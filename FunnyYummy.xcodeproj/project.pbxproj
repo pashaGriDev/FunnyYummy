@@ -21,6 +21,7 @@
 		10E624032A9B9428005BD5DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		10E624062A9B9428005BD5DA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		10E6240E2A9B94F4005BD5DA /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		10E624102A9B9577005BD5DA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +38,7 @@
 		10E623F32A9B9427005BD5DA = {
 			isa = PBXGroup;
 			children = (
+				10E624102A9B9577005BD5DA /* README.md */,
 				10E6240E2A9B94F4005BD5DA /* .gitignore */,
 				10E623FE2A9B9427005BD5DA /* FunnyYummy */,
 				10E623FD2A9B9427005BD5DA /* Products */,
