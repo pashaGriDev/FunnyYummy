@@ -13,6 +13,10 @@
 		10E624072A9B9428005BD5DA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10E624062A9B9428005BD5DA /* Preview Assets.xcassets */; };
 		10E6240F2A9B94F4005BD5DA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 10E6240E2A9B94F4005BD5DA /* .gitignore */; };
 		2D26A0AF2A9CC4F1009A04F7 /* color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D26A0AE2A9CC4F1009A04F7 /* color.swift */; };
+		3C9352F72A9D529500022170 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9352F62A9D529500022170 /* ViewRouter.swift */; };
+		3C9352FB2A9D539500022170 /* TabBarIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9352FA2A9D539500022170 /* TabBarIcon.swift */; };
+		3C9352FD2A9D5FE900022170 /* TabBarCustomShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9352FC2A9D5FE900022170 /* TabBarCustomShape.swift */; };
+		3C9352FF2A9D60EA00022170 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9352FE2A9D60EA00022170 /* TabBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		10E6240E2A9B94F4005BD5DA /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		10E624102A9B9577005BD5DA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2D26A0AE2A9CC4F1009A04F7 /* color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = color.swift; sourceTree = "<group>"; };
+		3C9352F62A9D529500022170 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
+		3C9352FA2A9D539500022170 /* TabBarIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarIcon.swift; sourceTree = "<group>"; };
+		3C9352FC2A9D5FE900022170 /* TabBarCustomShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCustomShape.swift; sourceTree = "<group>"; };
+		3C9352FE2A9D60EA00022170 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +68,8 @@
 			children = (
 				10E623FF2A9B9427005BD5DA /* FunnyYummyApp.swift */,
 				10E624012A9B9427005BD5DA /* ContentView.swift */,
+				3C9352F82A9D529800022170 /* TabBar */,
+				3C9353002A9D610800022170 /* Router */,
 				10E624032A9B9428005BD5DA /* Assets.xcassets */,
 				2D26A0AE2A9CC4F1009A04F7 /* color.swift */,
 				10E624052A9B9428005BD5DA /* Preview Content */,
@@ -73,6 +83,32 @@
 				10E624062A9B9428005BD5DA /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3C9352F82A9D529800022170 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				3C9352FE2A9D60EA00022170 /* TabBar.swift */,
+				3C9352F92A9D538400022170 /* Components */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		3C9352F92A9D538400022170 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3C9352FA2A9D539500022170 /* TabBarIcon.swift */,
+				3C9352FC2A9D5FE900022170 /* TabBarCustomShape.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		3C9353002A9D610800022170 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				3C9352F62A9D529500022170 /* ViewRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,8 +183,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D26A0AF2A9CC4F1009A04F7 /* color.swift in Sources */,
+				3C9352FB2A9D539500022170 /* TabBarIcon.swift in Sources */,
+				3C9352FD2A9D5FE900022170 /* TabBarCustomShape.swift in Sources */,
 				10E624022A9B9427005BD5DA /* ContentView.swift in Sources */,
 				10E624002A9B9427005BD5DA /* FunnyYummyApp.swift in Sources */,
+				3C9352F72A9D529500022170 /* ViewRouter.swift in Sources */,
+				3C9352FF2A9D60EA00022170 /* TabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
