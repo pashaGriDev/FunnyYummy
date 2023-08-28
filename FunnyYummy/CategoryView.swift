@@ -8,9 +8,9 @@ import SwiftUI
 
 struct CategoryView: View {
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack {
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 16) {
                     ForEach(1..<10) { _ in
                         VStack {
                             AsyncImage(url:URL(string: "https://spoonacular.com/recipeImages/716429-312x231.jpg")) {
@@ -19,14 +19,28 @@ struct CategoryView: View {
                                 case let .success (image):
                                     image
                                         .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 350, height: 200)
-                                        .background(Color.gray.opacity(0.3).cornerRadius(24))
+                                        .scaledToFill()
                                         .overlay(
                                             Rectangle()
-                                                .frame(height: 50)
-                                                .foregroundColor(.clear),
-                                            alignment: .top
+                                                .frame(width: 40, height: 30)
+                                                .foregroundStyle(.ultraThinMaterial)
+                                                .offset(x: 20, y: 40)
+                                                ,
+                                            alignment: .topLeading
+                                        )
+                                        .overlay(
+                                            VStack(alignment: .leading, spacing: 10) {
+                                                Text("How to make yam & vegetable sauce at home")
+                                                    .fontWeight(.bold)
+                                                    .foregroundColor(.white)
+                                                
+                                                Text("9 ingredients | 25 min")
+                                                    .font(.subheadline)
+                                                    .foregroundColor(.white)
+                                                    .opacity(0.7)
+                                            }
+                                                .padding(.bottom, 40),
+                                            alignment: .bottom
                                         )
                                 case .empty :
                                     ProgressView()
@@ -34,20 +48,11 @@ struct CategoryView: View {
                                     Image(systemName: "circle")
                                 }
                             }
-                                /*.overlay(
-                                    VStack(alignment: .leading) {
-                                        Text("How to make yam & vegetable sauce at home")
-                                            .fontWeight(.bold)
-                                            .foregroundColor(.white)
-                                        
-                                        Text("9 ingredients | 25 min")
-                                            .font(.subheadline)
-                                            .foregroundColor(.white)
-                                            .opacity(0.7)
-                                    }
-                                        .padding(),
-                                    alignment: .bottom
-                                )*/
+                            .frame(width: 350, height: 200)
+                            .background(Color.gray.opacity(0.3))
+                            .cornerRadius(24)
+                            .clipped()
+                            
                         }
                     }
                 }
