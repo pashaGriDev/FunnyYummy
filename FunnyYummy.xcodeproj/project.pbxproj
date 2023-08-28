@@ -13,6 +13,7 @@
 		10E624072A9B9428005BD5DA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10E624062A9B9428005BD5DA /* Preview Assets.xcassets */; };
 		10E6240F2A9B94F4005BD5DA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 10E6240E2A9B94F4005BD5DA /* .gitignore */; };
 		2D26A0AF2A9CC4F1009A04F7 /* color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D26A0AE2A9CC4F1009A04F7 /* color.swift */; };
+		FD1193402A9CEFBA00D87701 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD11933F2A9CEFBA00D87701 /* MainScreenView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		10E6240E2A9B94F4005BD5DA /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		10E624102A9B9577005BD5DA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2D26A0AE2A9CC4F1009A04F7 /* color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = color.swift; sourceTree = "<group>"; };
+		FD11933F2A9CEFBA00D87701 /* MainScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +81,7 @@
 		FDF385832A9BAD6600692374 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				FDF385842A9BAD7700692374 /* MainScreenView.swift */,
+				FD11933F2A9CEFBA00D87701 /* MainScreenView.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -157,8 +159,8 @@
 			files = (
 				2D26A0AF2A9CC4F1009A04F7 /* color.swift in Sources */,
 				10E624022A9B9427005BD5DA /* ContentView.swift in Sources */,
-				FDF385852A9BAD7700692374 /* MainScreenView.swift in Sources */,
 				10E624002A9B9427005BD5DA /* FunnyYummyApp.swift in Sources */,
+				FD1193402A9CEFBA00D87701 /* MainScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
