@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct MainScreenView: View {
+    
     @State private var searchText = ""
+    
     var body: some View {
         NavigationView {
             VStack(alignment: .leading, spacing: 10) {
@@ -16,47 +18,59 @@ struct MainScreenView: View {
                     .font(.title.bold())
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 20) {
-                        // TODO: - SearchBar
-                        HStack {
-                            Image(systemName: "magnifyingglass")
-                                .foregroundColor(
-                                    searchText.isEmpty ? .gray : .black
-                                )
-                            TextField("Search by name or symbol...", text: $searchText)
-                                .foregroundColor(.black)
-                                .autocorrectionDisabled(true)
-                                .overlay(
-                                    Image(systemName: "xmark.circle.fill")
-                                        .padding()
-                                        .offset(x: 10)
-                                        .foregroundColor(.black)
-                                        .opacity(searchText.isEmpty ? 0 : 1)
-                                        .onTapGesture {
-                                            searchText = ""
-                                        }
-                                    , alignment: .trailing
-                                )
-                        }
-                        .font(.headline)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 25)
-                                .strokeBorder(
-                                    Color.gray,
-                                    lineWidth: 2
-                                )
-                        )
-                        // TODO: - Trending now
-                        TrendingView()
-                        // TODO: - Popular category
-                        PopularCategoryView()
-                        // TODO: - Recent recipe
-                        RecentRecipeView()
-                        // TODO: - Recent recipe
-                        PopularCreatorsView()
+                        // MARK: - SearchBar
+                        SearchBarView(searchText: $searchText)
                         
+                        if searchText.isEmpty {
+                            // MARK: - Trending now
+                            VStack {
+                                HeaderTitleView(title: "Trending now 🔥")
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack {
+                                        ForEach(1..<10) { _ in
+                                            TrendingItemView()
+                                        }
+                                    }
+                                }
+                            }
+                            // MARK: - Popular category
+                            VStack {
+                                HeaderTitleView(title: "Popular category", hasNavigationLink: false)
+                                CategorySegmentedView()
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack(spacing: 20) {
+                                        ForEach(1..<10) { _ in
+                                            PopularCategoryItem()
+                                        }
+                                    }
+                                }
+                            }
+                            // MARK: - Recent recipe
+                            VStack {
+                                HeaderTitleView(title: "Recente recipe")
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack(spacing: 20) {
+                                        ForEach(1..<10) { _ in
+                                            RecentRecipeItem()
+                                        }
+                                    }
+                                }
+                            }
+                            // MARK: - Recent recipe
+                            VStack {
+                                HeaderTitleView(title: "Popular creators")
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack(spacing: 20) {
+                                        ForEach(1..<10) { _ in
+                                            PopularCreatorsItem()
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            EmptyView()
+                        }
                     }
-
                 }
             }
             .padding([.horizontal, .top])
@@ -67,7 +81,7 @@ struct MainScreenView: View {
 struct MainScreenView_Previews: PreviewProvider {
     static var previews: some View {
         //NavigationView {
-            MainScreenView()
-       // }
+        MainScreenView()
+        // }
     }
 }

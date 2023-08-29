@@ -19,6 +19,7 @@ struct HeaderTitleView: View {
             if hasNavigationLink {
                 NavigationLink {
                     Text("See all")
+                        .navigationBarBackButtonHidden()
                 } label: {
                     HStack {
                         Text("See all")

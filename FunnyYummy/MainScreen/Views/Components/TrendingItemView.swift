@@ -8,29 +8,19 @@
 import SwiftUI
 
 struct TrendingItemView: View {
+    
+    let url = "https://spoonacular.com/recipeImages/716429-312x231.jpg"
+    
     var body: some View {
         VStack(alignment: .leading) {
-            AsyncImage(url: URL(string: "https://spoonacular.com/recipeImages/716429-312x231.jpg")) { phase in
-                switch phase {
-                case let .success(image):
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .overlay(
-                            overlayCard
-                            , alignment: .top
-                        )
-                case .empty:
-                    ProgressView()
-                        .scaleEffect(2)
-                default:
-                    Image(systemName: "questionmark")
-                        .font(.headline)
-                }
-            }
+            ImageLoaderView(url: url)
             .frame(width: 280, height: 180)
             .background(
                 Color.gray.opacity(0.3)
+            )
+            .overlay(
+                overlayCard
+                , alignment: .top
             )
             .clipShape(RoundedRectangle(cornerRadius: 24))
             
@@ -52,13 +42,7 @@ struct TrendingItemView: View {
             .padding(.horizontal, 4)
             .background(Color.gray.cornerRadius(8))
             Spacer()
-            Image(systemName: "bookmark")
-                .foregroundColor(.gray)
-                .padding(.all, 6)
-                .background(
-                    Circle()
-                        .fill(.white)
-                )
+            BookmarkView()
         }
         .padding()
     }
