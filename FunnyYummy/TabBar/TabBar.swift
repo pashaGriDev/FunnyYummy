@@ -24,7 +24,7 @@ struct TabBar: View {
                     .resizable()
                     .scaledToFit()
                     .foregroundColor(.white)
-                    .frame(width: proxy.size.width/14, height: proxy.size.height/14)
+                    .frame(width: proxy.size.width/23, height: proxy.size.height/23)
             }
             .offset(y: -proxy.size.height/8/2)
             TabBarIcon(viewRouter: viewRouter, assignetPage: .notifications, width: proxy.size.width/5, height: proxy.size.height/28, iconName: "bell")

@@ -38,4 +38,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView(viewRouter: ViewRouter())
     }
 }
-
