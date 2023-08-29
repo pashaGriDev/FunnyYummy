@@ -26,9 +26,9 @@ struct MainScreenView: View {
                             VStack {
                                 HeaderTitleView(title: "Trending now 🔥")
                                 ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack {
+                                    HStack(spacing: 20) {
                                         ForEach(1..<10) { _ in
-                                            TrendingItemView()
+                                            TrendingItemView(screen: .main)
                                         }
                                     }
                                 }
