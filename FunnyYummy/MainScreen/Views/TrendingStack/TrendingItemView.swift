@@ -10,7 +10,6 @@ import SwiftUI
 struct TrendingItemView: View {
     var body: some View {
         VStack(alignment: .leading) {
-            
             AsyncImage(url: URL(string: "https://spoonacular.com/recipeImages/716429-312x231.jpg")) { phase in
                 switch phase {
                 case let .success(image):
@@ -21,10 +20,9 @@ struct TrendingItemView: View {
                             overlayCard
                             , alignment: .top
                         )
-
                 case .empty:
                     ProgressView()
-                        .scaleEffect(3)
+                        .scaleEffect(2)
                 default:
                     Image(systemName: "questionmark")
                         .font(.headline)
