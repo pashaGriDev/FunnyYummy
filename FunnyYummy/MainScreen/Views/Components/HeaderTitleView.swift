@@ -10,6 +10,7 @@ import SwiftUI
 struct HeaderTitleView: View {
     var title: String
     var hasNavigationLink = true
+    var content: AnyView?
     
     var body: some View {
         HStack {
@@ -18,7 +19,7 @@ struct HeaderTitleView: View {
             Spacer()
             if hasNavigationLink {
                 NavigationLink {
-                    Text("See all")
+                    content
                         .navigationBarBackButtonHidden()
                 } label: {
                     HStack {
