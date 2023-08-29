@@ -8,19 +8,33 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject var viewRouter: ViewRouter
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        GeometryReader { proxy in
+            VStack {
+                Spacer()
+                switch viewRouter.currentPage {
+                case .main:
+                    Text("MAIN PAGE")
+                case .favorites:
+                    Text("FAVORITES PAGE")
+                case .notifications:
+                    Text("NOTIFICATION PAGE")
+                case .account:
+                    Text("ACCOUNT PAGE")
+                }
+                Spacer()
+                TabBar(viewRouter: viewRouter, proxy: proxy)
+            }
+            .edgesIgnoringSafeArea(.bottom)
         }
-        .padding()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(viewRouter: ViewRouter())
     }
 }
