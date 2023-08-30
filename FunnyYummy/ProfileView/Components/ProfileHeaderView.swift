@@ -46,6 +46,8 @@ struct ProfileHeaderView: View {
     }
 }
 
-#Preview {
-    ProfileHeaderView()
+struct ProfileHeaderView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileHeaderView()
+    }
 }
