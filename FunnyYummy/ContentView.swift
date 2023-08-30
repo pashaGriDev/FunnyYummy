@@ -17,13 +17,13 @@ struct ContentView: View {
                 Spacer()
                 switch viewRouter.currentPage {
                 case .main:
-                    Text("MAIN PAGE")
+                    MainScreenView()
                 case .favorites:
                     Text("FAVORITES PAGE")
                 case .notifications:
                     Text("NOTIFICATION PAGE")
-                case .account:
-                    Text("ACCOUNT PAGE")
+                case .profile:
+                    ProfileView()
                 }
                 Spacer()
                 TabBar(viewRouter: viewRouter, proxy: proxy)
@@ -35,6 +35,8 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(viewRouter: ViewRouter())
+        NavigationView {
+            ContentView(viewRouter: ViewRouter())
+        }
     }
 }

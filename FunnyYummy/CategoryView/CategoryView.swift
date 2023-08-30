@@ -7,6 +7,8 @@
 import SwiftUI
 
 struct CategoryView: View {
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 16) {
@@ -29,7 +31,7 @@ struct CategoryView: View {
             
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
-                    //
+                    dismiss()
                 } label: {
                     Image(systemName: "arrow.left")
                         .foregroundColor(.black)

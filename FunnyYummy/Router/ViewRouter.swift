@@ -17,5 +17,5 @@ enum Page {
     case main
     case favorites
     case notifications
-    case account
+    case profile
 }
