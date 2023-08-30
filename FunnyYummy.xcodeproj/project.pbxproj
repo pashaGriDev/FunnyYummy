@@ -114,11 +114,11 @@
 		10E623FE2A9B9427005BD5DA /* FunnyYummy */ = {
 			isa = PBXGroup;
 			children = (
+				10E623FF2A9B9427005BD5DA /* FunnyYummyApp.swift */,
+				10E624012A9B9427005BD5DA /* ContentView.swift */,
 				6F464A162A9F59BF005C2002 /* API */,
 				FD67B6872A9E07BF0063D631 /* MainScreen */,
 				FD5C6F202A9E19F400B5CAF1 /* FavoriteScreen */,
-				10E623FF2A9B9427005BD5DA /* FunnyYummyApp.swift */,
-				10E624012A9B9427005BD5DA /* ContentView.swift */,
 				3C7C0C362A9D76CB00E2E5B3 /* CategoryView */,
 				3C7C0C3B2A9E72D800E2E5B3 /* ProfileView */,
 				3C9352F82A9D529800022170 /* TabBar */,
