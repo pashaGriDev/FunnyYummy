@@ -10,14 +10,20 @@ import SwiftUI
 struct API_Testing_View: View {
     
     @StateObject private var apiManager = API_Manager()
+  
     
-    let stubRecipe = Recipe(creditsText: "", id: 0, aggregateLikes: 0, title: "", sourceUrl: "", image: "", imageType: "", readyInMinutes: 0, dishTypes: [".dinner"], analyzedInstructions: nil)
+    
+    let stubRecipe = Recipe(creditsText: "", id: 0, aggregateLikes: 0, title: "", sourceUrl: "", image: "", imageType: "", readyInMinutes: 0, dishTypes: [".dinner"], extendedIngredients: nil, analyzedInstructions: nil)
     
     var body: some View {
+        let mockDataOne = Bundle.main.decode(Recipe.self, from: "mockData.json")
+        let mockDataTwo = mockDataOne
+        let mockDataArray = [mockDataOne, mockDataTwo]
+        
         NavigationView {
-            List(apiManager.response?.results ?? [stubRecipe]) { item in
+            List(mockDataArray ) { item in
                 VStack(spacing: 20){
-                    Text(item.aggregateLikes, format: .number)
+                    Text(item.rating ?? -1, format: .number)
                     
                     AsyncImage(url: URL(string: item.image)) { image in
                         image
@@ -42,19 +48,20 @@ struct API_Testing_View: View {
             .toolbar{
                 Button("Fetch Data") {
                     Task {
-                        do {
-                          try await apiManager.fetchData()
-                        } catch  RecipeError.invalidURL {
-                            print("Invalid URL")
-                        } catch  RecipeError.invalidResponse {
-                            print("Invalid Response")
-                        } catch  RecipeError.invalidData {
-                            print("Invalid Data")
-                        } catch {
-                            print("Unexpected error")
-                        }
+//                        do {
+//                            try await apiManager.fetchData(sortedBy: .popularity, forDishType: nil)
+//                        } catch  RecipeError.invalidURL {
+//                            print("Invalid URL")
+//                        } catch  RecipeError.invalidResponse {
+//                            print("Invalid Response")
+//                        } catch  RecipeError.invalidData {
+//                            print("Invalid Data")
+//                        } catch {
+//                            print("Unexpected error")
+//                        }
                     }
                 }
+                .disabled(true)
             }
         }
     }

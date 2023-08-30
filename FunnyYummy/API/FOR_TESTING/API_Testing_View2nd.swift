@@ -9,7 +9,7 @@ import SwiftUI
 
 struct API_Testing_View2nd: View {
     @StateObject private var apiManager = API_Manager()
-    let stubRecipe = Recipe(creditsText: "", id: 0, aggregateLikes: 0, title: "", sourceUrl: "", image: "", imageType: "", readyInMinutes: 0, dishTypes: [".dinner"], analyzedInstructions: nil)
+    let stubRecipe = Recipe(creditsText: "", id: 0, aggregateLikes: 0, title: "", sourceUrl: "", image: "", imageType: "", readyInMinutes: 0, dishTypes: [".dinner"], extendedIngredients: nil, analyzedInstructions: nil)
     
     var body: some View {
         NavigationView {
@@ -35,24 +35,18 @@ struct API_Testing_View2nd: View {
                     Text(item.aggregateLikes, format: .number)
                     
                     Text("Instr")
-                    List(item.analyzedInstructions?[0].steps ?? [Step(number: 1, step: "")]) {step in
+                    List(item.analyzedInstructions?[0].steps ?? [Step(number: 1, step: "", ingredients: nil)]) {step in
                         Text(step.number, format: .number)
                     }
                     Text("Igredients")
-//                    List(item.ingredients, id: \.self) {ingredient in
-//                        Text(ingredient.description)
-//                    }
-                    
-                    
-                    
-                    
+                    Text(item.extendedIngredients?[0].name ?? "error")
                 }
             }
             .toolbar{
                 Button("Fetch Data") {
                     Task {
                         do {
-                          try await apiManager.fetchData()
+                            try await apiManager.fetchData(lookingFor: "Salmon", sortedBy: .random, forDishType: nil, howMany: 2)
                         } catch  RecipeError.invalidURL {
                             print("Invalid URL")
                         } catch  RecipeError.invalidResponse {

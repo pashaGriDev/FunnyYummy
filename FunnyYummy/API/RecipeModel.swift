@@ -10,6 +10,8 @@ import Foundation
 struct Response: Codable {
     var results: [Recipe]
 }
+// 1. for Rating use rating
+// 2. to get image use AsyncImage with url from image
 
 struct Recipe: Codable, Identifiable {
     let creditsText: String
@@ -22,50 +24,58 @@ struct Recipe: Codable, Identifiable {
     let readyInMinutes: Int
     
     let dishTypes: [String]
-//    var extendedIngredients: [Ingredient]
+    let extendedIngredients: [Ingredient]?
     let analyzedInstructions: [Instruction]?
-//    var ingredients: [Ingredient]? {
-//       var ingredientsArray = [Ingredient]()
-//
-//        for item in analyzedInstructions {
-//            for step in item.steps {
-//                for ingredient in step.ingredients {
-//                    ingredientsArray.append(ingredient)
-//                }
-//            }
-//        }
-//        return ingredientsArray
-//    }
-}
-
-//enum DishTypes: String, Codable {
-//    case sideDish = "side dish"
-//    case lunch =    "lunch"
-//    case mainCourse = "main course"
-//    case salad = "salad"
-//    case mainDish = "main dish"
-//    case dinner = "dinner"
-//}
-
-struct Instruction: Codable {
-    let name: String
-    let steps: [Step]
-}
-
-struct Step: Codable, Identifiable {
-    var id: Int {
-        return number
+    
+    var rating: Int? {
+        switch aggregateLikes {
+        case 0..<100: return 1
+        case 100..<1000: return 2
+        case 1000..<5000: return 3
+        case 5000..<20_000: return 4
+        case 20_000..<100_000: return 5
+        default: return 0
+        }
     }
     
-    let number: Int
-    let step: String
-//    let ingredients: [Ingredient]
 }
-
-struct Ingredient: Codable, Identifiable {
-    var id: Int
-    var image: String
-    var name: String
-    var amount: Double
-    var unit: String
-}
+    enum DishTypes: String, Codable {
+        case mainCourse = "main course"
+        case sideDish = "side dish"
+        case dessert
+        case appetizer
+        case salad
+        case bread
+        case breakfast
+        case soup
+        case beverage
+        case sauce
+        case marinade
+        case fingerfood
+        case snack
+        case drink
+        
+    }
+    
+    struct Instruction: Codable {
+        let name: String
+        let steps: [Step]
+    }
+    
+    struct Step: Codable, Identifiable {
+        var id: Int {
+            return number
+        }
+        
+        let number: Int
+        let step: String
+        let ingredients: [Ingredient]?
+    }
+    
+    struct Ingredient: Codable, Identifiable {
+        let id: Int
+        let image: String
+        let name: String
+        let amount: Double?
+        let unit: String?
+    }
