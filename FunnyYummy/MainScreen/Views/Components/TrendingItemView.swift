@@ -9,12 +9,14 @@ import SwiftUI
 
 struct TrendingItemView: View {
     
+    let screen: ScreenSize
+    
     let url = "https://spoonacular.com/recipeImages/716429-312x231.jpg"
     
     var body: some View {
         VStack(alignment: .leading) {
             ImageLoaderView(url: url)
-            .frame(width: 280, height: 180)
+                .frame(width: screen.screen.width, height: screen.screen.height)
             .background(
                 Color.gray.opacity(0.3)
             )
@@ -25,6 +27,7 @@ struct TrendingItemView: View {
             .clipShape(RoundedRectangle(cornerRadius: 24))
             
             Text("How to shawarma at home")
+                .font(.system(size: screen.font).bold())
 
             footer
         }
@@ -59,8 +62,35 @@ struct TrendingItemView: View {
     
 }
 
+enum ScreenSize {
+    
+    case main
+    case favorite
+    
+    var screen: CGSize {
+        switch self {
+        case .favorite:
+            return CGSize(
+                width: UIScreen.main.bounds.width - 32,
+                height: 200
+            )
+        case .main: return CGSize(width: 280, height: 180)
+        }
+    }
+    
+    var font: Double {
+        switch self {
+        case .favorite: return 20
+        case .main: return 16
+        }
+    }
+}
+
 struct TrendingItemView_Previews: PreviewProvider {
     static var previews: some View {
-        TrendingItemView()
+        VStack {
+            TrendingItemView(screen: .main)
+            TrendingItemView(screen: .favorite)
+        }
     }
 }
