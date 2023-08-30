@@ -11,7 +11,7 @@ struct API_Testing_View: View {
     
     @StateObject private var apiManager = API_Manager()
     
-    let stubRecipe = Recipe(creditsText: "", id: 0, aggregateLikes: 0, title: "", sourceUrl: "", image: "", imageType: "", readyInMinutes: 0, dishTypes: [".dinner"], analyzedInstructions: nil)
+    let stubRecipe = Recipe(creditsText: "", id: 0, aggregateLikes: 0, title: "", sourceUrl: "", image: "", imageType: "", readyInMinutes: 0, dishTypes: [".dinner"])
     
     var body: some View {
         NavigationView {

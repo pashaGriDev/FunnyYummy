@@ -23,7 +23,7 @@ struct Recipe: Codable, Identifiable {
     
     let dishTypes: [String]
 //    var extendedIngredients: [Ingredient]
-    let analyzedInstructions: [Instruction]?
+//    let analyzedInstructions: [Instruction]?
 //    var ingredients: [Ingredient]? {
 //       var ingredientsArray = [Ingredient]()
 //

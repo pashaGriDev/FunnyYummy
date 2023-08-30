@@ -12,15 +12,9 @@ class API_Manager: ObservableObject {
     
     @Published var response: Response?
     
-    func fetchData() async throws {
-        do{
-            self.response = try await getRecipe()
-        } catch {
-            
-        }
-    }
+  
     
-   private func getRecipe() async throws -> Response {
+func fetchData() async throws {
         let endpoint = "https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&sort=random&apiKey=\(apiKey)"
         
         guard let url = URL(string: endpoint) else {
@@ -36,7 +30,7 @@ class API_Manager: ObservableObject {
         do {
             let decoder = JSONDecoder()
             
-            return try decoder.decode(Response.self, from: data)
+            self.response = try decoder.decode(Response.self, from: data)
         } catch {
             throw RecipeError.invalidData
         }
