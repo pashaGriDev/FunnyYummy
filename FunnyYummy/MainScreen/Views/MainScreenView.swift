@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainScreenView: View {
-    
+    @StateObject private var vm = MainScreenViewController()
     @State private var searchText = ""
     
     var body: some View {
@@ -27,8 +27,16 @@ struct MainScreenView: View {
                                 HeaderTitleView(title: "Trending now 🔥", hasNavigationLink: true, content: AnyView(CategoryView()))
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack(spacing: 20) {
-                                        ForEach(1..<10) { _ in
-                                            TrendingItemView(screen: .main)
+                                        if vm.trendings.isEmpty {
+                                            ForEach(1..<10) { _ in
+                                                TrendingItemView(
+                                                    recipe: vm.emptyRecipe,
+                                                    screen: .main)
+                                            }
+                                        } else {
+                                            ForEach(vm.trendings) {
+                                                TrendingItemView(recipe: $0, screen: .main)
+                                            }
                                         }
                                     }
                                 }
@@ -36,11 +44,11 @@ struct MainScreenView: View {
                             // MARK: - Popular category
                             VStack {
                                 HeaderTitleView(title: "Popular category", hasNavigationLink: false)
-                                CategorySegmentedView()
+                                CategorySegmentedView(choiceCategory: $vm.dishes)
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack(spacing: 20) {
-                                        ForEach(1..<10) { _ in
-                                            PopularCategoryItem()
+                                        ForEach(vm.populars) { recipe in
+                                            PopularCategoryItem(recipe: recipe)
                                         }
                                     }
                                 }

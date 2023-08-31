@@ -10,6 +10,7 @@ import SwiftUI
 struct PopularCategoryItem: View {
     
     let url = "https://spoonacular.com/recipeImages/716429-312x231.jpg"
+    let recipe: Recipe
     
     var body: some View {
         ZStack {
@@ -18,16 +19,17 @@ struct PopularCategoryItem: View {
                 .frame(width: 150, height: 176)
                 .cornerRadius(16)
                 .overlay(
-                    VStack(spacing: 30) {
-                        Text("Chicken and Vegetable wrap")
+                    VStack(spacing: 20) {
+                        Text(recipe.title)
                             .font(.headline)
                             .multilineTextAlignment(.center)
+                            .frame(height: 50)
                         
                         HStack {
                             VStack(alignment: .leading) {
                                 Text("Time")
                                     .foregroundColor(.gray.opacity(0.8))
-                                Text("5 mins")
+                                Text("\(recipe.readyInMinutes) mins")
                             }
                             Spacer()
                             
@@ -36,7 +38,7 @@ struct PopularCategoryItem: View {
                     }.padding([.horizontal, .bottom], 6), alignment: .bottom
                 )
             
-            ImageLoaderView(url: url)
+            ImageLoaderView(url: recipe.image)
                 .frame(width: 110, height: 110)
                 .background(.ultraThinMaterial)
                 .clipShape(Circle())
@@ -49,6 +51,6 @@ struct PopularCategoryItem: View {
 
 struct PopularCategoryItem_Previews: PreviewProvider {
     static var previews: some View {
-        PopularCategoryItem()
+        PopularCategoryItem(recipe: Bundle.main.decode(Recipe.self, from: "mockData.json"))
     }
 }

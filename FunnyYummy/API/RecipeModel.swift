@@ -39,9 +39,9 @@ struct Recipe: Codable, Identifiable {
     }
     
 }
-    enum DishTypes: String, Codable {
-        case mainCourse = "main course"
-        case sideDish = "side dish"
+    enum DishTypes: String, Codable, CaseIterable {
+        case mainCourse = "maincourse"
+        case sideDish = "sidedish"
         case dessert
         case appetizer
         case salad
