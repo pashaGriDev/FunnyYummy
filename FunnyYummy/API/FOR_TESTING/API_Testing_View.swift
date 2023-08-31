@@ -67,8 +67,12 @@ struct API_Testing_View: View {
     }
 }
 
-#Preview {
-    API_Testing_View()
+struct API_Testing_View_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            API_Testing_View()
+        }
+    }
 }
 
 
