@@ -11,11 +11,11 @@ struct ProfileView: View {
     
     var body: some View {
         VStack {
-            //MARK: - Profile Header
-            ProfileHeaderView()
-                .padding([.top, .horizontal])
-            
             ScrollView(showsIndicators: false) {
+                //MARK: - Profile Header
+                ProfileHeaderView()
+                    .padding([.top, .horizontal])
+                
                 VStack {
                     //MARK: - Recipes Title
                     HeaderTitleView(title: "My Recipes", hasNavigationLink: false)

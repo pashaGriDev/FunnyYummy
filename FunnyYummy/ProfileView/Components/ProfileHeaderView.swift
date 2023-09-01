@@ -8,18 +8,35 @@
 import SwiftUI
 
 struct ProfileHeaderView: View {
+    
+    @State private var isShowingPhotoPicker = false
+    @State private var selectedAvatarImage: UIImage? = nil
+    
     var body: some View {
         HStack {
             Button {
-                
+                isShowingPhotoPicker = true
             } label: {
-                Circle()
-                    .frame(width: 50, height: 50)
-                    .overlay {
-                        Circle()
-                            .stroke(lineWidth: 2)
-                            .foregroundColor(.gray)
-                    }
+                if let image = selectedAvatarImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                        .overlay {
+                            Circle()
+                                .stroke(lineWidth: 2)
+                                .foregroundColor(.gray)
+                        }
+                } else {
+                    Circle()
+                        .frame(width: 50, height: 50)
+                        .overlay {
+                            Circle()
+                                .stroke(lineWidth: 2)
+                                .foregroundColor(.gray)
+                        }
+                }
             }
             VStack(alignment: .leading) {
                 Text("Custom Name")
@@ -38,6 +55,9 @@ struct ProfileHeaderView: View {
                         .foregroundColor(.white)
                 }
         }
+        .sheet(isPresented: $isShowingPhotoPicker, content: {
+            PhotoPicker(avatarImage: $selectedAvatarImage)
+        })
         .frame(height: 50)
         .padding()
         .background(Color.white)
