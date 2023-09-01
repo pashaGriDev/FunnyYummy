@@ -28,10 +28,10 @@ struct TabBar: View {
             }
             .offset(y: -proxy.size.height/8/2)
             TabBarIcon(viewRouter: viewRouter, assignetPage: .notifications, width: proxy.size.width/5, height: proxy.size.height/28, iconName: "bell")
-            TabBarIcon(viewRouter: viewRouter, assignetPage: .account, width: proxy.size.width/5, height: proxy.size.height/28, iconName: "person")
+            TabBarIcon(viewRouter: viewRouter, assignetPage: .profile, width: proxy.size.width/5, height: proxy.size.height/28, iconName: "person")
         }
         .frame(width: proxy.size.width, height: proxy.size.height/8)
-        .background(Color.white.clipShape(TabBarCustomShape()))
+        .background(TabBarCustomShape())
         .shadow(color: .black.opacity(0.1), radius: 5, y: 0)
     }
 }

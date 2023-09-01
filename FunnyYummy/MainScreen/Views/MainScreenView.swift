@@ -24,11 +24,11 @@ struct MainScreenView: View {
                         if searchText.isEmpty {
                             // MARK: - Trending now
                             VStack {
-                                HeaderTitleView(title: "Trending now 🔥")
+                                HeaderTitleView(title: "Trending now 🔥", hasNavigationLink: true, content: AnyView(CategoryView()))
                                 ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack {
+                                    HStack(spacing: 20) {
                                         ForEach(1..<10) { _ in
-                                            TrendingItemView()
+                                            TrendingItemView(screen: .main)
                                         }
                                     }
                                 }
