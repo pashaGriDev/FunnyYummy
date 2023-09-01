@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainScreenView: View {
-    @StateObject private var vm = MainScreenViewController()
+    @StateObject private var vm = MainScreenViewModel()
     @State private var searchText = ""
     
     var body: some View {
@@ -58,8 +58,8 @@ struct MainScreenView: View {
                                 HeaderTitleView(title: "Recente recipe")
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack(spacing: 20) {
-                                        ForEach(1..<10) { _ in
-                                            RecentRecipeItem()
+                                        ForEach(vm.recents) { recipe in
+                                            RecentRecipeItem(recipe: recipe)
                                         }
                                     }
                                 }

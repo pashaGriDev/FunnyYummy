@@ -1,5 +1,5 @@
 //
-//  MainScreenViewController.swift
+//  MainScreenViewModel.swift
 //  FunnyYummy
 //
 //  Created by Kasharin Mikhail on 31.08.2023.
@@ -8,11 +8,11 @@
 import Foundation
 import Combine
 
-class MainScreenViewController: ObservableObject {
+class MainScreenViewModel: ObservableObject {
     
     let networkService = API_Manager()
     let emptyRecipe = Recipe(creditsText: "", id: 0, aggregateLikes: 0, title: "", sourceUrl: "", image: "", imageType: "", readyInMinutes: 0, dishTypes: [], extendedIngredients: nil, analyzedInstructions: nil)
-    
+    var numberOfCalls = 10
     @Published var trendings = [Recipe]()
     @Published var populars = [Recipe]()
     @Published var recents = [Recipe]()
@@ -22,7 +22,8 @@ class MainScreenViewController: ObservableObject {
     
     init() {
         
-        networkService.fetchData(sortedBy: .random)
+        
+        networkService.fetchData(sortedBy: .popularity, howMany: numberOfCalls)
             .receive(on: RunLoop.main)
             .sink { completion in
                 if case let .failure(error) = completion {
@@ -33,17 +34,6 @@ class MainScreenViewController: ObservableObject {
             }
             .store(in: &cancellables)
         
-//        networkService.fetchData(sortedBy: .popularity, forDishType: .mainCourse)
-//            .receive(on: RunLoop.main)
-//            .sink { completion in
-//                if case let .failure(error) = completion {
-//                    print("Error fetching dishType data: \(error)")
-//                }
-//            } receiveValue: { [weak self] recipes in
-//                self?.populars = recipes
-//            }
-//            .store(in: &cancellables)
-        
         $dishes
             .flatMap { [unowned self] dish in
                 return self.networkService.fetchData(sortedBy: .random, forDishType: dish)
@@ -51,31 +41,24 @@ class MainScreenViewController: ObservableObject {
             .receive(on: RunLoop.main)
             .sink { completion in
                 if case let .failure(error) = completion {
-                    print("Error fetching dishdishType data: \(error)")
+                    print("Error fetching dishType data: \(error)")
                 }
             } receiveValue: { [weak self] recipes in
                 print("success")
                 self?.populars = recipes
             }
             .store(in: &cancellables)
-
-            
-
-
         
-        //trendings = networkService.getMockData()
-//        Task {
-//            trendings = try await networkService.fetchData(sortedBy: .popularity)
-//            populars = try await networkService.fetchData(sortedBy: .popularity, forDishType: .mainCourse)
-//        }
-        
-//        $trendings
-//            .map { recipes in
-//                recipes.filter{ $0.rating == 5 }
-//            }
-//            .assign(to: \.populars, on: self)
-//            .store(in: &cancellables)
-    
+        networkService.fetchData(sortedBy: .random, howMany: numberOfCalls)
+            .receive(on: RunLoop.main)
+            .sink { completion in
+                if case let .failure(error) = completion {
+                    print("Error fetching recent data: \(error)")
+                }
+            } receiveValue: { [weak self] recipes in
+                self?.recents = recipes
+            }
+            .store(in: &cancellables)
     }
     
 }

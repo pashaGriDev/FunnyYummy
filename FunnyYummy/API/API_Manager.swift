@@ -29,10 +29,9 @@ class API_Manager: ObservableObject {
     
     func fetchData(lookingFor: String? = nil, sortedBy: SortingOptions, forDishType: DishTypes? = nil, howMany: Int? = nil) -> AnyPublisher<[Recipe], Error> {
            let endpoint = "https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&sort=\(sortedBy.rawValue)&fillIngredients=true&type=\(forDishType?.rawValue ?? "")&query=\(lookingFor ?? "")&number=\(howMany ?? 10)&apiKey=\(apiKey)"
-            print(endpoint)
            
            guard let url = URL(string: endpoint) else {
-               return Fail(error: RecipeError.invalidURL).eraseToAnyPublisher()
+               return Empty().eraseToAnyPublisher()
            }
            
            return URLSession.shared.dataTaskPublisher(for: url)

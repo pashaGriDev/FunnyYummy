@@ -27,6 +27,12 @@ struct Recipe: Codable, Identifiable {
     let extendedIngredients: [Ingredient]?
     let analyzedInstructions: [Instruction]?
     
+    var creatorName: String {
+        let words = creditsText.components(separatedBy: " ")
+        let firstThree = words.prefix(2)
+        return firstThree.joined(separator: " ")
+    }
+    
     var rating: Int? {
         switch aggregateLikes {
         case 0..<100: return 1
@@ -40,8 +46,8 @@ struct Recipe: Codable, Identifiable {
     
 }
     enum DishTypes: String, Codable, CaseIterable {
-        case mainCourse = "maincourse"
-        case sideDish = "sidedish"
+        case mainCourse = "main course"
+        case sideDish = "side dish"
         case dessert
         case appetizer
         case salad

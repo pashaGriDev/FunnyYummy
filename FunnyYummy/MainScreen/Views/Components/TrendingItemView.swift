@@ -59,9 +59,13 @@ struct TrendingItemView: View {
             Image(systemName: "circle.fill")
                 .resizable()
                 .frame(width: 30, height: 30)
-            Text("by \(recipe.creditsText)")
+            Text("by \(recipe.creatorName)")
                 .foregroundColor(.gray)
         }
+        .lineLimit(2)
+        .frame(width: screen.screen.width, height: screen.font * 2.4, alignment: .leading)
+        .background(recipe.title.isEmpty ? .gray.opacity(0.2) : .clear)
+        .cornerRadius(10)
     }
     
 }
