@@ -9,29 +9,31 @@ import SwiftUI
 
 struct CategorySegmentedView: View {
     
-    let array = ["Salad", "Appetizer", "Breakfast", "Noodle", "Lunch", "Dinner"]
-    @State private var choiceCategory = "Salad"
-    
-    
+    let dishTypes: [DishTypes] = DishTypes.allCases
+    @ObservedObject var vm: MainScreenViewModel
+
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(array, id: \.self) { category in
-                    Text(category)
+                ForEach(dishTypes, id: \.self) { type in
+                    Text(type.rawValue.capitalized)
                         .foregroundColor(
-                            category == choiceCategory
+                            type == vm.dishType
                             ? .white
-                            : .red
+                            : .buttonColor
                         )
                         .padding(.all, 10)
                         .background(
-                            category == choiceCategory
+                            type == vm.dishType
                             ? Color.buttonColor
                             : Color.clear
                         )
                         .cornerRadius(10)
                         .onTapGesture {
-                            choiceCategory = category
+                            vm.dishType = type
+                            Task {
+                                await vm.fetchDishTypeRecipe()
+                            }
                         }
                 }
             }
@@ -41,6 +43,6 @@ struct CategorySegmentedView: View {
 
 struct CategorySegmentedView_Previews: PreviewProvider {
     static var previews: some View {
-        CategorySegmentedView()
+        CategorySegmentedView(vm: MainScreenViewModel())
     }
 }

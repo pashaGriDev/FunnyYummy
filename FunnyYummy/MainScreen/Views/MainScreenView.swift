@@ -37,11 +37,11 @@ struct MainScreenView: View {
                             // MARK: - Popular category
                             VStack {
                                 HeaderTitleView(title: "Popular category", hasNavigationLink: false)
-                                CategorySegmentedView()
+                                CategorySegmentedView(vm: vm)
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack(spacing: 20) {
-                                        ForEach(1..<10) { _ in
-                                            PopularCategoryItem()
+                                        ForEach(vm.categoryRecipe) { recipe in
+                                            PopularCategoryItem(recipe: recipe)
                                         }
                                     }
                                 }
