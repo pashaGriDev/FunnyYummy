@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+// start screen
 struct ContentView: View {
     
     @StateObject var viewRouter: ViewRouter
