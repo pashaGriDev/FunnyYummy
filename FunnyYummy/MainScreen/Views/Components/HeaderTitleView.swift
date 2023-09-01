@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HeaderTitleView: View {
+    let recipeList: [Recipe]
     var title: String
     var hasNavigationLink = true
     var content: AnyView?
@@ -19,7 +20,7 @@ struct HeaderTitleView: View {
             Spacer()
             if hasNavigationLink {
                 NavigationLink {
-                    content
+                    CategoryView(recipeList: recipeList, title: title)
                         .navigationBarBackButtonHidden()
                 } label: {
                     HStack {
@@ -38,8 +39,7 @@ struct HeaderTitleViewPreviews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             VStack {
-                HeaderTitleView(title: "Trending now", hasNavigationLink: false)
-                HeaderTitleView(title: "Trending now")
+                HeaderTitleView(recipeList: [Bundle.main.decode(Recipe.self, from: "mockData.json")], title: "Trending now", hasNavigationLink: false)
             }
         }
     }

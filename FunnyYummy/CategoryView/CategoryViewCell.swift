@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct CategoryViewCell: View {
-    let imageURL: String
-    let title: String
-    let details: String
+    let recipe: Recipe
+//    let title: String
+//    let details: String
     
     var body: some View {
         VStack {
-            AsyncImage(url: URL(string: imageURL)) { phase in
+            AsyncImage(url: URL(string: recipe.image)) { phase in
                 switch phase {
                 case let .success(image):
                     image
@@ -29,11 +29,11 @@ struct CategoryViewCell: View {
                         )
                         .overlay(
                             VStack(alignment: .leading, spacing: 10) {
-                                Text(title)
+                                Text(recipe.title)
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
                                 
-                                Text(details)
+                                Text(recipe.creditsText)
                                     .font(.subheadline)
                                     .foregroundColor(.white)
                                     .opacity(0.7)

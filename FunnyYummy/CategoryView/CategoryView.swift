@@ -8,16 +8,14 @@ import SwiftUI
 
 struct CategoryView: View {
     @Environment(\.dismiss) var dismiss
+    let recipeList: [Recipe]
+    let title: String
     
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 16) {
-                ForEach(1..<10) { _ in
-                    CategoryViewCell(
-                        imageURL: "https://spoonacular.com/recipeImages/716429-312x231.jpg",
-                        title: "How to make yam & vegetable sauce at home",
-                        details: "9 ingredients | 25 min"
-                    )
+                ForEach(recipeList) { recipe in
+                    CategoryViewCell(recipe: recipe)
                 }
             }
             .padding(.top, 20)
@@ -25,7 +23,7 @@ struct CategoryView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text("Trending now")
+                Text(title)
                     .font(.title.bold())
             }
             
@@ -49,7 +47,7 @@ struct CategoryView: View {
 struct CategoryView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CategoryView()
+            CategoryView(recipeList: [Bundle.main.decode(Recipe.self, from: "mockData.json")], title: "Tranding now")
         }
     }
 }
