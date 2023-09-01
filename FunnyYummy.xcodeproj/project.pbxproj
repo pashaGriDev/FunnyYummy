@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		109502FD2A9D6CE90035403F /* Bundle + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109502FC2A9D6CE90035403F /* Bundle + ext.swift */; };
+		10AD2C292AA2944400ECB79B /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AD2C282AA2944400ECB79B /* PhotoPicker.swift */; };
 		10E624002A9B9427005BD5DA /* FunnyYummyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E623FF2A9B9427005BD5DA /* FunnyYummyApp.swift */; };
 		10E624022A9B9427005BD5DA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E624012A9B9427005BD5DA /* ContentView.swift */; };
 		10E624042A9B9428005BD5DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10E624032A9B9428005BD5DA /* Assets.xcassets */; };
@@ -53,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		109502FC2A9D6CE90035403F /* Bundle + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle + ext.swift"; sourceTree = "<group>"; };
+		10AD2C282AA2944400ECB79B /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		10E623FC2A9B9427005BD5DA /* FunnyYummy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FunnyYummy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10E623FF2A9B9427005BD5DA /* FunnyYummyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunnyYummyApp.swift; sourceTree = "<group>"; };
 		10E624012A9B9427005BD5DA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				10E624032A9B9428005BD5DA /* Assets.xcassets */,
 				3C7C0C352A9D747D00E2E5B3 /* Extensions */,
 				10E624052A9B9428005BD5DA /* Preview Content */,
+				10AD2C282AA2944400ECB79B /* PhotoPicker.swift */,
 			);
 			path = FunnyYummy;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				3C0BA8C22AA23E3300B205DA /* OnboardingButtonView.swift in Sources */,
 				3C0BA8C42AA23E3300B205DA /* PageIndicatorView.swift in Sources */,
 				3C7C0C402A9E954E00E2E5B3 /* RecipesCardView.swift in Sources */,
+				10AD2C292AA2944400ECB79B /* PhotoPicker.swift in Sources */,
 				3C0BA8BF2AA23E3300B205DA /* OnboardingPage.swift in Sources */,
 				6F464A222A9F59BF005C2002 /* RecipeModel.swift in Sources */,
 				10E624022A9B9427005BD5DA /* ContentView.swift in Sources */,
