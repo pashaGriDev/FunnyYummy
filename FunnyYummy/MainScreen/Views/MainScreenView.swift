@@ -10,6 +10,7 @@ import SwiftUI
 struct MainScreenView: View {
     
     @State private var searchText = ""
+    @StateObject private var vm = MainScreenViewModel()
     
     var body: some View {
         NavigationView {
@@ -27,8 +28,8 @@ struct MainScreenView: View {
                                 HeaderTitleView(title: "Trending now 🔥", hasNavigationLink: true, content: AnyView(CategoryView()))
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack(spacing: 20) {
-                                        ForEach(1..<10) { _ in
-                                            TrendingItemView(screen: .main)
+                                        ForEach(vm.trending) { recipe in
+                                            TrendingItemView(recipe: recipe, screen: .main)
                                         }
                                     }
                                 }

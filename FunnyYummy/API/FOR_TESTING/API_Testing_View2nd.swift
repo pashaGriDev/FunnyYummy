@@ -62,7 +62,3 @@ struct API_Testing_View2nd: View {
         }
     }
 }
-
-#Preview {
-    API_Testing_View2nd()
-}

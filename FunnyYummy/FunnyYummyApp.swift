@@ -14,7 +14,7 @@ struct FunnyYummyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(viewRouter: viewRouter)
+            MainScreenView()
         }
     }
 }

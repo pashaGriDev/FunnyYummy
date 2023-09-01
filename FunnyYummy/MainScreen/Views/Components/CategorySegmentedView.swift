@@ -12,6 +12,7 @@ struct CategorySegmentedView: View {
     let array = ["Salad", "Appetizer", "Breakfast", "Noodle", "Lunch", "Dinner"]
     @State private var choiceCategory = "Salad"
     
+    
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {

@@ -9,13 +9,15 @@ import SwiftUI
 
 struct TrendingItemView: View {
     
+    let recipe: Recipe
+    
     let screen: ScreenSize
     
     let url = "https://spoonacular.com/recipeImages/716429-312x231.jpg"
     
     var body: some View {
         VStack(alignment: .leading) {
-            ImageLoaderView(url: url)
+            ImageLoaderView(url: recipe.image)
                 .frame(width: screen.screen.width, height: screen.screen.height)
             .background(
                 Color.gray.opacity(0.3)
@@ -89,8 +91,8 @@ enum ScreenSize {
 struct TrendingItemView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            TrendingItemView(screen: .main)
-            TrendingItemView(screen: .favorite)
+            TrendingItemView(recipe: Bundle.main.decode(Recipe.self, from: "mockData.json"), screen: .main)
+            //TrendingItemView(screen: .favorite)
         }
     }
 }

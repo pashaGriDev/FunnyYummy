@@ -24,8 +24,8 @@ class API_Manager: ObservableObject {
   // 3. to get results by Category - use forDishType: DishTypes
   // 4. to get specific Query result - use lookingFor: "AnyString"
   // 5. how many is in range of 1..100
-    
-    func fetchData(lookingFor: String?, sortedBy: SortingOptions, forDishType: DishTypes?, howMany: Int?) async throws {
+    @Sendable
+    func fetchData(lookingFor: String? = nil, sortedBy: SortingOptions, forDishType: DishTypes? = nil, howMany: Int? = nil) async throws -> [Recipe] {
         let endpoint = "https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&sort=\(sortedBy.rawValue)&fillIngredients=true&type=\(forDishType?.rawValue ?? "")&query=\(lookingFor ?? "")&number=\(howMany ?? 10)&apiKey=\(apiKey)"
         
         guard let url = URL(string: endpoint) else {
@@ -41,7 +41,8 @@ class API_Manager: ObservableObject {
         do {
             let decoder = JSONDecoder()
             
-            self.response = try decoder.decode(Response.self, from: data)
+            let response = try decoder.decode(Response.self, from: data)
+            return response.results
         } catch {
             throw RecipeError.invalidData
         }

@@ -67,10 +67,6 @@ struct API_Testing_View: View {
     }
 }
 
-#Preview {
-    API_Testing_View()
-}
-
 
 
 
