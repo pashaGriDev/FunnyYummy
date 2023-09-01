@@ -18,7 +18,7 @@ struct GreetingView: View {
                 .scaledToFit()
                 .ignoresSafeArea()
                 .scaleEffect(1.2)
-
+            
             VStack {
                 HStack {
                     Image(systemName: "star.fill")

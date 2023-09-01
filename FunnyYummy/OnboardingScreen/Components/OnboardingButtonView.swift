@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct OnboardingButtonView: View {
+    
     @StateObject var vm: PageViewModel
     @Binding var isOnboarding: Bool
     @Binding var currentPage: Int

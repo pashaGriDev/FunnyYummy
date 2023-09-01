@@ -13,7 +13,6 @@ struct FunnyYummyApp: App {
     @StateObject var viewRouter = ViewRouter()
     @AppStorage("isOnboarding") var isOnboarding = false
     
-    
     var body: some Scene {
         WindowGroup {
             if isOnboarding {

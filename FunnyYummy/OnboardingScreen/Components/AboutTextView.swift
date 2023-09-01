@@ -27,7 +27,6 @@ struct AboutTextView: View {
     }
 }
 
-
 struct AboutTextView_Previews: PreviewProvider {
     static var previews: some View {
         AboutTextView(page: .constant(OnboardingPage(firstText: "Hello", secondText: "My friend", isSelected: false, image: "")))
