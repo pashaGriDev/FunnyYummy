@@ -54,7 +54,7 @@ class MainScreenViewModel: ObservableObject {
     func findRecipe() async {
         do {
             try await Task.sleep(nanoseconds: 300_000_000)
-            searchRecipe = try await networkService.fetchData(lookingFor: searchText, sortedBy: .popularity, forDishType: .appetizer, howMany: 10)
+            searchRecipe = try await networkService.fetchData(lookingFor: searchText.lowercased(), sortedBy: .popularity, forDishType: .appetizer, howMany: 10)
         } catch {
             print(networkService.recipeError)
         }

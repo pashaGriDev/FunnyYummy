@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MainScreenView: View {
     
-    @State private var searchText = ""
     @StateObject private var vm = MainScreenViewModel()
     
     var body: some View {
@@ -17,20 +16,18 @@ struct MainScreenView: View {
             VStack(alignment: .leading, spacing: 10) {
                 Text("Get amazing recipes for cooking")
                     .font(.title.bold())
+                
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 20) {
                         // MARK: - SearchBar
-                        SearchBarView(searchText: $vm.searchText)
-                            .onChange(of: vm.searchText) { newValue in
-                                Task {
-                                    await vm.findRecipe()
-                                }
-                            }
+                        SearchBarView(searchText: $vm.searchText) {
+                            await vm.findRecipe()
+                        }
                         
                         if vm.searchText.isEmpty {
                             // MARK: - Trending now
                             VStack {
-                                HeaderTitleView(recipeList: vm.trending, title: "Trending now")
+                                HeaderTitleView(recipeList: vm.trending, title: "Trending now 🔥")
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack(spacing: 20) {
                                         ForEach(vm.trending) { recipe in
@@ -41,30 +38,26 @@ struct MainScreenView: View {
                             }
                             // MARK: - Popular category
                             VStack {
-                                HeaderTitleView(recipeList: [], title: "Popular category", hasNavigationLink: false)
+                                HeaderTitleView(title: "Popular category", hasNavigationLink: false)
                                 CategorySegmentedView(vm: vm)
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack(spacing: 20) {
-                                        ForEach(vm.categoryRecipe) { recipe in
-                                            PopularCategoryItem(recipe: recipe)
-                                        }
+                                        ForEach($vm.categoryRecipe, content: PopularCategoryItem.init)
                                     }
                                 }
                             }
                             // MARK: - Recent recipe
                             VStack {
-                                HeaderTitleView(recipeList: vm.recentRecipe, title: "Recent")
+                                HeaderTitleView(recipeList: vm.recentRecipe, title: "Recent recipe")
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack(spacing: 20) {
-                                        ForEach(vm.recentRecipe) { recipe in
-                                            RecentRecipeItem(recipe: recipe)
-                                        }
+                                        ForEach($vm.recentRecipe, content: RecentRecipeItem.init)
                                     }
                                 }
                             }
-                            // TODO: - Recent recipe
+                            // TODO: - Popular creators
                             VStack {
-                                HeaderTitleView(recipeList: [], title: "Author", hasNavigationLink: true)
+                                HeaderTitleView(recipeList: [], title: "Popular creators", hasNavigationLink: true)
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack(spacing: 20) {
                                         ForEach(1..<10) { _ in
@@ -74,7 +67,7 @@ struct MainScreenView: View {
                                 }
                             }
                         } else {
-                            CategoryView(recipeList: [], title: "")
+                            CategoryView(recipeList: vm.searchRecipe, title: "")
                                 .navigationBarHidden(true)
                         }
                     }

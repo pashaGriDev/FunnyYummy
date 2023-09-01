@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HeaderTitleView: View {
-    let recipeList: [Recipe]
+    var recipeList: [Recipe] = []
     var title: String
     var hasNavigationLink = true
     var content: AnyView?

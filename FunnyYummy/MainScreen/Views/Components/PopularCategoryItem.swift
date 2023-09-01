@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct PopularCategoryItem: View {
-    
-    let url = "https://spoonacular.com/recipeImages/716429-312x231.jpg"
-    let recipe: Recipe
+    @Binding var recipe: Recipe
+    //let recipe: Recipe
     
     var body: some View {
         ZStack {
@@ -50,6 +49,6 @@ struct PopularCategoryItem: View {
 
 struct PopularCategoryItem_Previews: PreviewProvider {
     static var previews: some View {
-        PopularCategoryItem(recipe: Bundle.main.decode(Recipe.self, from: "mockData.json"))
+        PopularCategoryItem(recipe: .constant(Bundle.main.decode(Recipe.self, from: "mockData.json")))
     }
 }

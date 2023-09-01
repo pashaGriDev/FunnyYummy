@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct RecentRecipeItem: View {
-    
-    let recipe: Recipe
+    @Binding var recipe: Recipe
+    //let recipe: Recipe
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -31,6 +31,6 @@ struct RecentRecipeItem: View {
 
 struct RecentRecipeView_Previews: PreviewProvider {
     static var previews: some View {
-        RecentRecipeItem(recipe: Bundle.main.decode(Recipe.self, from: "mockData.json"))
+        RecentRecipeItem(recipe: .constant(Bundle.main.decode(Recipe.self, from: "mockData.json")))
     }
 }
