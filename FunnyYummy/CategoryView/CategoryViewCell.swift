@@ -9,48 +9,47 @@ import SwiftUI
 
 struct CategoryViewCell: View {
     let recipe: Recipe
-//    let title: String
-//    let details: String
     
     var body: some View {
         VStack {
-            AsyncImage(url: URL(string: recipe.image)) { phase in
-                switch phase {
-                case let .success(image):
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .overlay(
-                            Rectangle()
-                                .frame(width: 40, height: 30)
-                                .foregroundStyle(.ultraThinMaterial)
-                                .offset(x: 20, y: 40),
-                            alignment: .topLeading
-                        )
-                        .overlay(
-                            VStack(alignment: .leading, spacing: 10) {
-                                Text(recipe.title)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                                
-                                Text(recipe.creditsText)
-                                    .font(.subheadline)
-                                    .foregroundColor(.white)
-                                    .opacity(0.7)
-                            }
-                            .padding(.bottom, 40),
-                            alignment: .bottom
-                        )
-                case .empty:
-                    ProgressView()
-                default:
-                    Image(systemName: "circle")
-                }
-            }
-            .frame(width: 350, height: 200)
-            .background(Color.gray.opacity(0.3))
-            .cornerRadius(24)
-            .clipped()
+            ImageLoaderView(url: recipe.image)
+                .frame(width: 350, height: 200)
+                .background(Color.gray.opacity(0.3))
+                .clipShape(RoundedRectangle(cornerRadius: 24))
+                .overlay(
+                    VStack(alignment: .leading, spacing: 10) {
+                        
+                        HStack(spacing: 0) {
+                            Image(systemName: "star.fill")
+                            Text(recipe.rating?.formatted() ?? "")
+                                .foregroundColor(.white)
+                        }
+                        .padding(.all, 2)
+                        .padding(.horizontal, 4)
+                        .background(Color.black.opacity(0.3).cornerRadius(8))
+                            
+                        Spacer()
+                        
+                        Text(recipe.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                        
+                        Text(recipe.creditsText)
+                            .font(.subheadline)
+                            .foregroundColor(.white)
+                            .opacity(0.7)
+                    }
+                        .padding([.vertical, .leading]),
+                    alignment: .topLeading
+                )
+        }
+    }
+}
+
+struct CategoryViewCell_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            CategoryViewCell(recipe: Bundle.main.decode(Recipe.self, from: "mockData.json"))
         }
     }
 }

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SearchBarView: View {
     @Binding var searchText: String
-    let content: () async -> ()
     
     var body: some View {
         HStack {
@@ -32,11 +31,6 @@ struct SearchBarView: View {
                     , alignment: .trailing
                 )
         }
-        .onChange(of: searchText) { _ in
-            Task {
-                content
-            }
-        }
         .font(.headline)
         .padding()
         .background(
@@ -51,6 +45,6 @@ struct SearchBarView: View {
 
 struct SearchBarView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchBarView(searchText: .constant(""), content: {})
+        SearchBarView(searchText: .constant(""))
     }
 }

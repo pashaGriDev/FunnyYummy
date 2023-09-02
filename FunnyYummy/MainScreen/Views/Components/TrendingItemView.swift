@@ -10,17 +10,14 @@ import SwiftUI
 struct TrendingItemView: View {
     
     let recipe: Recipe
-    
     let screen: ScreenSize
-    
-    let url = "https://spoonacular.com/recipeImages/716429-312x231.jpg"
     
     var body: some View {
         VStack(alignment: .leading) {
             ImageLoaderView(url: recipe.image)
-                .frame(width: screen.screen.width, height: screen.screen.height)
+            .frame(width: screen.screen.width, height: screen.screen.height)
             .background(
-                Color.gray.opacity(0.3)
+                Color.black.opacity(0.3)
             )
             .overlay(
                 overlayCard
@@ -28,7 +25,7 @@ struct TrendingItemView: View {
             )
             .clipShape(RoundedRectangle(cornerRadius: 24))
             
-            Text("How to shawarma at home")
+            Text(recipe.title)
                 .font(.system(size: screen.font).bold())
 
             footer
@@ -40,7 +37,7 @@ struct TrendingItemView: View {
         HStack {
             HStack(spacing: 0) {
                 Image(systemName: "star.fill")
-                Text("4.5")
+                Text(recipe.rating?.formatted() ?? "")
                     .foregroundColor(.white)
             }
             .padding(.all, 2)
@@ -61,7 +58,6 @@ struct TrendingItemView: View {
                 .foregroundColor(.gray)
         }
     }
-    
 }
 
 enum ScreenSize {
@@ -92,7 +88,6 @@ struct TrendingItemView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             TrendingItemView(recipe: Bundle.main.decode(Recipe.self, from: "mockData.json"), screen: .main)
-            //TrendingItemView(screen: .favorite)
         }
     }
 }

@@ -13,10 +13,12 @@ class MainScreenViewModel: ObservableObject {
     let networkService = API_Manager()
 
     @Published var dishType: DishTypes = .appetizer
+    let cousine: Cousine = Cousine.allCases.randomElement() ?? .chinese
     @Published var trending = [Recipe]()
     @Published var categoryRecipe = [Recipe]()
     @Published var recentRecipe = [Recipe]()
     @Published var searchRecipe = [Recipe]()
+    @Published var cousineRecipe = [Recipe]()
     @Published var searchText = ""
     
     init() {
@@ -24,6 +26,7 @@ class MainScreenViewModel: ObservableObject {
             await fetchTrendingRecipe()
             await fetchDishTypeRecipe()
             await fetchRecentRecipe()
+            await fetchCousinRecipe()
         }
     }
     
@@ -51,10 +54,19 @@ class MainScreenViewModel: ObservableObject {
         }
     }
     
+    func fetchCousinRecipe() async {
+        do {
+            cousineRecipe = try await networkService.fetchData(sortedBy: .popularity, cousine: cousine)
+        } catch {
+            print(networkService.recipeError)
+        }
+    }
+    
     func findRecipe() async {
         do {
             try await Task.sleep(nanoseconds: 300_000_000)
-            searchRecipe = try await networkService.fetchData(lookingFor: searchText.lowercased(), sortedBy: .popularity, forDishType: .appetizer, howMany: 10)
+            searchRecipe = try await networkService.fetchData(lookingFor: searchText.lowercased(), sortedBy: .popularity, howMany: 10)
+            print(searchText)
         } catch {
             print(networkService.recipeError)
         }

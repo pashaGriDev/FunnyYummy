@@ -9,7 +9,6 @@ import SwiftUI
 
 struct PopularCategoryItem: View {
     @Binding var recipe: Recipe
-    //let recipe: Recipe
     
     var body: some View {
         ZStack {

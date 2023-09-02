@@ -7,25 +7,25 @@
 
 import SwiftUI
 
-struct PopularCreatorsItem: View {
+struct PopularCousinItem: View {
     
-    let url = "https://demotivation.ru/wp-content/uploads/2021/01/1_2Stf2unFSKZ5Nh91E-GeIw.jpeg"
+    @Binding var recipe: Recipe
     
     var body: some View {
         VStack {
-            ImageLoaderView(url: url)
+            ImageLoaderView(url: recipe.image)
                 .frame(width: 120, height: 120)
                 .background(.ultraThinMaterial)
                 .clipShape(Circle())
             
-            Text("Kasharin Mikhail")
+            Text(recipe.creditsText)
                 .font(.headline)
         }
     }
 }
 
-struct PopularCreatorsView_Previews: PreviewProvider {
+struct PopularCousinItem_Previews: PreviewProvider {
     static var previews: some View {
-        PopularCreatorsItem()
+        PopularCousinItem(recipe: .constant(Bundle.main.decode(Recipe.self, from: "mockData.json")))
     }
 }

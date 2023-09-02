@@ -26,8 +26,8 @@ class API_Manager: ObservableObject {
   // 4. to get specific Query result - use lookingFor: "AnyString"
   // 5. how many is in range of 1..100
 
-    func fetchData(lookingFor: String? = nil, sortedBy: SortingOptions, forDishType: DishTypes? = nil, howMany: Int? = nil) async throws -> [Recipe] {
-        let endpoint = "https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&sort=\(sortedBy.rawValue)&fillIngredients=true&type=\(forDishType?.rawValue ?? "")&query=\(lookingFor ?? "")&number=\(howMany ?? 10)&apiKey=\(apiKey)"
+    func fetchData(lookingFor: String? = nil, sortedBy: SortingOptions, cousine: Cousine? = nil,forDishType: DishTypes? = nil, howMany: Int? = nil) async throws -> [Recipe] {
+        let endpoint = "https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&sort=\(sortedBy.rawValue)&cuisine=\(cousine?.rawValue ?? "")&fillIngredients=true&type=\(forDishType?.rawValue ?? "")&query=\(lookingFor ?? "")&number=\(howMany ?? 10)&apiKey=\(apiKey)"
         print(endpoint)
         
         guard let url = URL(string: endpoint) else {
@@ -42,14 +42,12 @@ class API_Manager: ObservableObject {
             throw RecipeError.invalidResponse
         }
         
-        do {
-            let decoder = JSONDecoder()
-            let response = try decoder.decode(Response.self, from: data)
-            return response.results
-        } catch {
+        guard let response = try? JSONDecoder().decode(Response.self, from: data) else {
             recipeError = RecipeError.invalidData
             throw RecipeError.invalidData
         }
+        
+        return response.results
     }
     
     

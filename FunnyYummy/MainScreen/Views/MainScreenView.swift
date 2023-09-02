@@ -20,16 +20,18 @@ struct MainScreenView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 20) {
                         // MARK: - SearchBar
-                        SearchBarView(searchText: $vm.searchText) {
-                            await vm.findRecipe()
-                        }
-                        
+                        SearchBarView(searchText: $vm.searchText)
+                            .onChange(of: vm.searchText) { _ in
+                                Task {
+                                    await vm.findRecipe()
+                                }
+                            }
                         if vm.searchText.isEmpty {
                             // MARK: - Trending now
                             VStack {
                                 HeaderTitleView(recipeList: vm.trending, title: "Trending now 🔥")
                                 ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 20) {
+                                    LazyHStack(spacing: 20) {
                                         ForEach(vm.trending) { recipe in
                                             TrendingItemView(recipe: recipe, screen: .main)
                                         }
@@ -41,7 +43,7 @@ struct MainScreenView: View {
                                 HeaderTitleView(title: "Popular category", hasNavigationLink: false)
                                 CategorySegmentedView(vm: vm)
                                 ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 20) {
+                                    LazyHStack(spacing: 20) {
                                         ForEach($vm.categoryRecipe, content: PopularCategoryItem.init)
                                     }
                                 }
@@ -50,19 +52,17 @@ struct MainScreenView: View {
                             VStack {
                                 HeaderTitleView(recipeList: vm.recentRecipe, title: "Recent recipe")
                                 ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 20) {
+                                    LazyHStack(spacing: 20) {
                                         ForEach($vm.recentRecipe, content: RecentRecipeItem.init)
                                     }
                                 }
                             }
-                            // TODO: - Popular creators
+                            // TODO: - Any Cousine
                             VStack {
-                                HeaderTitleView(recipeList: [], title: "Popular creators", hasNavigationLink: true)
+                                HeaderTitleView(recipeList: vm.cousineRecipe, title: "\(vm.cousine.rawValue.capitalized) Cousine", hasNavigationLink: true)
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack(spacing: 20) {
-                                        ForEach(1..<10) { _ in
-                                            PopularCreatorsItem()
-                                        }
+                                        ForEach($vm.cousineRecipe, content: PopularCousinItem.init)
                                     }
                                 }
                             }
@@ -80,8 +80,6 @@ struct MainScreenView: View {
 
 struct MainScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        //NavigationView {
         MainScreenView()
-        // }
     }
 }

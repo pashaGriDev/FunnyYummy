@@ -54,8 +54,33 @@ struct Recipe: Codable, Identifiable {
         //case fingerfood
         case snack
         case drink
-        
     }
+
+enum Cousine: String, Codable, CaseIterable {
+    case african
+    case asian
+    case american
+    case british
+    case cajun
+    case caribbean
+    case chinese
+    case european
+    case french
+    case german
+    case greek
+    case indian
+    case irish
+    case italian
+    case japanese
+    case jewish
+    case korean
+    case mexican
+    case nordic
+    case southern
+    case spanish
+    case thai
+    case vietnamese
+}
     
     struct Instruction: Codable {
         let name: String
