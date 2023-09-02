@@ -11,10 +11,16 @@ import SwiftUI
 struct FunnyYummyApp: App {
     
     @StateObject var viewRouter = ViewRouter()
+    @AppStorage("isOnboarding") var isOnboarding = false
     
     var body: some Scene {
         WindowGroup {
-            MainScreenView()
+            if isOnboarding {
+                ContentView(viewRouter: viewRouter)
+                    .preferredColorScheme(.light)
+            } else {
+                PageControlView(isOnboarding: $isOnboarding)
+            }
         }
     }
 }
