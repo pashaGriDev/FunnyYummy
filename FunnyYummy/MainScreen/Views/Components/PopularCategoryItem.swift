@@ -26,13 +26,14 @@ struct PopularCategoryItem: View {
                             VStack(alignment: .leading) {
                                 Text("Time")
                                     .foregroundColor(.gray.opacity(0.8))
-                                Text("5 mins")
+                                Text("\(recipe.readyInMinutes.formatted()) mins")
                             }
                             Spacer()
                             
                             BookmarkView()
                         }
-                    }.padding([.horizontal, .bottom], 6), alignment: .bottom
+                    }
+                    .padding([.horizontal, .bottom], 6), alignment: .bottom
                 )
             
             ImageLoaderView(url: recipe.image)

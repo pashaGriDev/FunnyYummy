@@ -39,7 +39,9 @@ struct Recipe: Codable, Identifiable {
     }
     
     var creatorName: String {
-        ""
+        let words = creditsText.components(separatedBy: " ")
+        let firstThree = words.prefix(2)
+        return firstThree.joined(separator: " ")
     }
     
 }
