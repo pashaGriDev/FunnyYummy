@@ -50,6 +50,8 @@
 		FD67B69C2A9E07BF0063D631 /* PopularCategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67B6912A9E07BF0063D631 /* PopularCategoryItem.swift */; };
 		FD67B69D2A9E07BF0063D631 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67B6922A9E07BF0063D631 /* MainScreenView.swift */; };
 		FD67B69E2A9E07BF0063D631 /* ImageLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67B6942A9E07BF0063D631 /* ImageLoaderView.swift */; };
+		FDBCA81A2AA25EC600481DDE /* RecipeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBCA8172AA25EC600481DDE /* RecipeScreenView.swift */; };
+		FDBCA81B2AA25EC600481DDE /* IngredientRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBCA8192AA25EC600481DDE /* IngredientRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +100,8 @@
 		FD67B6912A9E07BF0063D631 /* PopularCategoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularCategoryItem.swift; sourceTree = "<group>"; };
 		FD67B6922A9E07BF0063D631 /* MainScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		FD67B6942A9E07BF0063D631 /* ImageLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoaderView.swift; sourceTree = "<group>"; };
+		FDBCA8172AA25EC600481DDE /* RecipeScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeScreenView.swift; sourceTree = "<group>"; };
+		FDBCA8192AA25EC600481DDE /* IngredientRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,7 @@
 				FD67B6872A9E07BF0063D631 /* MainScreen */,
 				FD5C6F202A9E19F400B5CAF1 /* FavoriteScreen */,
 				3C7C0C362A9D76CB00E2E5B3 /* CategoryView */,
+				FDBCA8162AA25EC600481DDE /* RecipeScreen */,
 				3C7C0C3B2A9E72D800E2E5B3 /* ProfileView */,
 				3C9352F82A9D529800022170 /* TabBar */,
 				FD67B6932A9E07BF0063D631 /* Services */,
@@ -339,6 +344,24 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		FDBCA8162AA25EC600481DDE /* RecipeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				FDBCA8172AA25EC600481DDE /* RecipeScreenView.swift */,
+				FDBCA8182AA25EC600481DDE /* Components */,
+			);
+			name = RecipeScreen;
+			path = FunnyYummy/RecipeScreen;
+			sourceTree = SOURCE_ROOT;
+		};
+		FDBCA8182AA25EC600481DDE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				FDBCA8192AA25EC600481DDE /* IngredientRowView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -441,6 +464,7 @@
 				3C7C0C3E2A9E953A00E2E5B3 /* ProfileHeaderView.swift in Sources */,
 				FD67B69E2A9E07BF0063D631 /* ImageLoaderView.swift in Sources */,
 				FD67B6992A9E07BF0063D631 /* SearchBarView.swift in Sources */,
+				FDBCA81A2AA25EC600481DDE /* RecipeScreenView.swift in Sources */,
 				3C0BA8C02AA23E3300B205DA /* PageViewModel.swift in Sources */,
 				FD67B69B2A9E07BF0063D631 /* CategorySegmentedView.swift in Sources */,
 				2D26A0CD2A9D05D0009A04F7 /* CategoryView.swift in Sources */,
@@ -449,6 +473,7 @@
 				3C9352F72A9D529500022170 /* ViewRouter.swift in Sources */,
 				3C7C0C3A2A9E72D200E2E5B3 /* ProfileView.swift in Sources */,
 				3C9352FF2A9D60EA00022170 /* TabBar.swift in Sources */,
+				FDBCA81B2AA25EC600481DDE /* IngredientRowView.swift in Sources */,
 				6F464A1D2A9F59BF005C2002 /* API_Key.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
