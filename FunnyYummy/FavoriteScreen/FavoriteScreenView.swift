@@ -14,8 +14,8 @@ struct FavoriteScreenView: View {
                 .font(.title.bold())
             ScrollView(.vertical, showsIndicators: false) {
                 ForEach(1..<10) { _ in
-                    TrendingItemView(screen: .favorite)
-                        .padding(.bottom, 25)
+//                    TrendingItemView(screen: .favorite)
+//                        .padding(.bottom, 25)
                 }
             }
         }

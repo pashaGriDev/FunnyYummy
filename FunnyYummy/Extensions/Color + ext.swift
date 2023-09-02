@@ -9,9 +9,7 @@ import SwiftUI
 import Foundation
 
 extension Color {
-    static var white : Color {
-        Color(red: 1.0, green: 1.0, blue: 1.0)
-    }
+    
     static var neutral100 : Color {
         Color(red: 0.09, green: 0.09, blue: 0.09)
     }

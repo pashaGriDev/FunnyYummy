@@ -8,26 +8,28 @@
 import SwiftUI
 
 struct TrendingItemView: View {
-    
+    let recipe: Recipe
     let screen: ScreenSize
-    
-    let url = "https://spoonacular.com/recipeImages/716429-312x231.jpg"
     
     var body: some View {
         VStack(alignment: .leading) {
-            ImageLoaderView(url: url)
+            ImageLoaderView(url: recipe.image)
                 .frame(width: screen.screen.width, height: screen.screen.height)
-            .background(
+                .background(
                 Color.gray.opacity(0.3)
-            )
-            .overlay(
+                )
+                .overlay(
                 overlayCard
                 , alignment: .top
-            )
-            .clipShape(RoundedRectangle(cornerRadius: 24))
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 24))
             
-            Text("How to shawarma at home")
+            Text(recipe.title)
                 .font(.system(size: screen.font).bold())
+                .lineLimit(2)
+                .frame(width: screen.screen.width, height: screen.font * 2.4, alignment: .leading)
+                .background(recipe.title.isEmpty ? .gray.opacity(0.2) : .clear)
+                .cornerRadius(10)
 
             footer
         }
@@ -38,7 +40,7 @@ struct TrendingItemView: View {
         HStack {
             HStack(spacing: 0) {
                 Image(systemName: "star.fill")
-                Text("4.5")
+                Text(recipe.rating?.formatted() ?? "5")
                     .foregroundColor(.white)
             }
             .padding(.all, 2)
@@ -55,11 +57,14 @@ struct TrendingItemView: View {
             Image(systemName: "circle.fill")
                 .resizable()
                 .frame(width: 30, height: 30)
-            Text("by Kasharin Mikhail")
+            Text("by \(recipe.creatorName)")
+                .padding(.leading, 6)
                 .foregroundColor(.gray)
+                .frame(width: screen.screen.width - 40, height: screen.font * 2.4, alignment: .leading)
+                .background(recipe.title.isEmpty ? .gray.opacity(0.2) : .clear)
+                .cornerRadius(10)
         }
     }
-    
 }
 
 enum ScreenSize {
@@ -89,8 +94,8 @@ enum ScreenSize {
 struct TrendingItemView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            TrendingItemView(screen: .main)
-            TrendingItemView(screen: .favorite)
+            TrendingItemView(recipe: Bundle.main.decode(Recipe.self, from: "mockData.json"), screen: .main)
+            TrendingItemView(recipe: MainScreenViewModel().emptyRecipe, screen: .main)
         }
     }
 }

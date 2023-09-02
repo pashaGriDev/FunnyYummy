@@ -9,26 +9,37 @@ import SwiftUI
 
 struct MainScreenView: View {
     
-    @State private var searchText = ""
+    @StateObject private var vm = MainScreenViewModel()
     
     var body: some View {
         NavigationView {
             VStack(alignment: .leading, spacing: 10) {
                 Text("Get amazing recipes for cooking")
                     .font(.title.bold())
+                
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 20) {
                         // MARK: - SearchBar
-                        SearchBarView(searchText: $searchText)
-                        
-                        if searchText.isEmpty {
+                        SearchBarView(searchText: $vm.searchText)
+                            .onChange(of: vm.searchText) { _ in
+                                Task {
+                                    await vm.findRecipe()
+                                }
+                            }
+                        if vm.searchText.isEmpty {
                             // MARK: - Trending now
                             VStack {
-                                HeaderTitleView(title: "Trending now 🔥", hasNavigationLink: true, content: AnyView(CategoryView()))
+                                HeaderTitleView(recipeList: vm.trending, title: "Trending now 🔥")
                                 ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 20) {
-                                        ForEach(1..<10) { _ in
-                                            TrendingItemView(screen: .main)
+                                    LazyHStack(spacing: 20) {
+                                        if vm.trending.isEmpty {
+                                            ForEach(1..<10) { _ in
+                                                TrendingItemView(recipe: vm.emptyRecipe, screen: .main)
+                                            }
+                                        } else {
+                                            ForEach(vm.trending) { recipe in
+                                                TrendingItemView(recipe: recipe, screen: .main)
+                                            }
                                         }
                                     }
                                 }
@@ -36,42 +47,57 @@ struct MainScreenView: View {
                             // MARK: - Popular category
                             VStack {
                                 HeaderTitleView(title: "Popular category", hasNavigationLink: false)
-                                CategorySegmentedView()
+                                CategorySegmentedView(vm: vm)
                                 ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 20) {
-                                        ForEach(1..<10) { _ in
-                                            PopularCategoryItem()
+                                    LazyHStack(spacing: 20) {
+                                        if vm.categoryRecipe.isEmpty {
+                                            ForEach(1..<10) { _ in
+                                                PopularCategoryItem(recipe: $vm.emptyRecipe)
+                                            }
+                                        } else {
+                                            ForEach($vm.categoryRecipe, content: PopularCategoryItem.init)
                                         }
                                     }
                                 }
                             }
                             // MARK: - Recent recipe
                             VStack {
-                                HeaderTitleView(title: "Recente recipe")
+                                HeaderTitleView(recipeList: vm.recentRecipe, title: "Recent recipe")
                                 ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 20) {
-                                        ForEach(1..<10) { _ in
-                                            RecentRecipeItem()
+                                    LazyHStack(spacing: 20) {
+                                        if vm.recentRecipe.isEmpty {
+                                            ForEach(1..<10) { _ in
+                                                RecentRecipeItem(recipe: $vm.emptyRecipe)
+                                            }
+                                        } else {
+                                            ForEach($vm.recentRecipe, content: RecentRecipeItem.init)
                                         }
                                     }
                                 }
                             }
-                            // MARK: - Recent recipe
+                            // TODO: - Any Cousin
                             VStack {
-                                HeaderTitleView(title: "Popular creators")
+                                HeaderTitleView(recipeList: vm.cousineRecipe, title: "\(vm.cousine.rawValue.capitalized) Cousin", hasNavigationLink: true)
                                 ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 20) {
-                                        ForEach(1..<10) { _ in
-                                            PopularCreatorsItem()
+                                    LazyHStack(spacing: 20) {
+                                        if vm.cousineRecipe.isEmpty {
+                                            ForEach(1..<10) { _ in
+                                                PopularCousinItem(recipe: $vm.emptyRecipe)
+                                            }
+                                        } else {
+                                            ForEach($vm.cousineRecipe, content: PopularCousinItem.init)
                                         }
                                     }
                                 }
                             }
                         } else {
-                            EmptyView()
+                            CategoryView(recipeList: vm.searchRecipe, title: "")
+                                .navigationBarHidden(true)
                         }
                     }
+                    Spacer(minLength: 50)
                 }
+                
             }
             .padding([.horizontal, .top])
         }
@@ -80,8 +106,6 @@ struct MainScreenView: View {
 
 struct MainScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        //NavigationView {
         MainScreenView()
-        // }
     }
 }

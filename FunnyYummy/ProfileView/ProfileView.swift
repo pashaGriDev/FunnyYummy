@@ -18,8 +18,8 @@ struct ProfileView: View {
             ScrollView(showsIndicators: false) {
                 VStack {
                     //MARK: - Recipes Title
-                    HeaderTitleView(title: "My Recipes", hasNavigationLink: false)
-                        .padding(.horizontal)
+                    //HeaderTitleView(title: "My Recipes", hasNavigationLink: false)
+                       // .padding(.horizontal)
                     
                     //MARK: - Resipes Bookmark
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 8) {

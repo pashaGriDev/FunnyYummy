@@ -9,21 +9,26 @@ import SwiftUI
 
 struct RecentRecipeItem: View {
     
-    let url = "https://spoonacular.com/recipeImages/716429-312x231.jpg"
+    @Binding var recipe: Recipe
     
     var body: some View {
-        VStack(alignment: .leading) {
-            ImageLoaderView(url: url)
+        VStack(alignment: .leading, spacing: 10) {
+            ImageLoaderView(url: recipe.image)
                 .frame(width: 124, height: 124)
                 .clipped()
                 .background(.ultraThinMaterial)
                 .cornerRadius(16)
             
-            Text("Kelewele Ghanian Recipe")
-                .font(.headline.bold())
-            Text("by Mikhail Kasharin")
-                .font(.system(size: 12))
-                .foregroundColor(.gray.opacity(0.8))
+            VStack(alignment: .leading) {
+                Text(recipe.title)
+                    .font(.headline.bold())
+                Text(recipe.creatorName)
+                    .font(.system(size: 12))
+                    .foregroundColor(.gray.opacity(0.8))
+            }
+            .frame(width: 124)
+            .background(recipe.title.isEmpty ? .gray.opacity(0.1) : .clear)
+            .cornerRadius(10)
         }
         .frame(width: 124, height: 210)
     }
@@ -31,6 +36,6 @@ struct RecentRecipeItem: View {
 
 struct RecentRecipeView_Previews: PreviewProvider {
     static var previews: some View {
-        RecentRecipeItem()
+        RecentRecipeItem(recipe: .constant(Bundle.main.decode(Recipe.self, from: "mockData.json")))
     }
 }

@@ -40,7 +40,7 @@
 		6F464A212A9F59BF005C2002 /* API_Testing_View2nd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F464A1B2A9F59BF005C2002 /* API_Testing_View2nd.swift */; };
 		6F464A222A9F59BF005C2002 /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F464A1C2A9F59BF005C2002 /* RecipeModel.swift */; };
 		FD5C6F222A9E1A1600B5CAF1 /* FavoriteScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5C6F212A9E1A1600B5CAF1 /* FavoriteScreenView.swift */; };
-		FD67B6952A9E07BF0063D631 /* PopularCreatorsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67B68A2A9E07BF0063D631 /* PopularCreatorsItem.swift */; };
+		FD67B6952A9E07BF0063D631 /* PopularCousinItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67B68A2A9E07BF0063D631 /* PopularCousinItem.swift */; };
 		FD67B6962A9E07BF0063D631 /* TrendingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67B68B2A9E07BF0063D631 /* TrendingItemView.swift */; };
 		FD67B6972A9E07BF0063D631 /* BookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67B68C2A9E07BF0063D631 /* BookmarkView.swift */; };
 		FD67B6982A9E07BF0063D631 /* HeaderTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67B68D2A9E07BF0063D631 /* HeaderTitleView.swift */; };
@@ -50,6 +50,7 @@
 		FD67B69C2A9E07BF0063D631 /* PopularCategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67B6912A9E07BF0063D631 /* PopularCategoryItem.swift */; };
 		FD67B69D2A9E07BF0063D631 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67B6922A9E07BF0063D631 /* MainScreenView.swift */; };
 		FD67B69E2A9E07BF0063D631 /* ImageLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67B6942A9E07BF0063D631 /* ImageLoaderView.swift */; };
+		FDA6EEC02AA371A80069936A /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA6EEBF2AA371A80069936A /* MainScreenViewModel.swift */; };
 		FDBCA81A2AA25EC600481DDE /* RecipeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBCA8172AA25EC600481DDE /* RecipeScreenView.swift */; };
 		FDBCA81B2AA25EC600481DDE /* IngredientRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBCA8192AA25EC600481DDE /* IngredientRowView.swift */; };
 /* End PBXBuildFile section */
@@ -90,7 +91,7 @@
 		6F464A1B2A9F59BF005C2002 /* API_Testing_View2nd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API_Testing_View2nd.swift; sourceTree = "<group>"; };
 		6F464A1C2A9F59BF005C2002 /* RecipeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
 		FD5C6F212A9E1A1600B5CAF1 /* FavoriteScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteScreenView.swift; sourceTree = "<group>"; };
-		FD67B68A2A9E07BF0063D631 /* PopularCreatorsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularCreatorsItem.swift; sourceTree = "<group>"; };
+		FD67B68A2A9E07BF0063D631 /* PopularCousinItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularCousinItem.swift; sourceTree = "<group>"; };
 		FD67B68B2A9E07BF0063D631 /* TrendingItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingItemView.swift; sourceTree = "<group>"; };
 		FD67B68C2A9E07BF0063D631 /* BookmarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkView.swift; sourceTree = "<group>"; };
 		FD67B68D2A9E07BF0063D631 /* HeaderTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderTitleView.swift; sourceTree = "<group>"; };
@@ -100,6 +101,7 @@
 		FD67B6912A9E07BF0063D631 /* PopularCategoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularCategoryItem.swift; sourceTree = "<group>"; };
 		FD67B6922A9E07BF0063D631 /* MainScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		FD67B6942A9E07BF0063D631 /* ImageLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoaderView.swift; sourceTree = "<group>"; };
+		FDA6EEBF2AA371A80069936A /* MainScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
 		FDBCA8172AA25EC600481DDE /* RecipeScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeScreenView.swift; sourceTree = "<group>"; };
 		FDBCA8192AA25EC600481DDE /* IngredientRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -305,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				FD67B6922A9E07BF0063D631 /* MainScreenView.swift */,
+				FDA6EEBE2AA371A80069936A /* ViewModels */,
 				FD67B6892A9E07BF0063D631 /* Components */,
 			);
 			name = MainScreen;
@@ -314,7 +317,7 @@
 		FD67B6892A9E07BF0063D631 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				FD67B68A2A9E07BF0063D631 /* PopularCreatorsItem.swift */,
+				FD67B68A2A9E07BF0063D631 /* PopularCousinItem.swift */,
 				FD67B68B2A9E07BF0063D631 /* TrendingItemView.swift */,
 				FD67B68C2A9E07BF0063D631 /* BookmarkView.swift */,
 				FD67B68D2A9E07BF0063D631 /* HeaderTitleView.swift */,
@@ -334,6 +337,14 @@
 				FD67B6942A9E07BF0063D631 /* ImageLoaderView.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		FDA6EEBE2AA371A80069936A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				FDA6EEBF2AA371A80069936A /* MainScreenViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		FDBCA8162AA25EC600481DDE /* RecipeScreen */ = {
@@ -430,7 +441,7 @@
 				FD5C6F222A9E1A1600B5CAF1 /* FavoriteScreenView.swift in Sources */,
 				2D26A0AF2A9CC4F1009A04F7 /* Color + ext.swift in Sources */,
 				FD67B69D2A9E07BF0063D631 /* MainScreenView.swift in Sources */,
-				FD67B6952A9E07BF0063D631 /* PopularCreatorsItem.swift in Sources */,
+				FD67B6952A9E07BF0063D631 /* PopularCousinItem.swift in Sources */,
 				3C0BA8C52AA23E3300B205DA /* PageControlView.swift in Sources */,
 				3C0BA8C32AA23E3300B205DA /* AboutTextView.swift in Sources */,
 				FD67B6982A9E07BF0063D631 /* HeaderTitleView.swift in Sources */,
@@ -455,6 +466,7 @@
 				10E624022A9B9427005BD5DA /* ContentView.swift in Sources */,
 				3C7C0C3E2A9E953A00E2E5B3 /* ProfileHeaderView.swift in Sources */,
 				FD67B69E2A9E07BF0063D631 /* ImageLoaderView.swift in Sources */,
+				FDA6EEC02AA371A80069936A /* MainScreenViewModel.swift in Sources */,
 				FD67B6992A9E07BF0063D631 /* SearchBarView.swift in Sources */,
 				FDBCA81A2AA25EC600481DDE /* RecipeScreenView.swift in Sources */,
 				3C0BA8C02AA23E3300B205DA /* PageViewModel.swift in Sources */,

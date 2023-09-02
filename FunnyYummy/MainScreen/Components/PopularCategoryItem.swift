@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PopularCategoryItem: View {
     
-    let url = "https://spoonacular.com/recipeImages/716429-312x231.jpg"
+    @Binding var recipe: Recipe
     
     var body: some View {
         ZStack {
@@ -18,25 +18,34 @@ struct PopularCategoryItem: View {
                 .frame(width: 150, height: 176)
                 .cornerRadius(16)
                 .overlay(
-                    VStack(spacing: 30) {
-                        Text("Chicken and Vegetable wrap")
+                    VStack(spacing: 20) {
+                        Text(recipe.title)
                             .font(.headline)
                             .multilineTextAlignment(.center)
+                            .frame(width: 150, height: 45)
+                            .background(.clear)
                         
                         HStack {
                             VStack(alignment: .leading) {
                                 Text("Time")
                                     .foregroundColor(.gray.opacity(0.8))
-                                Text("5 mins")
+                                Text(
+                                    recipe.title.isEmpty
+                                    ? ""
+                                    : "\(recipe.readyInMinutes) mins"
+                                )
+                                .frame(width: 100, alignment: .leading)
+                                    .background(.clear)
                             }
                             Spacer()
                             
                             BookmarkView()
                         }
-                    }.padding([.horizontal, .bottom], 6), alignment: .bottom
+                    }
+                    .padding([.horizontal, .bottom], 6), alignment: .bottom
                 )
             
-            ImageLoaderView(url: url)
+            ImageLoaderView(url: recipe.image)
                 .frame(width: 110, height: 110)
                 .background(.ultraThinMaterial)
                 .clipShape(Circle())
@@ -49,6 +58,6 @@ struct PopularCategoryItem: View {
 
 struct PopularCategoryItem_Previews: PreviewProvider {
     static var previews: some View {
-        PopularCategoryItem()
+        PopularCategoryItem(recipe: .constant(Bundle.main.decode(Recipe.self, from: "mockData.json")))
     }
 }

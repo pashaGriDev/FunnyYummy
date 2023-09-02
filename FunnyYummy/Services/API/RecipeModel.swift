@@ -38,11 +38,17 @@ struct Recipe: Codable, Identifiable {
         }
     }
     
+    var creatorName: String {
+        let words = creditsText.components(separatedBy: " ")
+        let firstThree = words.prefix(2)
+        return firstThree.joined(separator: " ")
+    }
+    
 }
-    enum DishTypes: String, Codable {
-        case mainCourse = "main course"
-        case sideDish = "side dish"
-        case dessert
+    enum DishTypes: String, Codable, CaseIterable {
+        //case mainCourse = "main course"
+        //case sideDish = "side dish"
+        //case dessert
         case appetizer
         case salad
         case bread
@@ -51,11 +57,36 @@ struct Recipe: Codable, Identifiable {
         case beverage
         case sauce
         case marinade
-        case fingerfood
+        //case fingerfood
         case snack
         case drink
-        
     }
+
+enum Cousine: String, Codable, CaseIterable {
+    case african
+    case asian
+    case american
+    case british
+    case cajun
+    case caribbean
+    case chinese
+    case european
+    case french
+    case german
+    case greek
+    case indian
+    case irish
+    case italian
+    case japanese
+    case jewish
+    case korean
+    case mexican
+    case nordic
+    case southern
+    case spanish
+    case thai
+    case vietnamese
+}
     
     struct Instruction: Codable {
         let name: String
