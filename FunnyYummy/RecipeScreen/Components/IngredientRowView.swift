@@ -9,20 +9,22 @@ import SwiftUI
 
 struct IngredientRowView: View {
     
-    let url: String
-    let text: String
+    let ingredient: Ingredient
+    
     @State private var isSelected = false
     
     var body: some View {
         HStack(spacing: 20) {
-            ImageLoaderView(url: url)
+            ImageLoaderView(url: ingredient.ingredientImage)
                 .frame(width: 52, height: 52)
-            Text(text)
-                .font(.system(size: 16).bold())
+                .clipped()
+                .cornerRadius(10)
+            Text(ingredient.correctName)
+                .font(.system(size: 15).bold())
                 .lineLimit(1)
 
             Spacer(minLength: 0)
-            Text("250g")
+            Text("\(ingredient.amount?.formatted() ?? "") \(ingredient.shortUnit)")
                 .foregroundColor(.gray)
                 .font(.system(size: 14))
             Image(systemName: "checkmark.circle.fill")
@@ -41,6 +43,6 @@ struct IngredientRowView: View {
 
 struct IngredientRowView_Previews: PreviewProvider {
     static var previews: some View {
-        IngredientRowView(url: "https://cdn-icons-png.flaticon.com/512/2005/2005849.png", text: "Vegetable oil")
+        IngredientRowView(ingredient: Bundle.main.decode(Recipe.self, from: "mockData.json").extendedIngredients?[5] ?? Ingredient(id: 0, image: "", name: "", amount: 0, unit: ""))
     }
 }

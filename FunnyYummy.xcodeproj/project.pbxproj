@@ -332,11 +332,19 @@
 		FD67B6932A9E07BF0063D631 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				FD998DF52AA387F900D09712 /* DataManager */,
 				6F464A162A9F59BF005C2002 /* API */,
 				3C9352F62A9D529500022170 /* ViewRouter.swift */,
 				FD67B6942A9E07BF0063D631 /* ImageLoaderView.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		FD998DF52AA387F900D09712 /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataManager;
 			sourceTree = "<group>";
 		};
 		FDA6EEBE2AA371A80069936A /* ViewModels */ = {
