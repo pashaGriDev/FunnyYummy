@@ -35,6 +35,7 @@ struct MainScreenView: View {
                                         if vm.trending.isEmpty {
                                             ForEach(1..<10) { _ in
                                                 TrendingItemView(recipe: vm.emptyRecipe, screen: .main)
+                                                    .disabled(true)
                                             }
                                         } else {
                                             ForEach(vm.trending) { recipe in
@@ -53,6 +54,7 @@ struct MainScreenView: View {
                                         if vm.categoryRecipe.isEmpty {
                                             ForEach(1..<10) { _ in
                                                 PopularCategoryItem(recipe: $vm.emptyRecipe)
+                                                    .disabled(true)
                                             }
                                         } else {
                                             ForEach($vm.categoryRecipe, content: PopularCategoryItem.init)
@@ -68,6 +70,7 @@ struct MainScreenView: View {
                                         if vm.recentRecipe.isEmpty {
                                             ForEach(1..<10) { _ in
                                                 RecentRecipeItem(recipe: $vm.emptyRecipe)
+                                                    .disabled(true)
                                             }
                                         } else {
                                             ForEach($vm.recentRecipe, content: RecentRecipeItem.init)
@@ -83,6 +86,7 @@ struct MainScreenView: View {
                                         if vm.cousineRecipe.isEmpty {
                                             ForEach(1..<10) { _ in
                                                 PopularCousinItem(recipe: $vm.emptyRecipe)
+                                                    .disabled(true)
                                             }
                                         } else {
                                             ForEach($vm.cousineRecipe, content: PopularCousinItem.init)

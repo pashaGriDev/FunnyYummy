@@ -27,6 +27,10 @@ struct Recipe: Codable, Identifiable {
     let extendedIngredients: [Ingredient]?
     let analyzedInstructions: [Instruction]?
     
+    var instruction: Instruction {
+        analyzedInstructions![0]
+    }
+    
     var rating: Int? {
         switch aggregateLikes {
         case 0..<100: return 1
@@ -109,4 +113,17 @@ enum Cousine: String, Codable, CaseIterable {
         let name: String
         let amount: Double?
         let unit: String?
+        
+        var correctName: String {
+            name.prefix(1).capitalized + name.dropFirst()
+        }
+        
+        var shortUnit: String {
+            guard let cutUnit = unit else { return ""}
+            return String(cutUnit.prefix(3))
+        }
+        
+        var ingredientImage: String {
+            "https://spoonacular.com/cdn/ingredients_250x250/\(image)"
+        }
     }

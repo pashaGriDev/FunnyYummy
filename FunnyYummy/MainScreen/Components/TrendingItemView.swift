@@ -12,40 +12,45 @@ struct TrendingItemView: View {
     let screen: ScreenSize
     
     var body: some View {
-        VStack(alignment: .leading) {
-            ImageLoaderView(url: recipe.image)
-                .frame(width: screen.screen.width, height: screen.screen.height)
-                .background(
-                Color.gray.opacity(0.3)
-                )
-                .overlay(
-                overlayCard
-                , alignment: .top
-                )
-                .clipShape(RoundedRectangle(cornerRadius: 24))
-            
-            Text(recipe.title)
-                .font(.system(size: screen.font).bold())
-                .lineLimit(2)
-                .frame(width: screen.screen.width, height: screen.font * 2.4, alignment: .leading)
-                .background(recipe.title.isEmpty ? .gray.opacity(0.2) : .clear)
-                .cornerRadius(10)
+        NavigationLink(destination: RecipeScreenView(recipe: recipe)) {
+            VStack(alignment: .leading) {
+                ImageLoaderView(url: recipe.image)
+                    .frame(width: screen.screen.width, height: screen.screen.height)
+                    .background(
+                    Color.gray.opacity(0.3)
+                    )
+                    .overlay(
+                    overlayCard
+                    , alignment: .top
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 24))
+                
+                Text(recipe.title)
+                    .font(.system(size: screen.font).bold())
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(2)
+                    .frame(width: screen.screen.width, height: screen.font * 2.4, alignment: .leading)
+                    .background(recipe.title.isEmpty ? .gray.opacity(0.2) : .clear)
+                    .cornerRadius(10)
 
-            footer
+                footer
+            }
         }
     }
     
     // Custom Overlay Rank&Bookmark
     var overlayCard: some View {
         HStack {
-            HStack(spacing: 0) {
-                Image(systemName: "star.fill")
-                Text(recipe.rating?.formatted() ?? "5")
-                    .foregroundColor(.white)
+            if !recipe.title.isEmpty {
+                HStack(spacing: 0) {
+                    Image(systemName: "star.fill")
+                    Text(recipe.rating?.formatted() ?? "5")
+                        .foregroundColor(.white)
+                }
+                .padding(.all, 2)
+                .padding(.horizontal, 4)
+                .background(Color.gray.cornerRadius(8))
             }
-            .padding(.all, 2)
-            .padding(.horizontal, 4)
-            .background(Color.gray.cornerRadius(8))
             Spacer()
             BookmarkView()
         }
@@ -68,7 +73,6 @@ struct TrendingItemView: View {
 }
 
 enum ScreenSize {
-    
     case main
     case favorite
     
@@ -79,7 +83,8 @@ enum ScreenSize {
                 width: UIScreen.main.bounds.width - 32,
                 height: 200
             )
-        case .main: return CGSize(width: 280, height: 180)
+        case .main:
+            return CGSize(width: 280, height: 180)
         }
     }
     
@@ -93,9 +98,11 @@ enum ScreenSize {
 
 struct TrendingItemView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
-            TrendingItemView(recipe: Bundle.main.decode(Recipe.self, from: "mockData.json"), screen: .main)
-            TrendingItemView(recipe: MainScreenViewModel().emptyRecipe, screen: .main)
+        NavigationView {
+            VStack {
+                TrendingItemView(recipe: Bundle.main.decode(Recipe.self, from: "mockData.json"), screen: .main)
+                TrendingItemView(recipe: MainScreenViewModel().emptyRecipe, screen: .main)
+            }
         }
     }
 }
