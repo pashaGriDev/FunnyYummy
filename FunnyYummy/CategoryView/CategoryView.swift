@@ -21,26 +21,7 @@ struct CategoryView: View {
             .padding(.top, 20)
         }
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text(title)
-                    .font(.title.bold())
-            }
-            
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "arrow.left")
-                        .foregroundColor(.black)
-                }
-            }
-            
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Image(systemName: "ellipsis")
-                    .foregroundColor(.black)
-            }
-        }
+        .navigationHeader(title: title)
     }
 }
 

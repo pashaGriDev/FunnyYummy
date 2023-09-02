@@ -67,14 +67,17 @@ struct RecipeScreenView: View {
                     }
                 }
             }
-            
         }
+        .navigationHeader(title: "")
+        .navigationBarBackButtonHidden(true)
         .padding([.horizontal, .top])
     }
 }
 
 struct RecipeScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeScreenView(recipe: Bundle.main.decode(Recipe.self, from: "mockData.json"))
+        NavigationView {
+            RecipeScreenView(recipe: Bundle.main.decode(Recipe.self, from: "mockData.json"))
+        }
     }
 }
