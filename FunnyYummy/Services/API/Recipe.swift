@@ -14,26 +14,32 @@ struct Response: Codable {
 // 2. to get image use AsyncImage with url from image
 
 struct Recipe: Codable, Identifiable {
-    let creditsText: String
+    let creditsText: String? // название автора
     let id: Int
-    let aggregateLikes: Int
-    let title: String
-    let sourceUrl: String
-    let image: String
-    let imageType: String
-    let readyInMinutes: Int
+    let aggregateLikes: Int?
+    let title: String?
+    let sourceUrl: String?
+    let image: String?
+    let imageType: String?
+    let readyInMinutes: Int?
     
-    let dishTypes: [String]
+    let dishTypes: [String]?
+    
+    // нужные продукты
     let extendedIngredients: [Ingredient]?
+    
+    // инструкция приготовления
     let analyzedInstructions: [Instruction]?
     
     var instruction: Instruction {
         analyzedInstructions![0]
     }
     
-    var rating: Int? {
-        switch aggregateLikes {
-        case 0..<100: return 1
+    // рейтинг блюда по лайкам
+    // если значение nil вернет 0
+    var rating: Int {
+        switch aggregateLikes ?? 0 {
+        case 1..<100: return 1
         case 100..<1000: return 2
         case 1000..<5000: return 3
         case 5000..<20_000: return 4
@@ -42,17 +48,17 @@ struct Recipe: Codable, Identifiable {
         }
     }
     
-    var creatorName: String {
-        let words = creditsText.components(separatedBy: " ")
-        let firstThree = words.prefix(2)
-        return firstThree.joined(separator: " ")
-    }
+//    var creatorName: String {
+//        let words = creditsText.components(separatedBy: " ")
+//        let firstThree = words.prefix(2)
+//        return firstThree.joined(separator: " ")
+//    }
     
 }
     enum DishTypes: String, Codable, CaseIterable {
-        //case mainCourse = "main course"
-        //case sideDish = "side dish"
-        //case dessert
+        case mainCourse = "main%20course"
+        case sideDish = "side%20dish"
+        case dessert
         case appetizer
         case salad
         case bread
@@ -61,12 +67,12 @@ struct Recipe: Codable, Identifiable {
         case beverage
         case sauce
         case marinade
-        //case fingerfood
+        case fingerfood
         case snack
         case drink
     }
 
-enum Cousine: String, Codable, CaseIterable {
+enum Сuisine: String, Codable, CaseIterable {
     case african
     case asian
     case american
@@ -93,18 +99,18 @@ enum Cousine: String, Codable, CaseIterable {
 }
     
     struct Instruction: Codable {
-        let name: String
+        let name: String?
         let steps: [Step]
     }
-    
+    // шаги приготовления
     struct Step: Codable, Identifiable {
         var id: Int {
             return number
         }
         
-        let number: Int
-        let step: String
-        let ingredients: [Ingredient]?
+        let number: Int // номер шага
+        let step: String // описание приготовления
+        let ingredients: [Ingredient]? // продукты для данного шага
     }
     
     struct Ingredient: Codable, Identifiable {
