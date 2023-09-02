@@ -50,7 +50,13 @@ struct MainScreenView: View {
                                 CategorySegmentedView(vm: vm)
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     LazyHStack(spacing: 20) {
-                                        ForEach($vm.categoryRecipe, content: PopularCategoryItem.init)
+                                        if vm.categoryRecipe.isEmpty {
+                                            ForEach(1..<10) { _ in
+                                                PopularCategoryItem(recipe: $vm.emptyRecipe)
+                                            }
+                                        } else {
+                                            ForEach($vm.categoryRecipe, content: PopularCategoryItem.init)
+                                        }
                                     }
                                 }
                             }

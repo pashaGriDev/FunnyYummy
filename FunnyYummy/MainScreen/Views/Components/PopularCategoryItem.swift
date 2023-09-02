@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PopularCategoryItem: View {
+    
     @Binding var recipe: Recipe
     
     var body: some View {
@@ -17,16 +18,24 @@ struct PopularCategoryItem: View {
                 .frame(width: 150, height: 176)
                 .cornerRadius(16)
                 .overlay(
-                    VStack(spacing: 30) {
+                    VStack(spacing: 20) {
                         Text(recipe.title)
                             .font(.headline)
                             .multilineTextAlignment(.center)
+                            .frame(width: 150, height: 45)
+                            .background(.clear)
                         
                         HStack {
                             VStack(alignment: .leading) {
                                 Text("Time")
                                     .foregroundColor(.gray.opacity(0.8))
-                                Text("\(recipe.readyInMinutes.formatted()) mins")
+                                Text(
+                                    recipe.title.isEmpty
+                                    ? ""
+                                    : "\(recipe.readyInMinutes) mins"
+                                )
+                                .frame(width: 100, alignment: .leading)
+                                    .background(.clear)
                             }
                             Spacer()
                             
