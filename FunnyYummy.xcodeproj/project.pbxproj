@@ -115,12 +115,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		100226782AA3625100CA02B7 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				6F02707D2A9F88FE00A57D83 /* mockData.json */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
 		10E623F32A9B9427005BD5DA = {
 			isa = PBXGroup;
 			children = (
 				10E624102A9B9577005BD5DA /* README.md */,
 				10E6240E2A9B94F4005BD5DA /* .gitignore */,
 				10E623FE2A9B9427005BD5DA /* FunnyYummy */,
+				6F02707F2A9F8E4500A57D83 /* FOR_TESTING */,
+				100226782AA3625100CA02B7 /* Source */,
 				10E623FD2A9B9427005BD5DA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -138,7 +148,6 @@
 			children = (
 				10E623FF2A9B9427005BD5DA /* FunnyYummyApp.swift */,
 				10E624012A9B9427005BD5DA /* ContentView.swift */,
-				6F464A162A9F59BF005C2002 /* API */,
 				3C0BA8A22AA22D5B00B205DA /* OnboardingScreen */,
 				FD67B6872A9E07BF0063D631 /* MainScreen */,
 				FD5C6F202A9E19F400B5CAF1 /* FavoriteScreen */,
@@ -264,14 +273,6 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		3C9353002A9D610800022170 /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				3C9352F62A9D529500022170 /* ViewRouter.swift */,
-			);
-			path = Router;
-			sourceTree = "<group>";
-		};
 		6F02707F2A9F8E4500A57D83 /* FOR_TESTING */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,11 +286,9 @@
 		6F464A162A9F59BF005C2002 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				6F02707D2A9F88FE00A57D83 /* mockData.json */,
 				6F464A172A9F59BF005C2002 /* API_Key.swift */,
 				6F464A192A9F59BF005C2002 /* API_Manager.swift */,
 				6F464A1C2A9F59BF005C2002 /* RecipeModel.swift */,
-				6F02707F2A9F8E4500A57D83 /* FOR_TESTING */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -305,20 +304,12 @@
 		FD67B6872A9E07BF0063D631 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				FD67B6882A9E07BF0063D631 /* Views */,
+				FD67B6922A9E07BF0063D631 /* MainScreenView.swift */,
+				FD67B6892A9E07BF0063D631 /* Components */,
 			);
 			name = MainScreen;
 			path = FunnyYummy/MainScreen;
 			sourceTree = SOURCE_ROOT;
-		};
-		FD67B6882A9E07BF0063D631 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				FD67B6892A9E07BF0063D631 /* Components */,
-				FD67B6922A9E07BF0063D631 /* MainScreenView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
 		};
 		FD67B6892A9E07BF0063D631 /* Components */ = {
 			isa = PBXGroup;
@@ -338,7 +329,8 @@
 		FD67B6932A9E07BF0063D631 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				3C9353002A9D610800022170 /* Router */,
+				6F464A162A9F59BF005C2002 /* API */,
+				3C9352F62A9D529500022170 /* ViewRouter.swift */,
 				FD67B6942A9E07BF0063D631 /* ImageLoaderView.swift */,
 			);
 			path = Services;
