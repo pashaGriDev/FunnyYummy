@@ -65,15 +65,21 @@ struct MainScreenView: View {
                                 HeaderTitleView(recipeList: vm.recentRecipe, title: "Recent recipe")
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     LazyHStack(spacing: 20) {
-                                        ForEach($vm.recentRecipe, content: RecentRecipeItem.init)
+                                        if vm.recentRecipe.isEmpty {
+                                            ForEach(1..<10) { _ in
+                                                RecentRecipeItem(recipe: $vm.emptyRecipe)
+                                            }
+                                        } else {
+                                            ForEach($vm.recentRecipe, content: RecentRecipeItem.init)
+                                        }
                                     }
                                 }
                             }
                             // TODO: - Any Cousin
                             VStack {
-                                HeaderTitleView(recipeList: vm.cousineRecipe, title: "\(vm.cousine.rawValue.capitalized) Cousine", hasNavigationLink: true)
+                                HeaderTitleView(recipeList: vm.cousineRecipe, title: "\(vm.cousine.rawValue.capitalized) Cousin", hasNavigationLink: true)
                                 ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 20) {
+                                    LazyHStack(spacing: 20) {
                                         if vm.cousineRecipe.isEmpty {
                                             ForEach(1..<10) { _ in
                                                 PopularCousinItem(recipe: $vm.emptyRecipe)
