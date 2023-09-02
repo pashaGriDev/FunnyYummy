@@ -10,7 +10,7 @@ import Foundation
 @MainActor
 class MainScreenViewModel: ObservableObject {
     
-    let networkService = API_Manager()
+    let networkService = NetworkManager()
 
     @Published var dishType: DishTypes = .appetizer
     let cousine: Cousine = Cousine.allCases.randomElement() ?? .chinese

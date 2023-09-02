@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Response: Codable {
+struct RecipeModel: Codable {
     var results: [Recipe]
 }
 // 1. for Rating use rating
@@ -47,12 +47,6 @@ struct Recipe: Codable, Identifiable {
         default: return 0
         }
     }
-    
-//    var creatorName: String {
-//        let words = creditsText.components(separatedBy: " ")
-//        let firstThree = words.prefix(2)
-//        return firstThree.joined(separator: " ")
-//    }
     
 }
     enum DishTypes: String, Codable, CaseIterable {
