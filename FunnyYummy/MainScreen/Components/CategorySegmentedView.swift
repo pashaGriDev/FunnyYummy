@@ -20,12 +20,12 @@ struct CategorySegmentedView: View {
                         .foregroundColor(
                             type == vm.dishType
                             ? .white
-                            : .buttonColor
+                            : .prymary50
                         )
                         .padding(.all, 10)
                         .background(
                             type == vm.dishType
-                            ? Color.buttonColor
+                            ? Color.prymary50
                             : Color.clear
                         )
                         .cornerRadius(10)
