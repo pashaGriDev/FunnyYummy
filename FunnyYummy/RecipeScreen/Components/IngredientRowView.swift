@@ -27,7 +27,7 @@ struct IngredientRowView: View {
                 .font(.system(size: 14))
             Image(systemName: "checkmark.circle.fill")
                 .resizable()
-                .foregroundColor(isSelected ? .buttonColor : .black)
+                .foregroundColor(isSelected ? .red : .black)
                 .frame(width: 23, height: 23)
         }
         .frame(height: 76)
