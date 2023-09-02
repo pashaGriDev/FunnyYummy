@@ -25,7 +25,7 @@ struct CategorySegmentedView: View {
                         .padding(.all, 10)
                         .background(
                             category == choiceCategory
-                            ? Color.buttonColor
+                            ? Color.prymary50
                             : Color.clear
                         )
                         .cornerRadius(10)

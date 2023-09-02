@@ -18,7 +18,7 @@ extension Color {
     static var neutral50 : Color {
         Color(red: 0.57, green: 0.57, blue: 0.57)
     }
-    static var piymary50 : Color {
+    static var prymary50 : Color {
         Color(red: 0.89, green: 0.24, blue: 0.24)
     }
     static var neutral10 : Color {
@@ -33,10 +33,10 @@ extension Color {
     static var neutral20 : Color {
         Color(red: 0.85, green: 0.85, blue: 0.85)
     }
-    static var piymary10 : Color {
+    static var prymary10 : Color {
         Color(red: 0.98, green: 0.85, blue: 0.85)
     }
-    static var piymary20 : Color {
+    static var prymary20 : Color {
         Color(red: 0.95, green: 0.7, blue: 0.7)
     }
 }

@@ -27,7 +27,7 @@ struct HeaderTitleView: View {
                         Image(systemName: "arrow.right")
                     }
                 }
-                .foregroundColor(.buttonColor)
+                .foregroundColor(.prymary50)
                 .font(.headline)
             }
         }
