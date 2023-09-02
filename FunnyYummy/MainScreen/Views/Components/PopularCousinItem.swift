@@ -21,6 +21,8 @@ struct PopularCousinItem: View {
             Text(recipe.creditsText)
                 .font(.headline)
         }
+        .frame(width: 120, height: 150)
+        .background(.clear)
     }
 }
 

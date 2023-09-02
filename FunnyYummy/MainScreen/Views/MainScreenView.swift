@@ -69,12 +69,18 @@ struct MainScreenView: View {
                                     }
                                 }
                             }
-                            // TODO: - Any Cousine
+                            // TODO: - Any Cousin
                             VStack {
                                 HeaderTitleView(recipeList: vm.cousineRecipe, title: "\(vm.cousine.rawValue.capitalized) Cousine", hasNavigationLink: true)
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack(spacing: 20) {
-                                        ForEach($vm.cousineRecipe, content: PopularCousinItem.init)
+                                        if vm.cousineRecipe.isEmpty {
+                                            ForEach(1..<10) { _ in
+                                                PopularCousinItem(recipe: $vm.emptyRecipe)
+                                            }
+                                        } else {
+                                            ForEach($vm.cousineRecipe, content: PopularCousinItem.init)
+                                        }
                                     }
                                 }
                             }
@@ -83,7 +89,9 @@ struct MainScreenView: View {
                                 .navigationBarHidden(true)
                         }
                     }
+                    Spacer(minLength: 50)
                 }
+                
             }
             .padding([.horizontal, .top])
         }
