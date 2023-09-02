@@ -32,8 +32,14 @@ struct MainScreenView: View {
                                 HeaderTitleView(recipeList: vm.trending, title: "Trending now 🔥")
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     LazyHStack(spacing: 20) {
-                                        ForEach(vm.trending) { recipe in
-                                            TrendingItemView(recipe: recipe, screen: .main)
+                                        if vm.trending.isEmpty {
+                                            ForEach(1..<10) { _ in
+                                                TrendingItemView(recipe: vm.emptyRecipe, screen: .main)
+                                            }
+                                        } else {
+                                            ForEach(vm.trending) { recipe in
+                                                TrendingItemView(recipe: recipe, screen: .main)
+                                            }
                                         }
                                     }
                                 }

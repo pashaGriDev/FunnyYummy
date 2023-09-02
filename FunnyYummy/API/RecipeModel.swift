@@ -38,6 +38,10 @@ struct Recipe: Codable, Identifiable {
         }
     }
     
+    var creatorName: String {
+        ""
+    }
+    
 }
     enum DishTypes: String, Codable, CaseIterable {
         //case mainCourse = "main course"

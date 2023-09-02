@@ -14,6 +14,7 @@ class MainScreenViewModel: ObservableObject {
 
     @Published var dishType: DishTypes = .appetizer
     let cousine: Cousine = Cousine.allCases.randomElement() ?? .chinese
+    let emptyRecipe = Recipe(creditsText: "", id: 0, aggregateLikes: 0, title: "", sourceUrl: "", image: "", imageType: "", readyInMinutes: 0, dishTypes: [], extendedIngredients: [], analyzedInstructions: [])
     @Published var trending = [Recipe]()
     @Published var categoryRecipe = [Recipe]()
     @Published var recentRecipe = [Recipe]()
