@@ -51,6 +51,7 @@ class NetworkManager: ObservableObject {
         return try await fetchData(url: url, model: [Recipe].self)
     }
     
+    /// поиск по тексту + нужное количество ответов. По умолчанию 10
     func searchData(by text: String?, amount: Int = 10) async throws -> [Recipe] {
         
         let baseUrl = SpoonacularURL.short.rawValue

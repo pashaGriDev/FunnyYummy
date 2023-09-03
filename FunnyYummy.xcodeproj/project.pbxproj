@@ -133,8 +133,6 @@
 				10E624102A9B9577005BD5DA /* README.md */,
 				10E6240E2A9B94F4005BD5DA /* .gitignore */,
 				10E623FE2A9B9427005BD5DA /* FunnyYummy */,
-				6F02707F2A9F8E4500A57D83 /* FOR_TESTING */,
-				100226782AA3625100CA02B7 /* Source */,
 				10E623FD2A9B9427005BD5DA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -164,6 +162,8 @@
 				3C7C0C352A9D747D00E2E5B3 /* Extensions */,
 				10E624052A9B9428005BD5DA /* Preview Content */,
 				10AD2C282AA2944400ECB79B /* PhotoPicker.swift */,
+				100226782AA3625100CA02B7 /* Source */,
+				6F02707F2A9F8E4500A57D83 /* FOR_TESTING */,
 			);
 			path = FunnyYummy;
 			sourceTree = "<group>";
