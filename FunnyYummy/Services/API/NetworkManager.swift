@@ -58,7 +58,7 @@ class NetworkManager: ObservableObject {
         let query = "&query=\(text ?? "")"
         
         let url = "\(baseUrl)\(apiKey)\(query)"
-        return []
+        return try await fetchData(url: url, model: [Recipe].self)
     }
     
     private func fetchData<T: Decodable>(url urlSting: String, model: T.Type) async throws -> T {
