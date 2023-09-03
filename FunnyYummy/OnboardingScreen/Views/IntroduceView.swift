@@ -13,6 +13,10 @@ struct IntroduceView: View {
     @Binding var isOnboarding: Bool
     @Binding var currentPage: Int
     
+    //Константы
+    let imageScaleFactor: CGFloat = 1.2
+    let tabViewHeight: CGFloat = 180
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             
@@ -20,7 +24,7 @@ struct IntroduceView: View {
                 .resizable()
                 .scaledToFit()
                 .ignoresSafeArea()
-                .scaleEffect(1.2)
+                .scaleEffect(imageScaleFactor)
             
             VStack(spacing: 30) {
                 TabView(selection: $currentPage) {
@@ -28,7 +32,7 @@ struct IntroduceView: View {
                         AboutTextView(page: $vm.pages[index])
                     }
                 }
-                .frame(height: 180)
+                .frame(height: tabViewHeight)
                 .tabViewStyle(.page(indexDisplayMode: .never))
                 
                 PageIndicatorView(pages: vm.pages, currentPage: currentPage)

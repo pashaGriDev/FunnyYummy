@@ -25,11 +25,11 @@ struct IngredientRowView: View {
 
             Spacer(minLength: 0)
             Text("\(ingredient.amount?.formatted() ?? "") \(ingredient.shortUnit)")
-                .foregroundColor(.gray)
+                .foregroundColor(Color.Text.gray)
                 .font(.system(size: 14))
             Image(systemName: "checkmark.circle.fill")
                 .resizable()
-                .foregroundColor(isSelected ? .red : .black)
+                .foregroundColor(isSelected ? Color.Button.red : Color.Button.black)
                 .frame(width: 23, height: 23)
         }
         .frame(height: 76)
@@ -37,7 +37,7 @@ struct IngredientRowView: View {
             isSelected.toggle()
         }
         .padding(.horizontal)
-        .background(Color.gray.opacity(0.2).cornerRadius(10))
+        .background(Color.Button.gray.opacity(0.2).cornerRadius(10))
     }
 }
 

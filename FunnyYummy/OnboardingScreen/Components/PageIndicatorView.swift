@@ -12,12 +12,16 @@ struct PageIndicatorView: View {
     let pages: [OnboardingPage]
     let currentPage: Int
     
+    // Константы
+    let capsuleWidth: CGFloat = 50
+    let capsuleHeight: CGFloat = 10
+    
     var body: some View {
         HStack {
             ForEach(pages.indices, id: \.self) { index in
                 Capsule()
-                    .fill(currentPage == index ? .red : .gray)
-                    .frame(width: 50, height: 10)
+                    .fill(currentPage == index ? Color.Button.red : Color.Button.gray)
+                    .frame(width: capsuleWidth, height: capsuleHeight)
             }
         }
     }

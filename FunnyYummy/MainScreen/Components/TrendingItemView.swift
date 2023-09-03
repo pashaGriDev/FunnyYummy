@@ -49,7 +49,7 @@ struct TrendingItemView: View {
                 HStack(spacing: 0) {
                     Image(systemName: "star.fill")
                     Text(recipe.rating.formatted())
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.Text.white)
                 }
                 .padding(.all, 2)
                 .padding(.horizontal, 4)
@@ -68,7 +68,7 @@ struct TrendingItemView: View {
                 .frame(width: 30, height: 30)
             Text("by \(recipe.creditsText ?? "no creator")")
                 .padding(.leading, 6)
-                .foregroundColor(.gray)
+                .foregroundColor(Color.Text.gray)
                 .frame(width: screen.screen.width - 40, height: screen.font * 2.4, alignment: .leading)
                 .background(titleRecipe.isEmpty ? .gray.opacity(0.2) : .clear)
                 .cornerRadius(10)
