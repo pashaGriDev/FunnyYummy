@@ -41,6 +41,24 @@ class NetworkManager: ObservableObject {
         return try await fetchData(url: url, model: RecipeModel.self).results
     }
     
+    /// дает полный набор данных, но быстрей убивается ключ
+    func searchData(by text: String?,
+                    sort: SortType? = nil,
+                     cousine: Сuisine? = nil ,
+                     type: DishTypes? = nil,
+                     amount: Int = 10) async throws -> [Recipe] {
+        
+        let baseUrl = SpoonacularURL.full.rawValue
+        let amount = "&number=\(amount)"
+        let query = "&query=\(text ?? "")"
+        let cousine = "&cuisine=\(cousine?.rawValue ?? "")"
+        let sort = "&sort=\(sort?.rawValue ?? "")"
+        let type = "&type=\(type?.rawValue ?? "")"
+        
+        let url = "\(baseUrl)\(apiKey)\(cousine)\(sort)\(type)\(query)\(amount)"
+        return try await fetchData(url: url, model: RecipeModel.self).results
+    }
+    
     /// получить данные по id одному или несколько
     func getFullData(by id: [Int]) async throws -> [Recipe] {
         
@@ -52,14 +70,14 @@ class NetworkManager: ObservableObject {
     }
     
     /// поиск по тексту + нужное количество ответов. По умолчанию 10
-    func searchData(by text: String?, amount: Int = 10) async throws -> [Recipe] {
+    func searchShortData(by text: String?, amount: Int = 10) async throws -> [Recipe] {
         
         let baseUrl = SpoonacularURL.short.rawValue
         let amount = "&number=\(amount)"
         let query = "&query=\(text ?? "")"
         
         let url = "\(baseUrl)\(apiKey)\(query)\(amount)"
-        return try await fetchData(url: url, model: [Recipe].self)
+        return try await fetchData(url: url, model: RecipeModel.self).results
     }
     
     private func fetchData<T: Decodable>(url urlSting: String, model: T.Type) async throws -> T {
@@ -73,8 +91,13 @@ class NetworkManager: ObservableObject {
         }
         
         if let resp = response as? HTTPURLResponse {
-            print("response statusCode = \(resp.statusCode)")
+//            print("response statusCode = \(resp.statusCode)")
+            
             if resp.statusCode != 200 {
+                if resp.statusCode == 402 {
+                    print("Смени apiKey, прошлый сдох!")
+                    throw RecipeError.invalidResponse
+                }
                 throw RecipeError.invalidResponse
             }
         }
