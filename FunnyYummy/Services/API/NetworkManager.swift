@@ -7,9 +7,7 @@
 
 import Foundation
 
-enum RecipeError: Error {
-    case invalidURL, invalidResponse, failedDecoded, failedRequest
-}
+// MARK: - SpoonacularURL
 
 enum SpoonacularURL: String {
     case short = "https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=false"
@@ -17,69 +15,10 @@ enum SpoonacularURL: String {
     case byIDs = "https://api.spoonacular.com/recipes/informationBulk?ids="
 }
 
-class NetworkManager: ObservableObject {
-    
-    /// returns 1 Recipe item
-        func getMockData() -> Recipe {
-            return  Bundle.main.decode(Recipe.self, from: "mockData.json")
-        }
-    
-    /// amount = 10 по умолчанию
-    func getShortData(sort: SortType? = nil,
-                      cousine: Сuisine? = nil ,
-                      type: DishTypes? = nil,
-                      amount: Int = 10) async throws -> [Recipe] {
-        
-        let baseUrl = SpoonacularURL.short.rawValue
-        let cousine = "&cuisine=\(cousine?.rawValue ?? "")"
-        let sort = "&sort=\(sort?.rawValue ?? "")"
-        let type = "&type=\(type?.rawValue ?? "")"
-        let amount = "&number=\(amount)"
-        
-        let url = "\(baseUrl)\(apiKey)\(cousine)\(sort)\(type)\(amount)"
-        
-        return try await fetchData(url: url, model: RecipeModel.self).results
-    }
-    
-    /// дает полный набор данных, но быстрей убивается ключ
-    func searchData(by text: String?,
-                    sort: SortType? = nil,
-                     cousine: Сuisine? = nil ,
-                     type: DishTypes? = nil,
-                     amount: Int = 10) async throws -> [Recipe] {
-        
-        let baseUrl = SpoonacularURL.full.rawValue
-        let amount = "&number=\(amount)"
-        let query = "&query=\(text ?? "")"
-        let cousine = "&cuisine=\(cousine?.rawValue ?? "")"
-        let sort = "&sort=\(sort?.rawValue ?? "")"
-        let type = "&type=\(type?.rawValue ?? "")"
-        
-        let url = "\(baseUrl)\(apiKey)\(cousine)\(sort)\(type)\(query)\(amount)"
-        return try await fetchData(url: url, model: RecipeModel.self).results
-    }
-    
-    /// получить данные по id одному или несколько
-    func getFullData(by id: [Int]) async throws -> [Recipe] {
-        
-        let idsString = id.map { String($0) + "," }.reduce("", +) // в конце запятая, но вроде не влияет
-        let baseUrl = SpoonacularURL.byIDs.rawValue
-        let url = "\(baseUrl)\(idsString)\(apiKey)"
-        
-        return try await fetchData(url: url, model: [Recipe].self)
-    }
-    
-    /// поиск по тексту + нужное количество ответов. По умолчанию 10
-    func searchShortData(by text: String?, amount: Int = 10) async throws -> [Recipe] {
-        
-        let baseUrl = SpoonacularURL.short.rawValue
-        let amount = "&number=\(amount)"
-        let query = "&query=\(text ?? "")"
-        
-        let url = "\(baseUrl)\(apiKey)\(query)\(amount)"
-        return try await fetchData(url: url, model: RecipeModel.self).results
-    }
-    
+// MARK: - NetworkManager
+
+final class NetworkManager: ObservableObject {
+
     private func fetchData<T: Decodable>(url urlSting: String, model: T.Type) async throws -> T {
         
         guard let url = URL(string: urlSting) else {
@@ -110,10 +49,86 @@ class NetworkManager: ObservableObject {
     }
 }
 
+// MARK: - getFullData by [id]
+
+extension NetworkManager {
+    /// получить данные по id одному или несколько
+    func getFullData(by id: [Int]) async throws -> [Recipe] {
+        
+        let idsString = id.map { String($0) + "," }.reduce("", +) // в конце запятая, но вроде не влияет
+        let baseUrl = SpoonacularURL.byIDs.rawValue
+        let url = "\(baseUrl)\(idsString)\(apiKey)"
+        
+        return try await fetchData(url: url, model: [Recipe].self)
+    }
+}
+
+// MARK: - searchData with sort, type ..., and searchShortData
+
+extension NetworkManager {
+    /// дает полный набор данных, но быстрей убивается ключ
+    func searchData(by text: String?,
+                    sort: SortType? = nil,
+                    cousine: Сuisine? = nil ,
+                    type: DishTypes? = nil,
+                    amount: Int = 10) async throws -> [Recipe] {
+        
+        let baseUrl = SpoonacularURL.full.rawValue
+        let amount = "&number=\(amount)"
+        let query = "&query=\(text ?? "")"
+        let cousine = "&cuisine=\(cousine?.rawValue ?? "")"
+        let sort = "&sort=\(sort?.rawValue ?? "")"
+        let type = "&type=\(type?.rawValue ?? "")"
+        
+        let url = "\(baseUrl)\(apiKey)\(cousine)\(sort)\(type)\(query)\(amount)"
+        return try await fetchData(url: url, model: RecipeModel.self).results
+    }
+    
+    /// поиск по тексту + нужное количество ответов. По умолчанию 10
+    func searchShortData(by text: String?, amount: Int = 10) async throws -> [Recipe] {
+        
+        let baseUrl = SpoonacularURL.short.rawValue
+        let amount = "&number=\(amount)"
+        let query = "&query=\(text ?? "")"
+        
+        let url = "\(baseUrl)\(apiKey)\(query)\(amount)"
+        return try await fetchData(url: url, model: RecipeModel.self).results
+    }
+}
 
 
+// MARK: - get shortData
 
+extension NetworkManager {
+    
+    func getShortData(sort: SortType? = nil,
+                      cousine: Сuisine? = nil ,
+                      type: DishTypes? = nil,
+                      amount: Int = 10) async throws -> [Recipe] {
+        
+        let baseUrl = SpoonacularURL.short.rawValue
+        let cousine = "&cuisine=\(cousine?.rawValue ?? "")"
+        let sort = "&sort=\(sort?.rawValue ?? "")"
+        let type = "&type=\(type?.rawValue ?? "")"
+        let amount = "&number=\(amount)"
+        
+        let url = "\(baseUrl)\(apiKey)\(cousine)\(sort)\(type)\(amount)"
+        
+        return try await fetchData(url: url, model: RecipeModel.self).results
+    }
+}
 
+// MARK: - get mockData from Bundle
 
+extension NetworkManager {
+    /// return [Recipe] count 100
+    func getMockData() -> [Recipe] {
+        return  Bundle.main.decode(RecipeModel.self, from: "mockData.json").results
+    }
+}
 
+// MARK: - RecipeError
 
+enum RecipeError: Error {
+    case invalidURL, invalidResponse, failedDecoded, failedRequest
+}
