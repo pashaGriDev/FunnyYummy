@@ -10,19 +10,23 @@ import SwiftUI
 struct CategoryViewCell: View {
     let recipe: Recipe
     
+    var titleRecipe: String {
+        recipe.title ?? ""
+    }
+    
     var body: some View {
         NavigationLink(destination: RecipeScreenView(recipe: recipe)) {
             VStack {
-                ImageLoaderView(url: recipe.image)
+                ImageLoaderView(url: recipe.image ?? "")
                     .frame(width: 350, height: 200)
                     .background(Color.gray.opacity(0.3))
                     .clipShape(RoundedRectangle(cornerRadius: 24))
                     .overlay(
                         VStack(alignment: .leading, spacing: 10) {
-                            if !recipe.title.isEmpty {
+                            if !titleRecipe.isEmpty {
                                 HStack(spacing: 0) {
                                     Image(systemName: "star.fill")
-                                    Text(recipe.rating?.formatted() ?? "")
+                                    Text(recipe.rating.formatted())
                                         .foregroundColor(.white)
                                 }
                                 .padding(.all, 2)
@@ -32,12 +36,12 @@ struct CategoryViewCell: View {
                                 
                             Spacer()
                             
-                            Text(recipe.title)
+                            Text(titleRecipe)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
                                 .multilineTextAlignment(.leading)
                             
-                            Text(recipe.creditsText)
+                            Text(recipe.creditsText ?? "no creator")
                                 .font(.subheadline)
                                 .foregroundColor(.white)
                                 .opacity(0.7)

@@ -14,12 +14,12 @@ struct PopularCousinItem: View {
     var body: some View {
         NavigationLink(destination: RecipeScreenView(recipe: recipe)) {
             VStack {
-                ImageLoaderView(url: recipe.image)
+                ImageLoaderView(url: recipe.image ?? "")
                     .frame(width: 120, height: 120)
                     .background(.ultraThinMaterial)
                     .clipShape(Circle())
                 
-                Text(recipe.creditsText)
+                Text(recipe.creditsText ?? "no creator")
                     .font(.headline)
                     .foregroundColor(.black)
             }

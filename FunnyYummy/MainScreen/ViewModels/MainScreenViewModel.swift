@@ -13,7 +13,7 @@ class MainScreenViewModel: ObservableObject {
     let networkService = NetworkManager()
 
     @Published var dishType: DishTypes = .appetizer
-    let cousine: Cousine = Cousine.allCases.randomElement() ?? .chinese
+    let cousine: Сuisine = Сuisine.allCases.randomElement() ?? .chinese
     @Published var emptyRecipe = Recipe(creditsText: "", id: 0, aggregateLikes: 0, title: "", sourceUrl: "", image: "", imageType: "", readyInMinutes: 0, dishTypes: [], extendedIngredients: [], analyzedInstructions: [])
     @Published var trending = [Recipe]()
     @Published var categoryRecipe = [Recipe]()
@@ -33,43 +33,43 @@ class MainScreenViewModel: ObservableObject {
     
     func fetchTrendingRecipe(number: Int = 10) async {
         do {
-            trending = try await networkService.fetchData(sortedBy: .popularity)
+            trending = try await networkService.getShortData(sort: .popularity)
         } catch {
-            print(networkService.recipeError)
+            print(error)
         }
     }
     
     func fetchDishTypeRecipe() async {
         do {
-            categoryRecipe = try await networkService.fetchData(sortedBy: .popularity, forDishType: dishType)
+            categoryRecipe = try await networkService.getShortData(sort: .popularity, type: .mainCourse)
         } catch {
-            print(networkService.recipeError)
+            print(error)
         }
     }
     
     func fetchRecentRecipe() async {
         do {
-            recentRecipe = try await networkService.fetchData(sortedBy: .random)
+            recentRecipe = try await networkService.getShortData(sort: .random)
         } catch {
-            print(networkService.recipeError)
+            print(error)
         }
     }
     
     func fetchCousinRecipe() async {
         do {
-            cousineRecipe = try await networkService.fetchData(sortedBy: .popularity, cousine: cousine)
+            cousineRecipe = try await networkService.getShortData(sort: .popularity, cousine: .chinese)
         } catch {
-            print(networkService.recipeError)
+            print(error)
         }
     }
     
     func findRecipe() async {
         do {
             try await Task.sleep(nanoseconds: 300_000_000)
-            searchRecipe = try await networkService.fetchData(lookingFor: searchText.lowercased(), sortedBy: .popularity, howMany: 10)
+            searchRecipe = try await networkService.searchData(by: searchText.lowercased(), amount: 10)
             print(searchText)
         } catch {
-            print(networkService.recipeError)
+            print(error)
         }
         
     }

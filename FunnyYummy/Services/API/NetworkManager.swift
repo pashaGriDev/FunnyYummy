@@ -58,7 +58,7 @@ class NetworkManager: ObservableObject {
         let amount = "&number=\(amount)"
         let query = "&query=\(text ?? "")"
         
-        let url = "\(baseUrl)\(apiKey)\(query)"
+        let url = "\(baseUrl)\(apiKey)\(query)\(amount)"
         return try await fetchData(url: url, model: [Recipe].self)
     }
     

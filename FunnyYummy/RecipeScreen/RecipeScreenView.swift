@@ -10,16 +10,20 @@ import SwiftUI
 struct RecipeScreenView: View {
     let recipe: Recipe
     
+    var titleRecipe: String {
+        recipe.title ?? ""
+    }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
-            Text(recipe.title)
+            Text(titleRecipe)
                 .font(.title.bold())
             
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 30) {
                     // TODO: Picture Stack
                     VStack(alignment: .leading) {
-                        ImageLoaderView(url: recipe.image)
+                        ImageLoaderView(url: recipe.image ?? "")
                             .frame(
                                 width: UIScreen.main.bounds.width - 32, height: 200)
                             .background(
@@ -28,8 +32,8 @@ struct RecipeScreenView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 16))
                         
                         HStack {
-                            Label(recipe.rating?.formatted() ?? "", systemImage: "star.fill")
-                            Text("(\(recipe.aggregateLikes) Reviews)")
+                            Label(recipe.rating.formatted(), systemImage: "star.fill")
+                            Text("(\(recipe.aggregateLikes ?? 0) Reviews)")
                                 .foregroundColor(.gray)
                         }
                         .font(.system(size: 14))
