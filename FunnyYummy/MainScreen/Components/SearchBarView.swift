@@ -14,16 +14,16 @@ struct SearchBarView: View {
         HStack {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(
-                    searchText.isEmpty ? .black : .gray
+                    searchText.isEmpty ? Color.Text.black : Color.Text.gray
                 )
             TextField("Search by name or symbol...", text: $searchText)
-                .foregroundColor(.black)
+                .foregroundColor(Color.Text.black)
                 .autocorrectionDisabled(true)
                 .overlay(
                     Image(systemName: "xmark.circle.fill")
                         .padding()
                         .offset(x: 10)
-                        .foregroundColor(.black)
+                        .foregroundColor(Color.Text.black)
                         .opacity(searchText.isEmpty ? 0 : 1)
                         .onTapGesture {
                             searchText = ""

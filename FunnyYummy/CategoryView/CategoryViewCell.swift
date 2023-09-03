@@ -27,25 +27,23 @@ struct CategoryViewCell: View {
                                 HStack(spacing: 0) {
                                     Image(systemName: "star.fill")
                                     Text(recipe.rating.formatted())
-                                        .foregroundColor(.white)
                                 }
                                 .padding(.all, 2)
                                 .padding(.horizontal, 4)
                                 .background(Color.black.opacity(0.3).cornerRadius(8))
                             }
-                                
+                            
                             Spacer()
                             
                             Text(titleRecipe)
                                 .fontWeight(.bold)
-                                .foregroundColor(.white)
                                 .multilineTextAlignment(.leading)
                             
                             Text(recipe.creditsText ?? "no creator")
                                 .font(.subheadline)
-                                .foregroundColor(.white)
                                 .opacity(0.7)
                         }
+                            .foregroundColor(Color.Text.white)
                             .padding([.vertical, .leading]),
                         alignment: .topLeading
                     )

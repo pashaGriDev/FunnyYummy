@@ -33,7 +33,7 @@ struct PopularCategoryItem: View {
                             HStack {
                                 VStack(alignment: .leading) {
                                     Text("Time")
-                                        .foregroundColor(.gray.opacity(0.8))
+                                        .foregroundColor(Color.Text.gray.opacity(0.8))
                                     Text(
                                         titleRecipe.isEmpty
                                         ? ""

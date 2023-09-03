@@ -25,7 +25,7 @@ struct RecipesCardView: View {
                     HStack(spacing: 0) {
                         Image(systemName: "star.fill")
                         Text("4.5")
-                            .foregroundColor(.white)
+                            .foregroundColor(Color.Text.white)
                     }
                     .padding(2)
                     .background(Color.gray.opacity(0.5).blur(radius: 0.5))

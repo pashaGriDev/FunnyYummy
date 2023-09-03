@@ -31,10 +31,10 @@ struct RecentRecipeItem: View {
                         .multilineTextAlignment(.leading)
                     Text(recipe.creditsText ?? "no creator")
                         .font(.system(size: 12))
-                        .foregroundColor(.gray.opacity(0.8))
+                        .foregroundColor(Color.Text.gray.opacity(0.8))
                 }
                 .frame(width: 124)
-                .background(titleRecipe.isEmpty ? .gray.opacity(0.1) : .clear)
+                .background(titleRecipe.isEmpty ? Color.Text.gray.opacity(0.1) : .clear)
                 .cornerRadius(10)
             }
             .frame(width: 124, height: 210)

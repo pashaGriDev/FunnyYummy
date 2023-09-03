@@ -21,7 +21,7 @@ struct TabBarIcon: View {
             Image(iconName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .foregroundColor(viewRouter.currentPage == assignetPage ? .red : .gray)
+                .foregroundColor(viewRouter.currentPage == assignetPage ? Color.Button.red : Color.Button.gray)
                 .frame(width: width, height: height)
                 .padding(.top, 15)
             Spacer()
