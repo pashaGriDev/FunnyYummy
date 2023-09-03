@@ -110,26 +110,6 @@ class NetworkManager: ObservableObject {
     }
 }
 
-enum SortType: String {
-    case popularity, price, time
-    case maxUsedIngredients = "max-used-ingredients"
-    case alcohol
-    case caffeine
-    case energy
-    case calories
-    case carbs
-    case cholesterol
-    case totalFat
-    case saturatedFat
-    case monoUnsaturatedFat = "mono-unsaturated-fat"
-    case polyUnsaturatedFat = "poly-unsaturated-fat"
-    case fiber
-    case protein
-    case sodium
-    case sugar
-    case random
-}
-
 
 
 
