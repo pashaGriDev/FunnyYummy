@@ -11,25 +11,30 @@ struct RecentRecipeItem: View {
     
     @Binding var recipe: Recipe
     
+    var titleRecipe: String {
+        recipe.title ?? "" 
+    }
+    
+    
     var body: some View {
         NavigationLink(destination: RecipeScreenView(recipe: recipe)) {
             VStack(alignment: .leading, spacing: 10) {
-                ImageLoaderView(url: recipe.image)
+                ImageLoaderView(url: recipe.image ?? "")
                     .frame(width: 124, height: 124)
                     .clipped()
                     .background(.ultraThinMaterial)
                     .cornerRadius(16)
                 
                 VStack(alignment: .leading) {
-                    Text(recipe.title)
+                    Text(titleRecipe)
                         .font(.headline.bold())
                         .multilineTextAlignment(.leading)
-                    Text(recipe.creatorName)
+                    Text(recipe.creditsText ?? "no creator")
                         .font(.system(size: 12))
                         .foregroundColor(.gray.opacity(0.8))
                 }
                 .frame(width: 124)
-                .background(recipe.title.isEmpty ? .gray.opacity(0.1) : .clear)
+                .background(titleRecipe.isEmpty ? .gray.opacity(0.1) : .clear)
                 .cornerRadius(10)
             }
             .frame(width: 124, height: 210)

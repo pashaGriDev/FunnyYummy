@@ -11,10 +11,14 @@ struct TrendingItemView: View {
     let recipe: Recipe
     let screen: ScreenSize
     
+    var titleRecipe: String {
+        recipe.title ?? ""
+    }
+    
     var body: some View {
         NavigationLink(destination: RecipeScreenView(recipe: recipe)) {
             VStack(alignment: .leading) {
-                ImageLoaderView(url: recipe.image)
+                ImageLoaderView(url: recipe.image ?? "")
                     .frame(width: screen.screen.width, height: screen.screen.height)
                     .background(
                     Color.gray.opacity(0.3)
@@ -25,12 +29,12 @@ struct TrendingItemView: View {
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 24))
                 
-                Text(recipe.title)
+                Text(titleRecipe)
                     .font(.system(size: screen.font).bold())
                     .multilineTextAlignment(.leading)
                     .lineLimit(2)
                     .frame(width: screen.screen.width, height: screen.font * 2.4, alignment: .leading)
-                    .background(recipe.title.isEmpty ? .gray.opacity(0.2) : .clear)
+                    .background(titleRecipe.isEmpty ? .gray.opacity(0.2) : .clear)
                     .cornerRadius(10)
 
                 footer
@@ -41,10 +45,10 @@ struct TrendingItemView: View {
     // Custom Overlay Rank&Bookmark
     var overlayCard: some View {
         HStack {
-            if !recipe.title.isEmpty {
+            if !titleRecipe.isEmpty {
                 HStack(spacing: 0) {
                     Image(systemName: "star.fill")
-                    Text(recipe.rating?.formatted() ?? "5")
+                    Text(recipe.rating.formatted())
                         .foregroundColor(.white)
                 }
                 .padding(.all, 2)
@@ -62,11 +66,11 @@ struct TrendingItemView: View {
             Image(systemName: "circle.fill")
                 .resizable()
                 .frame(width: 30, height: 30)
-            Text("by \(recipe.creatorName)")
+            Text("by \(recipe.creditsText ?? "no creator")")
                 .padding(.leading, 6)
                 .foregroundColor(.gray)
                 .frame(width: screen.screen.width - 40, height: screen.font * 2.4, alignment: .leading)
-                .background(recipe.title.isEmpty ? .gray.opacity(0.2) : .clear)
+                .background(titleRecipe.isEmpty ? .gray.opacity(0.2) : .clear)
                 .cornerRadius(10)
         }
     }

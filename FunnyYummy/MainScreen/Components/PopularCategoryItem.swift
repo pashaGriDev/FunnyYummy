@@ -11,6 +11,10 @@ struct PopularCategoryItem: View {
     
     @Binding var recipe: Recipe
     
+    var titleRecipe: String {
+        recipe.title ?? ""
+    }
+    
     var body: some View {
         NavigationLink(destination: RecipeScreenView(recipe: recipe)) {
             ZStack {
@@ -20,7 +24,7 @@ struct PopularCategoryItem: View {
                     .cornerRadius(16)
                     .overlay(
                         VStack(spacing: 20) {
-                            Text(recipe.title)
+                            Text(titleRecipe)
                                 .font(.headline)
                                 .multilineTextAlignment(.center)
                                 .frame(width: 150, height: 45)
@@ -31,9 +35,10 @@ struct PopularCategoryItem: View {
                                     Text("Time")
                                         .foregroundColor(.gray.opacity(0.8))
                                     Text(
-                                        recipe.title.isEmpty
+                                        titleRecipe.isEmpty
                                         ? ""
-                                        : "\(recipe.readyInMinutes) mins"
+                                        : "\(recipe.readyInMinutes ?? 0) mins"
+                                        // неуверен что 0 эт правильно
                                     )
                                     .frame(width: 100, alignment: .leading)
                                         .background(.clear)
@@ -46,7 +51,7 @@ struct PopularCategoryItem: View {
                         .padding([.horizontal, .bottom], 6), alignment: .bottom
                     )
                 
-                ImageLoaderView(url: recipe.image)
+                ImageLoaderView(url: recipe.image ?? "")
                     .frame(width: 110, height: 110)
                     .background(.ultraThinMaterial)
                     .clipShape(Circle())
