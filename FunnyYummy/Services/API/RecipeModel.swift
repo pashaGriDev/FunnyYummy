@@ -28,6 +28,10 @@ struct Recipe: Codable, Identifiable {
     let imageType: String?
     let readyInMinutes: Int?
     
+    var largeImage: String {
+        "https://spoonacular.com/recipeImages/\(id)-556x370.jpg"
+    }
+    
     let dishTypes: [String]?
     
     // нужные продукты
@@ -35,10 +39,6 @@ struct Recipe: Codable, Identifiable {
     
     // инструкция приготовления
     let analyzedInstructions: [Instruction]?
-    
-    var instruction: Instruction {
-        analyzedInstructions![0]
-    }
     
     // рейтинг блюда по лайкам
     // если значение nil вернет 0

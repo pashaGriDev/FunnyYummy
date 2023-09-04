@@ -18,7 +18,7 @@ struct TrendingItemView: View {
     var body: some View {
         NavigationLink(destination: RecipeScreenView(recipe: recipe)) {
             VStack(alignment: .leading) {
-                ImageLoaderView(url: recipe.image ?? "")
+                ImageLoaderView(url: recipe.largeImage)
                     .frame(width: screen.screen.width, height: screen.screen.height)
                     .background(
                     Color.gray.opacity(0.3)
@@ -109,6 +109,7 @@ struct TrendingItemView_Previews: PreviewProvider {
             VStack {
                 TrendingItemView(recipe: recipe, screen: .main)
                 TrendingItemView(recipe: MainScreenViewModel().emptyRecipe, screen: .main)
+                Text(recipe.image ?? "")
             }
         }
     }
