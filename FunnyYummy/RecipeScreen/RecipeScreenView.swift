@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct RecipeScreenView: View {
+    
+    @StateObject var vm = RecipeScreenViewModel()
     let recipe: Recipe
     
     var titleRecipe: String {
@@ -16,14 +18,14 @@ struct RecipeScreenView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
-            Text(titleRecipe)
+            Text(vm.detailRecipe?.title ?? "")
                 .font(.title.bold())
             
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 30) {
                     // TODO: Picture Stack
                     VStack(alignment: .leading) {
-                        ImageLoaderView(url: recipe.image ?? "")
+                        ImageLoaderView(url: vm.detailRecipe?.largeImage ?? "")
                             .frame(
                                 width: UIScreen.main.bounds.width - 32, height: 200)
                             .background(
@@ -32,8 +34,8 @@ struct RecipeScreenView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 16))
                         
                         HStack {
-                            Label(recipe.rating.formatted(), systemImage: "star.fill")
-                            Text("(\(recipe.aggregateLikes ?? 0) Reviews)")
+                            Label(vm.detailRecipe?.rating.formatted() ?? "", systemImage: "star.fill")
+                            Text("(\(vm.detailRecipe?.aggregateLikes ?? 0) Reviews)")
                                 .foregroundColor(Color.Text.gray)
                         }
                         .font(.system(size: 14))
@@ -45,14 +47,17 @@ struct RecipeScreenView: View {
                                 .font(.title3.bold())
                             Spacer()
                         }
-                        
-                        ForEach(recipe.instruction.steps) { step in
-                            HStack (alignment: .firstTextBaseline){
-                                Text("\(step.number).")
-                                Text(step.step)
-                                
+                        if !(vm.detailRecipe?.analyzedInstructions?.isEmpty ?? true) {
+                            ForEach(vm.detailRecipe?.instruction.steps ?? []) { step in
+                                HStack (alignment: .firstTextBaseline){
+                                    Text("\(step.number).")
+                                    Text(step.step)
+                                    
+                                }
+                                .font(.system(size: 18))
                             }
-                            .font(.system(size: 18))
+                        } else {
+                            Text("This recipe does not have cooking instructions.")
                         }
                     }
                     
@@ -64,13 +69,16 @@ struct RecipeScreenView: View {
                         }
                         
                         VStack(spacing: 12) {
-                            ForEach(recipe.extendedIngredients ?? []) { ingredient in
+                            ForEach(vm.detailRecipe?.extendedIngredients ?? []) { ingredient in
                                 IngredientRowView(ingredient: ingredient)
                             }
                         }
                     }
                 }
             }
+        }
+        .task {
+            await vm.getFullRecipe(id: recipe.id)
         }
         .navigationHeader(title: "")
         .navigationBarBackButtonHidden(true)
@@ -79,9 +87,12 @@ struct RecipeScreenView: View {
 }
 
 struct RecipeScreenView_Previews: PreviewProvider {
+    
+    static let recipe = NetworkManager().getMockData().first!
+    
     static var previews: some View {
         NavigationView {
-            RecipeScreenView(recipe: Bundle.main.decode(Recipe.self, from: "mockData.json"))
+            RecipeScreenView(recipe: recipe)
         }
     }
 }

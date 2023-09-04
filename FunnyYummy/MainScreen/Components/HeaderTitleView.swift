@@ -11,7 +11,6 @@ struct HeaderTitleView: View {
     var recipeList: [Recipe] = []
     var title: String
     var hasNavigationLink = true
-    var content: AnyView?
     
     var body: some View {
         HStack {

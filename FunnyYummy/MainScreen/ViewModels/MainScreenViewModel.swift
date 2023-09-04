@@ -11,7 +11,7 @@ import Foundation
 class MainScreenViewModel: ObservableObject {
     
     let networkService = NetworkManager()
-
+    
     @Published var dishType: DishTypes = .appetizer
     let cousine: Сuisine = Сuisine.allCases.randomElement() ?? .chinese
     @Published var emptyRecipe = Recipe(creditsText: "", id: 0, aggregateLikes: 0, title: "", sourceUrl: "", image: "", imageType: "", readyInMinutes: 0, dishTypes: [], extendedIngredients: [], analyzedInstructions: [])
@@ -28,6 +28,7 @@ class MainScreenViewModel: ObservableObject {
             await fetchDishTypeRecipe()
             await fetchRecentRecipe()
             await fetchCousinRecipe()
+            
         }
     }
     
@@ -41,7 +42,7 @@ class MainScreenViewModel: ObservableObject {
     
     func fetchDishTypeRecipe() async {
         do {
-            categoryRecipe = try await networkService.getShortData(sort: .popularity, type: .mainCourse)
+            categoryRecipe = try await networkService.getShortData(sort: .popularity, type: dishType)
         } catch {
             print(error)
         }
@@ -66,7 +67,7 @@ class MainScreenViewModel: ObservableObject {
     func findRecipe() async {
         do {
             try await Task.sleep(nanoseconds: 300_000_000)
-            searchRecipe = try await networkService.searchData(by: searchText.lowercased(), amount: 10)
+            searchRecipe = try await networkService.searchShortData(by: searchText.lowercased())
             print(searchText)
         } catch {
             print(error)

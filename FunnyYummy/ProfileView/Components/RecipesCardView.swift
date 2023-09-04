@@ -31,7 +31,7 @@ struct RecipesCardView: View {
                     .background(Color.gray.opacity(0.5).blur(radius: 0.5))
                     .cornerRadius(10)
                     Spacer()
-                    BookmarkView()
+                    BookmarkView(id: 100)
                 }
                     .padding(4)
                 , alignment: .top)

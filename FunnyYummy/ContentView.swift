@@ -19,7 +19,7 @@ struct ContentView: View {
                 case .main:
                     MainScreenView()
                 case .favorites:
-                    Text("FAVORITES PAGE")
+                    FavoriteScreenView()
                 case .notifications:
                     Text("NOTIFICATION PAGE")
                 case .profile:
@@ -28,6 +28,7 @@ struct ContentView: View {
                 Spacer()
                 TabBar(viewRouter: viewRouter, proxy: proxy)
             }
+            .environmentObject(DataProvider())
             .edgesIgnoringSafeArea(.bottom)
         }
     }

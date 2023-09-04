@@ -18,7 +18,7 @@ struct TrendingItemView: View {
     var body: some View {
         NavigationLink(destination: RecipeScreenView(recipe: recipe)) {
             VStack(alignment: .leading) {
-                ImageLoaderView(url: recipe.image ?? "")
+                ImageLoaderView(url: recipe.largeImage)
                     .frame(width: screen.screen.width, height: screen.screen.height)
                     .background(
                     Color.gray.opacity(0.3)
@@ -56,7 +56,7 @@ struct TrendingItemView: View {
                 .background(Color.gray.cornerRadius(8))
             }
             Spacer()
-            BookmarkView()
+            BookmarkView(id: recipe.id)
         }
         .padding()
     }
@@ -101,11 +101,15 @@ enum ScreenSize {
 }
 
 struct TrendingItemView_Previews: PreviewProvider {
+    
+    static let recipe = NetworkManager().getMockData().first!
+    
     static var previews: some View {
         NavigationView {
             VStack {
-                TrendingItemView(recipe: Bundle.main.decode(Recipe.self, from: "mockData.json"), screen: .main)
+                TrendingItemView(recipe: recipe, screen: .main)
                 TrendingItemView(recipe: MainScreenViewModel().emptyRecipe, screen: .main)
+                Text(recipe.image ?? "")
             }
         }
     }

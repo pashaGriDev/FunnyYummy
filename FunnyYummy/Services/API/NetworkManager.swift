@@ -16,7 +16,7 @@ enum SpoonacularURL: String {
 }
 
 // MARK: - NetworkManager
-
+@MainActor
 final class NetworkManager: ObservableObject {
 
     private func fetchData<T: Decodable>(url urlSting: String, model: T.Type) async throws -> T {
@@ -58,6 +58,7 @@ extension NetworkManager {
         let idsString = id.map { String($0) + "," }.reduce("", +) // в конце запятая, но вроде не влияет
         let baseUrl = SpoonacularURL.byIDs.rawValue
         let url = "\(baseUrl)\(idsString)\(apiKey)"
+        print("URL ID: \(url)")
         
         return try await fetchData(url: url, model: [Recipe].self)
     }
@@ -113,7 +114,7 @@ extension NetworkManager {
         let amount = "&number=\(amount)"
         
         let url = "\(baseUrl)\(apiKey)\(cousine)\(sort)\(type)\(amount)"
-        
+        print(url)
         return try await fetchData(url: url, model: RecipeModel.self).results
     }
 }

@@ -8,23 +8,34 @@
 import SwiftUI
 
 struct FavoriteScreenView: View {
+    
+    @EnvironmentObject var dataProvider: DataProvider
+    @StateObject var vm = FavoriteScreenViewModel()
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 30) {
-            Text("Saved recipes")
-                .font(.title.bold())
-            ScrollView(.vertical, showsIndicators: false) {
-                ForEach(1..<10) { _ in
-//                    TrendingItemView(screen: .favorite)
-//                        .padding(.bottom, 25)
+        NavigationView {
+            VStack(alignment: .leading, spacing: 30) {
+                Text("Saved recipes")
+                    .font(.title.bold())
+                ScrollView(.vertical, showsIndicators: false) {
+                    ForEach(vm.favoriteRecipes) { recipe in
+                        TrendingItemView(recipe: recipe, screen: .favorite)
+                    }
                 }
             }
+            .padding(.top)
+            .task {
+                await vm.fetchFavoriteRecipe(id: dataProvider.ids)
+            }
         }
-        .padding(.top)
     }
 }
 
 struct FavoriteScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        FavoriteScreenView()
+        NavigationView {
+            FavoriteScreenView()
+                .environmentObject(DataProvider())
+        }
     }
 }

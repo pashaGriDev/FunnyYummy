@@ -7,7 +7,6 @@
 import SwiftUI
 
 struct CategoryView: View {
-    @Environment(\.dismiss) var dismiss
     let recipeList: [Recipe]
     let title: String
     

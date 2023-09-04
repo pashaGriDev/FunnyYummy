@@ -16,8 +16,12 @@ struct CategorySegmentedView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 ForEach(dishTypes, id: \.self) { type in
-                    Text(type.rawValue.capitalized)
-                        .foregroundColor(type == vm.dishType ? Color.Text.white : Color.Text.lightRed)
+                    Text(type.description)
+                        .foregroundColor(
+                            type == vm.dishType
+                            ? .white
+                            : .red
+                        )
                         .padding(.all, 10)
                         .background(type == vm.dishType ? Color.Button.red : Color.clear)
                         .cornerRadius(10)

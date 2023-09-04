@@ -15,7 +15,6 @@ struct RecentRecipeItem: View {
         recipe.title ?? "" 
     }
     
-    
     var body: some View {
         NavigationLink(destination: RecipeScreenView(recipe: recipe)) {
             VStack(alignment: .leading, spacing: 10) {
@@ -33,8 +32,8 @@ struct RecentRecipeItem: View {
                         .font(.system(size: 12))
                         .foregroundColor(Color.Text.gray.opacity(0.8))
                 }
-                .frame(width: 124)
-                .background(titleRecipe.isEmpty ? Color.Text.gray.opacity(0.1) : .clear)
+                .frame(width: 124, height: 60, alignment: .bottom)
+                .background(titleRecipe.isEmpty ? .gray.opacity(0.1) : .clear)
                 .cornerRadius(10)
             }
             .frame(width: 124, height: 210)
@@ -43,9 +42,10 @@ struct RecentRecipeItem: View {
 }
 
 struct RecentRecipeView_Previews: PreviewProvider {
+    static let mockData = Recipe(creditsText: "blogspot.com", id: 782585, aggregateLikes: 1000, title: "Cannellini Bean and Asparagus Salad with Mushrooms", sourceUrl: "http://foodandspice.blogspot.com/2016/05/cannellini-bean-and-asparagus-salad.html", image: "https://spoonacular.com/recipeImages/782585-312x231.jpg", imageType: "", readyInMinutes: 0, dishTypes: [], extendedIngredients: [], analyzedInstructions: [])
     static var previews: some View {
         NavigationView {
-            RecentRecipeItem(recipe: .constant(Bundle.main.decode(Recipe.self, from: "mockData.json")))
+            RecentRecipeItem(recipe: .constant(mockData))
         }
     }
 }
