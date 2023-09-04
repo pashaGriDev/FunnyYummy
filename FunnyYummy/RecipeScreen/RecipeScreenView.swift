@@ -47,8 +47,8 @@ struct RecipeScreenView: View {
                                 .font(.title3.bold())
                             Spacer()
                         }
-                        if !(vm.detailRecipe?.analyzedInstructions?.isEmpty ?? true) {
-                            ForEach(vm.detailRecipe?.instruction.steps ?? []) { step in
+                        if !vm.steps.isEmpty {
+                            ForEach(vm.steps) { step in
                                 HStack (alignment: .firstTextBaseline){
                                     Text("\(step.number).")
                                     Text(step.step)

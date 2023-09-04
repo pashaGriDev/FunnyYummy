@@ -13,6 +13,9 @@ final class RecipeScreenViewModel: ObservableObject {
     private let networkService = NetworkManager()
     @Published var detailRecipe: Recipe?
     
+    var steps: [Step] {
+        detailRecipe?.analyzedInstructions?.first?.steps ?? []
+    }
     
     func getFullRecipe(id: Int) async {
         do {
