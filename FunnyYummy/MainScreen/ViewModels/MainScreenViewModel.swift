@@ -41,7 +41,7 @@ class MainScreenViewModel: ObservableObject {
     
     func fetchDishTypeRecipe() async {
         do {
-            categoryRecipe = try await networkService.getShortData(sort: .popularity, type: .mainCourse)
+            categoryRecipe = try await networkService.getShortData(sort: .popularity, type: dishType)
         } catch {
             print(error)
         }

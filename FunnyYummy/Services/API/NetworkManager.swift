@@ -37,7 +37,7 @@ class NetworkManager: ObservableObject {
         let amount = "&number=\(amount)"
         
         let url = "\(baseUrl)\(apiKey)\(cousine)\(sort)\(type)\(amount)"
-        
+        print(url)
         return try await fetchData(url: url, model: RecipeModel.self).results
     }
     

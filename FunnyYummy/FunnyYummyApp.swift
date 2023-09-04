@@ -13,6 +13,12 @@ struct FunnyYummyApp: App {
     @StateObject var viewRouter = ViewRouter()
     @AppStorage("isOnboarding") var isOnboarding = false
     
+    init() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .white
+        UINavigationBar.appearance().standardAppearance = appearance
+    }
+    
     var body: some Scene {
         WindowGroup {
             if isOnboarding {
@@ -22,5 +28,6 @@ struct FunnyYummyApp: App {
                 PageControlView(isOnboarding: $isOnboarding)
             }
         }
+        
     }
 }

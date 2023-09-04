@@ -38,7 +38,7 @@ struct CategoryViewCell: View {
                             
                             Text(titleRecipe)
                                 .fontWeight(.bold)
-                                .foregroundColor(.white)
+                                .foregroundColor(.black)
                                 .multilineTextAlignment(.leading)
                             
                             Text(recipe.creditsText ?? "no creator")
