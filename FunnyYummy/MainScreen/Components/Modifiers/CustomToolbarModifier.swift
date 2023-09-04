@@ -24,13 +24,13 @@ struct CustomToolbarModifier: ViewModifier {
                         dismiss()
                     } label: {
                         Image(systemName: "arrow.left")
-                            .foregroundColor(.black)
+                            .foregroundColor(Color.Button.black)
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Image(systemName: "ellipsis")
-                        .foregroundColor(.black)
+                        .foregroundColor(Color.Button.black)
                 }
             }
     }

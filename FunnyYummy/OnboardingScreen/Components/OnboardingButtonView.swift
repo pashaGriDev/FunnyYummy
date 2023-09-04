@@ -13,34 +13,43 @@ struct OnboardingButtonView: View {
     @Binding var isOnboarding: Bool
     @Binding var currentPage: Int
     
+    // Вычисляемое свойство для последней страницы
+    var lastPage: Int {
+        return vm.pages.count - 1
+    }
+    
+    // Константы
+    let skipButtonHeight: CGFloat = 30
+    let cornerRadius: CGFloat = 15
+    
     var body: some View {
         VStack {
             Button {
                 withAnimation {
-                    if currentPage != vm.pages.count - 1 {
+                    if currentPage != lastPage {
                         currentPage += 1
                     } else {
                         isOnboarding.toggle()
                     }
                 }
             } label: {
-                Text(currentPage != vm.pages.count - 1 ? "Continue" : "Start cooking")
+                Text(currentPage != lastPage ? "Continue" : "Start cooking")
                     .font(.title)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.Text.white)
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(.red)
-                    .cornerRadius(15)
+                    .background(Color.Button.red)
+                    .cornerRadius(cornerRadius)
             }
             .padding(.horizontal)
             
             Button {
                 isOnboarding.toggle()
             } label: {
-                Text(currentPage != vm.pages.count - 1 ? "Skip" : "")
+                Text(currentPage != lastPage ? "Skip" : "")
                     .font(.title3)
-                    .foregroundColor(.white)
-                    .frame(height: 30)
+                    .foregroundColor(Color.Text.white)
+                    .frame(height: skipButtonHeight)
             }
         }
     }
@@ -52,7 +61,6 @@ struct OnboardingButtonView_Previews: PreviewProvider {
             Color.green.ignoresSafeArea()
             VStack {
                 OnboardingButtonView(vm: PageViewModel(), isOnboarding: .constant(true), currentPage: .constant(0))
-                
                 OnboardingButtonView(vm: PageViewModel(), isOnboarding: .constant(false), currentPage: .constant(2))
             }
         }

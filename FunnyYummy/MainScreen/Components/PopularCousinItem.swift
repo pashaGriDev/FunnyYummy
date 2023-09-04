@@ -21,7 +21,7 @@ struct PopularCousinItem: View {
                 
                 Text(recipe.creditsText ?? "no creator")
                     .font(.headline)
-                    .foregroundColor(.black)
+                    .foregroundColor(Color.Button.black)
             }
             .frame(width: 120, height: 150)
             .background(.clear)

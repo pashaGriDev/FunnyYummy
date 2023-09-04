@@ -7,54 +7,22 @@
 
 import SwiftUI
 
+import SwiftUI
+
 struct GreetingView: View {
     
     @Binding var isOnboardingDone: Bool
     
     var body: some View {
         ZStack {
-            Image("Onboarding")
-                .resizable()
-                .scaledToFit()
-                .ignoresSafeArea()
-                .scaleEffect(1.2)
-            
+            BackgroundImage()
             VStack {
-                HStack {
-                    Image(systemName: "star.fill")
-                    Text("100k Premium recipes")
-                        .foregroundColor(.white)
-                }
-                .padding(.top, 50)
-                
+                TopContent()
                 Spacer()
-                
-                VStack(spacing: 30) {
-                    Text("Best\nRecipe")
-                        .font(.system(size: 48, weight: .black, design: .rounded))
-                        .foregroundColor(.white)
-                        .multilineTextAlignment(.center)
-                    
-                    Text("Find best recipe for cooking")
-                        .foregroundColor(.white)
-                    
-                    Button {
-                        withAnimation(.easeInOut) {
-                            isOnboardingDone.toggle()
-                        }
-                    } label: {
-                        Text("Get started")
-                            .font(.title)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(.red)
-                            .cornerRadius(15)
-                    }
-                    .padding(.horizontal)
-                }
-                .padding(.bottom, 70)
+                GreetingContent(isOnboardingDone: $isOnboardingDone)
+                    .padding(.bottom, 50)
             }
+            .foregroundColor(Color.Text.white)
         }
         .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
     }

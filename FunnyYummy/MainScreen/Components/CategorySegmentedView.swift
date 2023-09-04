@@ -11,7 +11,7 @@ struct CategorySegmentedView: View {
     
     let dishTypes: [DishTypes] = DishTypes.allCases
     @ObservedObject var vm: MainScreenViewModel
-
+    
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
@@ -23,11 +23,7 @@ struct CategorySegmentedView: View {
                             : .prymary50
                         )
                         .padding(.all, 10)
-                        .background(
-                            type == vm.dishType
-                            ? Color.prymary50
-                            : Color.clear
-                        )
+                        .background(type == vm.dishType ? Color.Button.red : Color.clear)
                         .cornerRadius(10)
                         .onTapGesture {
                             vm.dishType = type

@@ -17,13 +17,13 @@ struct TabBar: View {
             TabBarIcon(viewRouter: viewRouter, assignetPage: .favorites, width: proxy.size.width/5, height: proxy.size.height/28, iconName: "book")
             ZStack {
                 Circle()
-                    .foregroundColor(.red)
+                    .foregroundColor(Color.Button.red)
                     .frame(width: proxy.size.width/7, height: proxy.size.height/7)
                     .shadow(color: .black.opacity(0.05), radius: 8, y: -1)
                 Image("plus")
                     .resizable()
                     .scaledToFit()
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.Text.white)
                     .frame(width: proxy.size.width/23, height: proxy.size.height/23)
             }
             .offset(y: -proxy.size.height/8/2)

@@ -12,14 +12,15 @@ struct ProfileView: View {
     var body: some View {
         VStack {
             //MARK: - Profile Header
-            ProfileHeaderView()
-                .padding([.top, .horizontal])
             
             ScrollView(showsIndicators: false) {
                 VStack {
+                    ProfileHeaderView()
+                        .padding([.top, .horizontal])
+
                     //MARK: - Recipes Title
-                    //HeaderTitleView(title: "My Recipes", hasNavigationLink: false)
-                       // .padding(.horizontal)
+                    HeaderTitleView(title: "My Recipes", hasNavigationLink: false)
+                        .padding(.horizontal)
                     
                     //MARK: - Resipes Bookmark
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 8) {
@@ -43,7 +44,7 @@ struct ProfileView: View {
                     
                 } label: {
                     Image(systemName: "ellipsis")
-                        .foregroundColor(.black)
+                        .foregroundColor(Color.Button.black)
                 }
             }
         }

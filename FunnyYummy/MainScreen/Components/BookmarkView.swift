@@ -13,13 +13,13 @@ struct BookmarkView: View {
     
     var body: some View {
         Image(systemName: "bookmark")
-            .foregroundColor(isSelected ? .prymary50 : .gray)
+            .foregroundColor(isSelected ? Color.Button.red : Color.Button.gray)
             .padding(.all, 6)
             .background(
                 Circle()
                     .fill(isSelected
-                          ? Color.prymary50.opacity(0.2)
-                          : Color.white)
+                          ? Color.Button.red.opacity(0.2)
+                          : Color.Main.white)
             )
             .onTapGesture {
                 isSelected.toggle()

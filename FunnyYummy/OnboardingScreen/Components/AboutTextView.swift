@@ -11,17 +11,24 @@ struct AboutTextView: View {
     
     @Binding var page: OnboardingPage
     
+    // Константы
+    let fontSize: CGFloat = 48
+    let fontWeight: Font.Weight = .black
+    let fontDesign: Font.Design = .serif
+    let minimumScaleFactor: CGFloat = 0.5
+    
     var body: some View {
         ZStack {
             Group {
                 Text(page.firstText)
-                + Text(page.secondText)
-                    .foregroundColor(.gray)
+                    .foregroundColor(Color.Text.white)
+                +
+                Text(page.secondText)
+                    .foregroundColor(Color.Text.peach)
             }
             .padding(.horizontal)
-            .font(.system(size: 48, weight: .black, design: .rounded))
-            .minimumScaleFactor(0.5)
-            .foregroundColor(.white)
+            .font(.system(size: fontSize, weight: fontWeight, design: fontDesign))
+            .minimumScaleFactor(minimumScaleFactor)
             .multilineTextAlignment(.center)
         }
     }

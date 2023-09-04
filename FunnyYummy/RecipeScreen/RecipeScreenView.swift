@@ -34,7 +34,7 @@ struct RecipeScreenView: View {
                         HStack {
                             Label(recipe.rating.formatted(), systemImage: "star.fill")
                             Text("(\(recipe.aggregateLikes ?? 0) Reviews)")
-                                .foregroundColor(.gray)
+                                .foregroundColor(Color.Text.gray)
                         }
                         .font(.system(size: 14))
                     }

@@ -30,7 +30,7 @@ struct RecentRecipeItem: View {
                         .multilineTextAlignment(.leading)
                     Text(recipe.creditsText ?? "no creator")
                         .font(.system(size: 12))
-                        .foregroundColor(.gray.opacity(0.8))
+                        .foregroundColor(Color.Text.gray.opacity(0.8))
                 }
                 .frame(width: 124, height: 60, alignment: .bottom)
                 .background(titleRecipe.isEmpty ? .gray.opacity(0.1) : .clear)
