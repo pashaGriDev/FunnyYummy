@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct FunnyYummyApp: App {
-    
+    @StateObject var dataProvider = DataProvider()
     @StateObject var viewRouter = ViewRouter()
     @AppStorage("isOnboarding") var isOnboarding = false
     
@@ -23,6 +23,7 @@ struct FunnyYummyApp: App {
         WindowGroup {
             if isOnboarding {
                 ContentView(viewRouter: viewRouter)
+                    .environmentObject(dataProvider)
                     .preferredColorScheme(.light)
             } else {
                 PageControlView(isOnboarding: $isOnboarding)

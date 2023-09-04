@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct BookmarkView: View {
-    
+    let id: Int
     @State private var isSelected = false
+    @EnvironmentObject var dataProvider: DataProvider
     
     var body: some View {
         Image(systemName: "bookmark")
@@ -17,18 +18,25 @@ struct BookmarkView: View {
             .padding(.all, 6)
             .background(
                 Circle()
-                    .fill(isSelected
+                    .fill(dataProvider.ids.contains(id)
                           ? Color.Button.red.opacity(0.2)
                           : Color.Main.white)
             )
             .onTapGesture {
-                isSelected.toggle()
+                if dataProvider.ids.contains(id) {
+                    dataProvider.ids.removeAll(where: { $0 == id })
+                } else {
+                    dataProvider.ids.append(id)
+                }
+                try? dataProvider.saveData(for: dataProvider.ids, withKey: "ID")
             }
     }
 }
 
 struct BookmarkView_Previews: PreviewProvider {
+    static let recipe = NetworkManager().getMockData().first!
     static var previews: some View {
-        BookmarkView()
+        BookmarkView(id: 100)
+            .environmentObject(DataProvider())
     }
 }

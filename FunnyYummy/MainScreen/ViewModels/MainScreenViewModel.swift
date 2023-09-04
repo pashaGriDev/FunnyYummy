@@ -11,7 +11,7 @@ import Foundation
 class MainScreenViewModel: ObservableObject {
     
     let networkService = NetworkManager()
-
+    
     @Published var dishType: DishTypes = .appetizer
     let cousine: Сuisine = Сuisine.allCases.randomElement() ?? .chinese
     @Published var emptyRecipe = Recipe(creditsText: "", id: 0, aggregateLikes: 0, title: "", sourceUrl: "", image: "", imageType: "", readyInMinutes: 0, dishTypes: [], extendedIngredients: [], analyzedInstructions: [])
@@ -28,6 +28,7 @@ class MainScreenViewModel: ObservableObject {
             await fetchDishTypeRecipe()
             await fetchRecentRecipe()
             await fetchCousinRecipe()
+            
         }
     }
     

@@ -56,7 +56,7 @@ struct TrendingItemView: View {
                 .background(Color.gray.cornerRadius(8))
             }
             Spacer()
-            BookmarkView()
+            BookmarkView(id: recipe.id)
         }
         .padding()
     }
@@ -102,12 +102,12 @@ enum ScreenSize {
 
 struct TrendingItemView_Previews: PreviewProvider {
     
-    static let recipe = NetworkManager().getMockData()
+    static let recipe = NetworkManager().getMockData().first!
     
     static var previews: some View {
         NavigationView {
             VStack {
-                TrendingItemView(recipe: recipe[2], screen: .main)
+                TrendingItemView(recipe: recipe, screen: .main)
                 TrendingItemView(recipe: MainScreenViewModel().emptyRecipe, screen: .main)
             }
         }

@@ -45,7 +45,7 @@ struct PopularCategoryItem: View {
                                 }
                                 Spacer()
                                 
-                                BookmarkView()
+                                BookmarkView(id: recipe.id)
                             }
                         }
                         .padding([.horizontal, .bottom], 6), alignment: .bottom
