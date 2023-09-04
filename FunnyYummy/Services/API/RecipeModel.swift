@@ -54,30 +54,6 @@ struct Recipe: Codable, Identifiable {
     }
     
 }
-    enum DishTypes: String, Codable, CaseIterable {
-        case mainCourse = "main%20course"
-        case sideDish = "side%20dish"
-        case dessert
-        case appetizer
-        case salad
-        case bread
-        case breakfast
-        case soup
-        case beverage
-        case sauce
-        case marinade
-        case fingerfood
-        case snack
-        case drink
-        
-        var description: String {
-            switch self {
-            case .mainCourse: return "Main Course"
-            case .sideDish: return "Side Dish"
-            default: return self.rawValue.capitalized
-            }
-        }
-    }
 
 // MARK: - Instruction - analyzedInstructions
 

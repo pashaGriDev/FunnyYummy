@@ -46,6 +46,14 @@ enum DishTypes: String, Codable, CaseIterable {
     case fingerfood
     case snack
     case drink
+    
+    var description: String {
+        switch self {
+        case .mainCourse: return "Main Course"
+        case .sideDish: return "Side Dish"
+        default: return self.rawValue.capitalized
+        }
+    }
 }
 
 // MARK: - Spoonacular - cuisine
