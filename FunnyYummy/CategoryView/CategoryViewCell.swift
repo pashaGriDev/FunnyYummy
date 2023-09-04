@@ -56,8 +56,7 @@ struct CategoryViewCell_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             VStack {
-                CategoryViewCell(recipe: Bundle.main.decode(Recipe.self, from: "mockData.json"))
-                CategoryViewCell(recipe: Recipe(creditsText: "", id: 0, aggregateLikes: 0, title: "", sourceUrl: "", image: "", imageType: "", readyInMinutes: 0, dishTypes: [], extendedIngredients: [], analyzedInstructions: []))
+                CategoryViewCell(recipe: Bundle.main.getMokRecip())
             }
         }
     }

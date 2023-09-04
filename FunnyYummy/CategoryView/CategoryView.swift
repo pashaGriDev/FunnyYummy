@@ -27,7 +27,7 @@ struct CategoryView: View {
 struct CategoryView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CategoryView(recipeList: [Bundle.main.decode(Recipe.self, from: "mockData.json")], title: "Tranding now")
+            CategoryView(recipeList: Bundle.main.getMokData(), title: "Tranding now")
         }
     }
 }

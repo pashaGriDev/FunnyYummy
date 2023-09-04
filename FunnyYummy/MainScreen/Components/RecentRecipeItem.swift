@@ -42,10 +42,10 @@ struct RecentRecipeItem: View {
 }
 
 struct RecentRecipeView_Previews: PreviewProvider {
-    static let mockData = Recipe(creditsText: "blogspot.com", id: 782585, aggregateLikes: 1000, title: "Cannellini Bean and Asparagus Salad with Mushrooms", sourceUrl: "http://foodandspice.blogspot.com/2016/05/cannellini-bean-and-asparagus-salad.html", image: "https://spoonacular.com/recipeImages/782585-312x231.jpg", imageType: "", readyInMinutes: 0, dishTypes: [], extendedIngredients: [], analyzedInstructions: [])
+//    static let mockData = Recipe(creditsText: "blogspot.com", id: 782585, aggregateLikes: 1000, title: "Cannellini Bean and Asparagus Salad with Mushrooms", sourceUrl: "http://foodandspice.blogspot.com/2016/05/cannellini-bean-and-asparagus-salad.html", image: "https://spoonacular.com/recipeImages/782585-312x231.jpg", imageType: "", readyInMinutes: 0, dishTypes: [], extendedIngredients: [], analyzedInstructions: [])
     static var previews: some View {
         NavigationView {
-            RecentRecipeItem(recipe: .constant(mockData))
+            RecentRecipeItem(recipe: .constant(Bundle.main.getMokRecip()))
         }
     }
 }
