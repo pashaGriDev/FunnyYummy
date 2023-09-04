@@ -66,7 +66,7 @@ struct PopularCategoryItem: View {
 struct PopularCategoryItem_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            PopularCategoryItem(recipe: .constant(Bundle.main.decode(Recipe.self, from: "mockData.json")))
+            PopularCategoryItem(recipe: .constant(Bundle.main.getMokRecip()))
         }
     }
 }

@@ -119,14 +119,14 @@ extension NetworkManager {
     }
 }
 
-// MARK: - get mockData from Bundle
-
-extension NetworkManager {
-    /// return [Recipe] count 100
-    func getMockData() -> [Recipe] {
-        return  Bundle.main.decode(RecipeModel.self, from: "mockData.json").results
-    }
-}
+//// MARK: - get mockData from Bundle
+//
+//extension NetworkManager {
+//    /// return [Recipe] count 100
+//    func getMockData() -> [Recipe] {
+//        return  Bundle.main.decode(RecipeModel.self, from: "mockData.json").results
+//    }
+//}
 
 // MARK: - RecipeError
 

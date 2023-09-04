@@ -41,8 +41,8 @@ struct IngredientRowView: View {
     }
 }
 
-struct IngredientRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        IngredientRowView(ingredient: Bundle.main.decode(Recipe.self, from: "mockData.json").extendedIngredients?[5] ?? Ingredient(id: 0, image: "", name: "", amount: 0, unit: ""))
-    }
-}
+//struct IngredientRowView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        IngredientRowView(ingredient: Bundle.main.decode(Recipe.self, from: "mockData.json").extendedIngredients?[5] ?? Ingredient(id: 0, image: "", name: "", amount: 0, unit: ""))
+//    }
+//}

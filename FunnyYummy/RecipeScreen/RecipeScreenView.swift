@@ -88,7 +88,7 @@ struct RecipeScreenView: View {
 
 struct RecipeScreenView_Previews: PreviewProvider {
     
-    static let recipe = NetworkManager().getMockData().first!
+    static let recipe = Bundle.main.getMokRecip()
     
     static var previews: some View {
         NavigationView {

@@ -101,16 +101,9 @@ enum ScreenSize {
 }
 
 struct TrendingItemView_Previews: PreviewProvider {
-    
-    static let recipe = NetworkManager().getMockData().first!
-    
     static var previews: some View {
         NavigationView {
-            VStack {
-                TrendingItemView(recipe: recipe, screen: .main)
-                TrendingItemView(recipe: MainScreenViewModel().emptyRecipe, screen: .main)
-                Text(recipe.image ?? "")
-            }
+            TrendingItemView(recipe: Bundle.main.getMokRecip(), screen: .main)
         }
     }
 }
