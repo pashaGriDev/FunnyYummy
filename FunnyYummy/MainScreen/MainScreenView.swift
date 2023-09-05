@@ -111,5 +111,6 @@ struct MainScreenView: View {
 struct MainScreenView_Previews: PreviewProvider {
     static var previews: some View {
         MainScreenView()
+            .environmentObject(DataProvider())
     }
 }

@@ -21,6 +21,7 @@ class MainScreenViewModel: ObservableObject {
     @Published var searchRecipe = [Recipe]()
     @Published var cousineRecipe = [Recipe]()
     @Published var searchText = ""
+    @Published var offset: Int = 0
     
     init() {
         Task {
@@ -28,14 +29,14 @@ class MainScreenViewModel: ObservableObject {
             await fetchDishTypeRecipe()
             await fetchRecentRecipe()
             await fetchCousinRecipe()
-            
         }
     }
     
     func fetchTrendingRecipe(number: Int = 10) async {
         do {
-            trending = try await networkService.getShortData(sort: .popularity)
+            trending = try await networkService.getShortData(sort: .popularity, offset: offset)
         } catch {
+            trending = Bundle.main.getMokData()
             print(error)
         }
     }
@@ -44,6 +45,7 @@ class MainScreenViewModel: ObservableObject {
         do {
             categoryRecipe = try await networkService.getShortData(sort: .popularity, type: dishType)
         } catch {
+            categoryRecipe = Bundle.main.getMokData()
             print(error)
         }
     }
@@ -52,6 +54,7 @@ class MainScreenViewModel: ObservableObject {
         do {
             recentRecipe = try await networkService.getShortData(sort: .random)
         } catch {
+            recentRecipe = Bundle.main.getMokData()
             print(error)
         }
     }
@@ -60,6 +63,7 @@ class MainScreenViewModel: ObservableObject {
         do {
             cousineRecipe = try await networkService.getShortData(sort: .popularity, cousine: .chinese)
         } catch {
+            cousineRecipe = Bundle.main.getMokData()
             print(error)
         }
     }
@@ -67,7 +71,7 @@ class MainScreenViewModel: ObservableObject {
     func findRecipe() async {
         do {
             try await Task.sleep(nanoseconds: 300_000_000)
-            searchRecipe = try await networkService.searchShortData(by: searchText.lowercased())
+            searchRecipe = try await networkService.searchShortData(by: searchText.lowercased(), amount: 50)
             print(searchText)
         } catch {
             print(error)

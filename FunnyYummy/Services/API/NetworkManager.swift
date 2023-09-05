@@ -105,15 +105,17 @@ extension NetworkManager {
     func getShortData(sort: SortType? = nil,
                       cousine: Сuisine? = nil ,
                       type: DishTypes? = nil,
-                      amount: Int = 10) async throws -> [Recipe] {
+                      amount: Int = 10,
+                      offset: Int = 0) async throws -> [Recipe] {
         
         let baseUrl = SpoonacularURL.short.rawValue
         let cousine = "&cuisine=\(cousine?.rawValue ?? "")"
         let sort = "&sort=\(sort?.rawValue ?? "")"
         let type = "&type=\(type?.rawValue ?? "")"
         let amount = "&number=\(amount)"
+        let offset = "&offset=\(offset)"
         
-        let url = "\(baseUrl)\(apiKey)\(cousine)\(sort)\(type)\(amount)"
+        let url = "\(baseUrl)\(apiKey)\(cousine)\(sort)\(type)\(amount)\(offset)"
         print(url)
         return try await fetchData(url: url, model: RecipeModel.self).results
     }

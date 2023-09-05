@@ -15,7 +15,7 @@ struct IngredientRowView: View {
     
     var body: some View {
         HStack(spacing: 20) {
-            ImageLoaderView(url: ingredient.ingredientImage)
+            ImageLoaderView(url: "ingredient.ingredientImage")
                 .frame(width: 52, height: 52)
                 .clipped()
                 .cornerRadius(10)
@@ -41,8 +41,10 @@ struct IngredientRowView: View {
     }
 }
 
-//struct IngredientRowView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        IngredientRowView(ingredient: Bundle.main.decode(Recipe.self, from: "mockData.json").extendedIngredients?[5] ?? Ingredient(id: 0, image: "", name: "", amount: 0, unit: ""))
-//    }
-//}
+struct IngredientRowView_Previews: PreviewProvider {
+    static var previews: some View {
+        if let ingredient = Bundle.main.getMokRecip().extendedIngredients?.randomElement() {
+            IngredientRowView(ingredient: ingredient)
+        }
+    }
+}
