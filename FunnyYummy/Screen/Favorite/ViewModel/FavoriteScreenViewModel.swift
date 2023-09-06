@@ -9,7 +9,12 @@ import Foundation
 @MainActor
 final class FavoriteScreenViewModel: ObservableObject {
     
-    private let networkService = NetworkManager()
+    private let networkService: NetworkManager
+    
+    init(networkService: NetworkManager = .init()) {
+        self.networkService = networkService
+    }
+    
     @Published var favoriteRecipes = [Recipe]()
     
     func fetchFavoriteRecipe(id: [Int]) async {

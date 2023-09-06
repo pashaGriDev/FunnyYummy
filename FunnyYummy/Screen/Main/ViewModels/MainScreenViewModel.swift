@@ -10,7 +10,7 @@ import Foundation
 @MainActor
 class MainScreenViewModel: ObservableObject {
     
-    let networkService = NetworkManager()
+    private let networkService: NetworkManager
     
     @Published var dishType: DishTypes = .appetizer
     let cousine: Сuisine = Сuisine.allCases.randomElement() ?? .chinese
@@ -23,7 +23,9 @@ class MainScreenViewModel: ObservableObject {
     @Published var searchText = ""
     @Published var offset: Int = 0
     
-    init() {
+    init(networkService: NetworkManager = .init()) {
+        self.networkService = networkService
+        
         Task {
             await fetchTrendingRecipe()
             await fetchDishTypeRecipe()

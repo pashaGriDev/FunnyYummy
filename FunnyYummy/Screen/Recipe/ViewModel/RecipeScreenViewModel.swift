@@ -10,7 +10,12 @@ import Foundation
 @MainActor
 final class RecipeScreenViewModel: ObservableObject {
     
-    private let networkService = NetworkManager()
+    private let networkService: NetworkManager
+    
+    init(networkService: NetworkManager = .init()) {
+        self.networkService = networkService
+    }
+    
     @Published var detailRecipe: Recipe?
     
     var steps: [Step] {

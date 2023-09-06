@@ -10,7 +10,12 @@ import Foundation
 @MainActor
 class CategoryViewModel: ObservableObject {
     
-    let networkManager = NetworkManager()
+    private let networkService: NetworkManager
+    
+    init(networkService: NetworkManager = .init()) {
+        self.networkService = networkService
+    }
+    
     @Published var recipes = [Recipe]()
     @Published var offset = 0
     
@@ -25,7 +30,7 @@ class CategoryViewModel: ObservableObject {
     func loadingData() {
         Task {
             do {
-                let recipes: [Recipe] = try await networkManager.getShortData(sort: sort, cousine: cuisine, type: type, offset: offset)
+                let recipes: [Recipe] = try await networkService.getShortData(sort: sort, cousine: cuisine, type: type, offset: offset)
                 
                 self.recipes.insert(contentsOf: recipes, at: lastIndex)
             } catch {
