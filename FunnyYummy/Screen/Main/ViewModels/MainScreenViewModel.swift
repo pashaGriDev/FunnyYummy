@@ -12,7 +12,7 @@ class MainScreenViewModel: ObservableObject {
     
     private let networkService: NetworkManager
     
-    @Published var dishType: DishTypes = .appetizer
+    @Published var dishType: DishTypes = .mainCourse
     let cousine: Сuisine = Сuisine.allCases.randomElement() ?? .chinese
     @Published var emptyRecipe = Recipe(creditsText: "", id: 0, aggregateLikes: 0, title: "", sourceUrl: "", image: "", imageType: "", readyInMinutes: 0, dishTypes: [], extendedIngredients: [], analyzedInstructions: [])
     @Published var trending = [Recipe]()

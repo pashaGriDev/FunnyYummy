@@ -36,6 +36,7 @@
 		3C9352FB2A9D539500022170 /* TabBarIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9352FA2A9D539500022170 /* TabBarIcon.swift */; };
 		3C9352FD2A9D5FE900022170 /* TabBarCustomShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9352FC2A9D5FE900022170 /* TabBarCustomShape.swift */; };
 		3C9352FF2A9D60EA00022170 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9352FE2A9D60EA00022170 /* TabBar.swift */; };
+		3CE4E0092AA912B2001E7C98 /* TabBarCircleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE4E0082AA912B2001E7C98 /* TabBarCircleIcon.swift */; };
 		6F02707E2A9F88FE00A57D83 /* mockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F02707D2A9F88FE00A57D83 /* mockData.json */; };
 		6F464A1D2A9F59BF005C2002 /* API_Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F464A172A9F59BF005C2002 /* API_Key.swift */; };
 		6F464A1F2A9F59BF005C2002 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F464A192A9F59BF005C2002 /* NetworkManager.swift */; };
@@ -94,6 +95,7 @@
 		3C9352FA2A9D539500022170 /* TabBarIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarIcon.swift; sourceTree = "<group>"; };
 		3C9352FC2A9D5FE900022170 /* TabBarCustomShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCustomShape.swift; sourceTree = "<group>"; };
 		3C9352FE2A9D60EA00022170 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		3CE4E0082AA912B2001E7C98 /* TabBarCircleIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCircleIcon.swift; sourceTree = "<group>"; };
 		6F02707D2A9F88FE00A57D83 /* mockData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mockData.json; sourceTree = "<group>"; };
 		6F464A172A9F59BF005C2002 /* API_Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API_Key.swift; sourceTree = "<group>"; };
 		6F464A192A9F59BF005C2002 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				3C9352FA2A9D539500022170 /* TabBarIcon.swift */,
+				3CE4E0082AA912B2001E7C98 /* TabBarCircleIcon.swift */,
 				3C9352FC2A9D5FE900022170 /* TabBarCustomShape.swift */,
 			);
 			path = Components;
@@ -542,6 +545,7 @@
 				3C7C0C3E2A9E953A00E2E5B3 /* ProfileHeaderView.swift in Sources */,
 				FD67B69E2A9E07BF0063D631 /* ImageLoaderView.swift in Sources */,
 				FDA6EEC02AA371A80069936A /* MainScreenViewModel.swift in Sources */,
+				3CE4E0092AA912B2001E7C98 /* TabBarCircleIcon.swift in Sources */,
 				FD67B6992A9E07BF0063D631 /* SearchBarView.swift in Sources */,
 				FDBCA81A2AA25EC600481DDE /* RecipeScreenView.swift in Sources */,
 				3C0BA8C02AA23E3300B205DA /* PageViewModel.swift in Sources */,

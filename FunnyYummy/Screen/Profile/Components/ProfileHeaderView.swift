@@ -11,6 +11,9 @@ struct ProfileHeaderView: View {
     
     @State private var isShowingPhotoPicker = false
     @State private var selectedAvatarImage: UIImage? = nil
+    @Binding var name: String
+    @Binding var rank: String
+    @Binding var isEditProfile: Bool
     
     var body: some View {
         HStack {
@@ -39,21 +42,25 @@ struct ProfileHeaderView: View {
                 }
             }
             VStack(alignment: .leading) {
-                Text("Custom Name")
+                Text(name)
                     .font(.headline)
-                Text("Chief cook")
+                Text(rank)
                     .font(.subheadline)
             }
             Spacer()
             
-            Rectangle()
-                .foregroundColor(Color.Button.gray.opacity(0.5))
-                .frame(width: 30, height: 30)
-                .cornerRadius(5)
-                .overlay {
-                    Image(systemName: "arrow.right")
-                        .foregroundColor(Color.Text.white)
-                }
+            Button {
+                isEditProfile.toggle()
+            } label: {
+                Rectangle()
+                    .foregroundColor(Color.Button.gray.opacity(0.5))
+                    .frame(width: 30, height: 30)
+                    .cornerRadius(5)
+                    .overlay {
+                        Image(systemName: "arrow.right")
+                            .foregroundColor(Color.Text.white)
+                    }
+            }
         }
         .sheet(isPresented: $isShowingPhotoPicker, content: {
             PhotoPicker(avatarImage: $selectedAvatarImage)
@@ -64,11 +71,5 @@ struct ProfileHeaderView: View {
         .background(Color.Text.white)
         .cornerRadius(15)
         .shadow(color: Color.Button.black.opacity(0.15), radius: 5)
-    }
-}
-
-struct ProfileHeaderView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileHeaderView()
     }
 }
