@@ -56,7 +56,7 @@ struct CategoryViewCell_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             VStack {
-                CategoryViewCell(recipe: Bundle.main.getMokRecip())
+                CategoryViewCell(recipe: mokRandomRecip)
             }
         }
     }

@@ -12,6 +12,10 @@ struct HeaderTitleView: View {
     var title: String
     var hasNavigationLink = true
     
+    let sort: SortType?
+    let type: DishTypes?
+    let cuisine: Сuisine?
+    
     var body: some View {
         HStack {
             Text(title)
@@ -19,7 +23,7 @@ struct HeaderTitleView: View {
             Spacer()
             if hasNavigationLink {
                 NavigationLink {
-                    CategoryView(recipeList: recipeList, title: title)
+                    CategoryView(recipeList: recipeList, title: title, sort: sort, type: type, cuisine: cuisine)
                         .navigationBarBackButtonHidden()
                 } label: {
                     HStack {
@@ -36,10 +40,7 @@ struct HeaderTitleView: View {
 
 struct HeaderTitleViewPreviews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            VStack {
-                HeaderTitleView(recipeList: Bundle.main.getMokData(), title: "Trending now", hasNavigationLink: false)
-            }
-        }
+                HeaderTitleView(title: "Title", sort: nil, type: nil, cuisine: nil)
+            .previewLayout(.fixed(width: 400, height: 70))
     }
 }

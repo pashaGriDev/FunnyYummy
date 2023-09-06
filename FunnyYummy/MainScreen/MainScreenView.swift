@@ -29,7 +29,11 @@ struct MainScreenView: View {
                         if vm.searchText.isEmpty {
                             // MARK: - Trending now
                             VStack {
-                                HeaderTitleView(recipeList: vm.trending, title: "Trending now 🔥")
+                                HeaderTitleView(
+                                    recipeList: vm.trending,
+                                    title: "Trending now 🔥",
+                                    sort: .popularity, type: nil, cuisine: nil
+                                )
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     LazyHStack(spacing: 20) {
                                         if vm.trending.isEmpty {
@@ -47,7 +51,11 @@ struct MainScreenView: View {
                             }
                             // MARK: - Popular category
                             VStack {
-                                HeaderTitleView(title: "Popular category", hasNavigationLink: false)
+                                HeaderTitleView(
+                                    title: "Popular category",
+                                    hasNavigationLink: false,
+                                    sort: .popularity, type: vm.dishType, cuisine: nil
+                                )
                                 CategorySegmentedView(vm: vm)
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     LazyHStack(spacing: 20) {
@@ -64,7 +72,11 @@ struct MainScreenView: View {
                             }
                             // MARK: - Recent recipe
                             VStack {
-                                HeaderTitleView(recipeList: vm.recentRecipe, title: "Recent recipe")
+                                HeaderTitleView(
+                                    recipeList: vm.recentRecipe,
+                                    title: "Recent recipe",
+                                    sort: .random, type: nil, cuisine: nil
+                                )
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     LazyHStack(spacing: 20) {
                                         if vm.recentRecipe.isEmpty {
@@ -80,7 +92,11 @@ struct MainScreenView: View {
                             }
                             // TODO: - Any Cousin
                             VStack {
-                                HeaderTitleView(recipeList: vm.cousineRecipe, title: "\(vm.cousine.rawValue.capitalized) Cousin", hasNavigationLink: true)
+                                HeaderTitleView(
+                                    recipeList: vm.cousineRecipe,
+                                    title: "\(vm.cousine.rawValue.capitalized) Cousin", hasNavigationLink: true,
+                                    sort: .popularity, type: nil, cuisine: .chinese
+                                )
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     LazyHStack(spacing: 20) {
                                         if vm.cousineRecipe.isEmpty {
@@ -111,5 +127,6 @@ struct MainScreenView: View {
 struct MainScreenView_Previews: PreviewProvider {
     static var previews: some View {
         MainScreenView()
+            .environmentObject(DataProvider())
     }
 }

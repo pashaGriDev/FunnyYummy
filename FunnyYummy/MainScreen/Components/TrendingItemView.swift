@@ -103,7 +103,8 @@ enum ScreenSize {
 struct TrendingItemView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            TrendingItemView(recipe: Bundle.main.getMokRecip(), screen: .main)
+            TrendingItemView(recipe: mokRandomRecip, screen: .main)
+                .environmentObject(DataProvider())
         }
     }
 }

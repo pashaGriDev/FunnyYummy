@@ -21,6 +21,7 @@ class MainScreenViewModel: ObservableObject {
     @Published var searchRecipe = [Recipe]()
     @Published var cousineRecipe = [Recipe]()
     @Published var searchText = ""
+    @Published var offset: Int = 0
     
     init() {
         Task {
@@ -28,15 +29,16 @@ class MainScreenViewModel: ObservableObject {
             await fetchDishTypeRecipe()
             await fetchRecentRecipe()
             await fetchCousinRecipe()
-            
         }
     }
     
     func fetchTrendingRecipe(number: Int = 10) async {
         do {
-            trending = try await networkService.getShortData(sort: .popularity)
+            trending = try await networkService.getShortData(sort: .popularity, offset: offset)
         } catch {
-            print(error)
+            trending = mokRecipes
+//            print(error)
+            print("Ошибка связанная с запросом дданных!!! Происходит подмена данных")
         }
     }
     
@@ -44,7 +46,9 @@ class MainScreenViewModel: ObservableObject {
         do {
             categoryRecipe = try await networkService.getShortData(sort: .popularity, type: dishType)
         } catch {
-            print(error)
+            categoryRecipe = mokRecipes
+//            print(error)
+            print("Ошибка связанная с запросом дданных!!! Происходит подмена данных")
         }
     }
     
@@ -52,7 +56,9 @@ class MainScreenViewModel: ObservableObject {
         do {
             recentRecipe = try await networkService.getShortData(sort: .random)
         } catch {
-            print(error)
+            recentRecipe = mokRecipes
+//            print(error)
+            print("Ошибка связанная с запросом дданных!!! Происходит подмена данных")
         }
     }
     
@@ -60,14 +66,16 @@ class MainScreenViewModel: ObservableObject {
         do {
             cousineRecipe = try await networkService.getShortData(sort: .popularity, cousine: .chinese)
         } catch {
-            print(error)
+            cousineRecipe = mokRecipes
+//            print(error)
+            print("Ошибка связанная с запросом дданных!!! Происходит подмена данных")
         }
     }
     
     func findRecipe() async {
         do {
             try await Task.sleep(nanoseconds: 300_000_000)
-            searchRecipe = try await networkService.searchShortData(by: searchText.lowercased())
+            searchRecipe = try await networkService.searchShortData(by: searchText.lowercased(), amount: 50)
             print(searchText)
         } catch {
             print(error)

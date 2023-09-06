@@ -34,7 +34,7 @@ struct BookmarkView: View {
 }
 
 struct BookmarkView_Previews: PreviewProvider {
-    static let recipe = Bundle.main.getMokRecip()
+    static let recipe = mokRandomRecip
     static var previews: some View {
         BookmarkView(id: 100)
             .environmentObject(DataProvider())

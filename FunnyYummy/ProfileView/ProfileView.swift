@@ -19,12 +19,16 @@ struct ProfileView: View {
                         .padding([.top, .horizontal])
 
                     //MARK: - Recipes Title
-                    HeaderTitleView(title: "My Recipes", hasNavigationLink: false)
+                    HeaderTitleView(
+                        title: "My Recipes",
+                        hasNavigationLink: false,
+                        sort: nil, type: nil, cuisine: nil
+                    )
                         .padding(.horizontal)
                     
                     //MARK: - Resipes Bookmark
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 8) {
-                        ForEach(1..<10) { _ in
+                        ForEach(1..<4) { _ in
                             RecipesCardView()
                         }
                     }
@@ -54,5 +58,6 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
+            .environmentObject(DataProvider())
     }
 }

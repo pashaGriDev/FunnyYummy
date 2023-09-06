@@ -87,12 +87,9 @@ struct RecipeScreenView: View {
 }
 
 struct RecipeScreenView_Previews: PreviewProvider {
-    
-    static let recipe = Bundle.main.getMokRecip()
-    
     static var previews: some View {
         NavigationView {
-            RecipeScreenView(recipe: recipe)
+            RecipeScreenView(recipe: mokRandomRecip)
         }
     }
 }

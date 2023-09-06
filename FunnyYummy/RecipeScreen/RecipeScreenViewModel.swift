@@ -19,9 +19,11 @@ final class RecipeScreenViewModel: ObservableObject {
     
     func getFullRecipe(id: Int) async {
         do {
-            detailRecipe = try await networkService.getFullData(by: [id])[0]
+            detailRecipe = try await networkService.getFullData(by: [id]).first
         } catch {
-            print(error.localizedDescription)
+//            print(error.localizedDescription)
+            detailRecipe = mokRandomRecip
+            print("Ошибка связанная с запросом дданных!!! Происходит подмена данных")
         }
     }
     

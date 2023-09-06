@@ -11,11 +11,15 @@ struct IngredientRowView: View {
     
     let ingredient: Ingredient
     
+    var urlStringImage: String {
+        "https://spoonacular.com/cdn/ingredients_500x500/\(ingredient.image)"
+    }
+    
     @State private var isSelected = false
     
     var body: some View {
         HStack(spacing: 20) {
-            ImageLoaderView(url: ingredient.ingredientImage)
+            ImageLoaderView(url: urlStringImage)
                 .frame(width: 52, height: 52)
                 .clipped()
                 .cornerRadius(10)
@@ -41,8 +45,11 @@ struct IngredientRowView: View {
     }
 }
 
-//struct IngredientRowView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        IngredientRowView(ingredient: Bundle.main.decode(Recipe.self, from: "mockData.json").extendedIngredients?[5] ?? Ingredient(id: 0, image: "", name: "", amount: 0, unit: ""))
-//    }
-//}
+struct IngredientRowView_Previews: PreviewProvider {
+
+    static var previews: some View {
+        if let ingredient = mokRandomRecip.extendedIngredients?.randomElement() {
+            IngredientRowView(ingredient: ingredient)
+        }
+    }
+}
