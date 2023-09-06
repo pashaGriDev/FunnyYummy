@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct CustomRecipeView: View {
+    
+    @State private var serves = 2
+    @State private var readyInMinutes = 15
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Create recipe")
@@ -16,6 +20,11 @@ struct CustomRecipeView: View {
                 VStack(spacing: 20) {
                     ImageRecipeItem()
                     RecipeNameItem()
+                    VStack(spacing: 10) {
+                        PickerViewItem(selected: $serves, title: "Serves", dataPicker: Array(1...10))
+                        PickerViewItem(selected: $readyInMinutes, title: "Cook Time", dataPicker: Array(stride(from: 5, through: 60, by: 5))
+)
+                    }
                     
                 }
             }
