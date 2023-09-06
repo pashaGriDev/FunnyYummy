@@ -42,8 +42,9 @@ struct IngredientRowView: View {
 }
 
 struct IngredientRowView_Previews: PreviewProvider {
+
     static var previews: some View {
-        if let ingredient = Bundle.main.getMokRecip().extendedIngredients?.randomElement() {
+        if let ingredient = mokRandomRecip.extendedIngredients?.randomElement() {
             IngredientRowView(ingredient: ingredient)
         }
     }

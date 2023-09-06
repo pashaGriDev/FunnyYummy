@@ -36,8 +36,8 @@ struct DishImageStack: View {
 struct DishImageStack_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 30) {
-            DishImageStack(recipe: Bundle.main.getMokRecip())
-            DishImageStack(recipe: Bundle.main.getMokRecip())
+            DishImageStack(recipe: mokRandomRecip)
+            DishImageStack(recipe: mokRandomRecip)
         }
     }
 }

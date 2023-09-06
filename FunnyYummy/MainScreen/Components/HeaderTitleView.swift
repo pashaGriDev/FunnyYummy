@@ -38,7 +38,7 @@ struct HeaderTitleViewPreviews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             VStack {
-                HeaderTitleView(recipeList: Bundle.main.getMokData(), title: "Trending now", hasNavigationLink: false)
+                HeaderTitleView(recipeList: mokRecipes, title: "Trending now", hasNavigationLink: false)
             }
         }
     }

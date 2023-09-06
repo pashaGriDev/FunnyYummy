@@ -36,7 +36,7 @@ class MainScreenViewModel: ObservableObject {
         do {
             trending = try await networkService.getShortData(sort: .popularity, offset: offset)
         } catch {
-            trending = Bundle.main.getMokData()
+            trending = mokRecipes
             print(error)
         }
     }
@@ -45,7 +45,7 @@ class MainScreenViewModel: ObservableObject {
         do {
             categoryRecipe = try await networkService.getShortData(sort: .popularity, type: dishType)
         } catch {
-            categoryRecipe = Bundle.main.getMokData()
+            categoryRecipe = mokRecipes
             print(error)
         }
     }
@@ -54,7 +54,7 @@ class MainScreenViewModel: ObservableObject {
         do {
             recentRecipe = try await networkService.getShortData(sort: .random)
         } catch {
-            recentRecipe = Bundle.main.getMokData()
+            recentRecipe = mokRecipes
             print(error)
         }
     }
@@ -63,7 +63,7 @@ class MainScreenViewModel: ObservableObject {
         do {
             cousineRecipe = try await networkService.getShortData(sort: .popularity, cousine: .chinese)
         } catch {
-            cousineRecipe = Bundle.main.getMokData()
+            cousineRecipe = mokRecipes
             print(error)
         }
     }

@@ -6,9 +6,12 @@
 //
 import Foundation
 
+var mokRecipes: [Recipe] = Bundle.main.getMokData()
+var mokRandomRecip: Recipe = Bundle.main.getMokData().randomElement()!
+
 //MARK: - Использование: let user = Bundle.main.decode(User.self, from: "data.json")
 extension Bundle {
-    func decoded33<T: Codable>(_ file: String) -> T {
+    func decoded<T: Codable>(_ file: String) -> T {
         guard let url = self.url(forResource: file, withExtension: nil) else {
             fatalError("Failed to locate \(file) in bundle")
         }
@@ -29,12 +32,7 @@ extension Bundle {
 
 extension Bundle {
     func getMokData() -> [Recipe] {
-        let result: RecipeModel = Bundle.main.decoded33("mockData.json")
+        let result: RecipeModel = Bundle.main.decoded("mockData.json")
         return result.results
-    }
-    
-    func getMokRecip() -> Recipe {
-        let result: RecipeModel = Bundle.main.decoded33("mockData.json")
-        return result.results.randomElement()!
     }
 }

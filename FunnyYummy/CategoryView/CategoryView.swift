@@ -40,7 +40,7 @@ struct CategoryView: View {
 struct CategoryView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CategoryView(recipeList: Bundle.main.getMokData(), title: "Trending")
+            CategoryView(recipeList: mokRecipes, title: "Trending")
         }
     }
 }

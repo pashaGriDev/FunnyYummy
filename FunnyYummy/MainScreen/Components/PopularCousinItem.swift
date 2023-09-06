@@ -32,7 +32,7 @@ struct PopularCousinItem: View {
 struct PopularCousinItem_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            PopularCousinItem(recipe: .constant(Bundle.main.getMokRecip()))
+            PopularCousinItem(recipe: .constant(mokRandomRecip))
         }
     }
 }
