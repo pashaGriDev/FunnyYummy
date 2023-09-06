@@ -13,8 +13,7 @@ enum SpoonacularURL: String {
     case byIDs = "https://api.spoonacular.com/recipes/informationBulk?ids="
 }
 
-@MainActor
-final class NetworkManager: ObservableObject {
+struct NetworkManager {
 
     private func fetchData<T: Decodable>(url urlSting: String, model: T.Type) async throws -> T {
         
