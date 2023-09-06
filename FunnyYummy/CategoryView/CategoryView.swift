@@ -7,9 +7,24 @@
 import SwiftUI
 
 struct CategoryView: View {
+    
     @StateObject private var vm = CategoryViewModel()
+    
     let recipeList: [Recipe]
     let title: String
+    
+    let sort: SortType?
+    let type: DishTypes?
+    let cuisine: Сuisine?
+    
+    init(recipeList: [Recipe], title: String,
+         sort: SortType? = nil, type: DishTypes? = nil, cuisine: Сuisine? = nil) {
+        self.recipeList = recipeList
+        self.title = title
+        self.sort = sort
+        self.type = type
+        self.cuisine = cuisine
+    }
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -27,8 +42,9 @@ struct CategoryView: View {
             .padding(.top, 20)
         }
         .onAppear {
-            print("OnAppaer")
-            if !recipeList.isEmpty {
+            vm.sort = sort ; vm.type = type; vm.cuisine = cuisine
+            
+            if vm.recipes.isEmpty {
                 vm.recipes = recipeList
             }
         }
@@ -40,7 +56,10 @@ struct CategoryView: View {
 struct CategoryView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CategoryView(recipeList: mokRecipes, title: "Trending")
+            CategoryView(
+                recipeList: mokRecipes,
+                title: "Trending"
+            )
         }
     }
 }

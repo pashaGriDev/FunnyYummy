@@ -13,20 +13,21 @@ class CategoryViewModel: ObservableObject {
     let networkManager = NetworkManager()
     @Published var recipes = [Recipe]()
     @Published var offset = 0
+    
+    var sort: SortType? = nil
+    var type: DishTypes? = nil
+    var cuisine: Сuisine? = nil
+    
     var lastIndex: Int {
         recipes.count - 1
-    }
-    
-    
-    init() {
-        
     }
     
     func loadingData() {
         Task {
             do {
-                let array: [Recipe] = try await networkManager.getShortData(offset: offset)
-                recipes.insert(contentsOf: array, at: lastIndex)
+                let recipes: [Recipe] = try await networkManager.getShortData(sort: sort, cousine: cuisine, type: type, offset: offset)
+                
+                self.recipes.insert(contentsOf: recipes, at: lastIndex)
             } catch {
                 print(error.localizedDescription)
             }

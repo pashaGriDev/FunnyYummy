@@ -106,7 +106,7 @@ extension NetworkManager {
         let offset = "&offset=\(offset)"
         
         let url = "\(baseUrl)\(apiKey)\(cousine)\(sort)\(type)\(amount)\(offset)"
-//        print(url)
+        print("\(cousine):\(sort):\(type):\(amount):\(offset)")
         return try await fetchData(url: url, model: RecipeModel.self).results
     }
 }

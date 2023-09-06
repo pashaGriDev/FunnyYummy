@@ -145,6 +145,14 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
+		10AE30732AA81C7600DEAA06 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FD5C1D432AA792E2001A7DA0 /* CategoryViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		10E623F32A9B9427005BD5DA = {
 			isa = PBXGroup;
 			children = (
@@ -255,9 +263,9 @@
 		3C7C0C362A9D76CB00E2E5B3 /* CategoryView */ = {
 			isa = PBXGroup;
 			children = (
+				10AE30732AA81C7600DEAA06 /* ViewModel */,
 				2D26A0CC2A9D05D0009A04F7 /* CategoryView.swift */,
 				3C7C0C372A9D76E000E2E5B3 /* CategoryViewCell.swift */,
-				FD5C1D432AA792E2001A7DA0 /* CategoryViewModel.swift */,
 			);
 			path = CategoryView;
 			sourceTree = "<group>";
