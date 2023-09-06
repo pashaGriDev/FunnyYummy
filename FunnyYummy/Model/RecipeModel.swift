@@ -76,10 +76,10 @@ struct Step: Codable, Identifiable {
 
 struct Ingredient: Codable, Identifiable {
     let id: Int
-    private let image: String
-    let name: String
-    let amount: Double?
-    let unit: String?
+    let image: String
+    var name: String
+    var amount: Double?
+    var unit: String?
     
     var urlImageStr: String {
         "https://spoonacular.com/cdn/ingredients_500x500/\(image)"

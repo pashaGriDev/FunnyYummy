@@ -10,7 +10,7 @@ import SwiftUI
 struct ImageRecipeItem: View {
     
     @State private var isShowingPhotoPicker = false
-    @State private var selectedDishImage: UIImage? = nil
+    @Binding var selectedDishImage: UIImage?
     
     var body: some View {
         Group {
@@ -55,6 +55,6 @@ struct ImageRecipeItem: View {
 
 struct ImageRecipeItem_Previews: PreviewProvider {
     static var previews: some View {
-        ImageRecipeItem()
+        ImageRecipeItem(selectedDishImage: .constant(nil))
     }
 }

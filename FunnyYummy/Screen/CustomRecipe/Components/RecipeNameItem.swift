@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecipeNameItem: View {
     
-    @State private var recipeName = ""
+    @Binding var recipeName: String
     
     var body: some View {
     TextField("Enter recipe name...", text: $recipeName)
@@ -24,6 +24,6 @@ struct RecipeNameItem: View {
 
 struct RecipeNameItem_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeNameItem()
+        RecipeNameItem(recipeName: .constant(""))
     }
 }
