@@ -7,15 +7,12 @@
 
 import Foundation
 
-// MARK: - SpoonacularURL
-
 enum SpoonacularURL: String {
     case short = "https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=false"
     case full = "https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&fillIngredients=true"
     case byIDs = "https://api.spoonacular.com/recipes/informationBulk?ids="
 }
 
-// MARK: - NetworkManager
 @MainActor
 final class NetworkManager: ObservableObject {
 
@@ -49,8 +46,6 @@ final class NetworkManager: ObservableObject {
     }
 }
 
-// MARK: - getFullData by [id]
-
 extension NetworkManager {
     /// получить данные по id одному или несколько
     func getFullData(by id: [Int]) async throws -> [Recipe] {
@@ -58,13 +53,11 @@ extension NetworkManager {
         let idsString = id.map { String($0) + "," }.reduce("", +) // в конце запятая, но вроде не влияет
         let baseUrl = SpoonacularURL.byIDs.rawValue
         let url = "\(baseUrl)\(idsString)\(apiKey)"
-        print("URL ID: \(url)")
+//        print("URL ID: \(url)")
         
         return try await fetchData(url: url, model: [Recipe].self)
     }
 }
-
-// MARK: - searchData with sort, type ..., and searchShortData
 
 extension NetworkManager {
     /// дает полный набор данных, но быстрей убивается ключ
@@ -97,9 +90,6 @@ extension NetworkManager {
     }
 }
 
-
-// MARK: - get shortData
-
 extension NetworkManager {
     
     func getShortData(sort: SortType? = nil,
@@ -116,21 +106,10 @@ extension NetworkManager {
         let offset = "&offset=\(offset)"
         
         let url = "\(baseUrl)\(apiKey)\(cousine)\(sort)\(type)\(amount)\(offset)"
-        print(url)
+//        print(url)
         return try await fetchData(url: url, model: RecipeModel.self).results
     }
 }
-
-//// MARK: - get mockData from Bundle
-//
-//extension NetworkManager {
-//    /// return [Recipe] count 100
-//    func getMockData() -> [Recipe] {
-//        return  Bundle.main.decode(RecipeModel.self, from: "mockData.json").results
-//    }
-//}
-
-// MARK: - RecipeError
 
 enum RecipeError: Error {
     case invalidURL, invalidResponse, failedDecoded, failedRequest

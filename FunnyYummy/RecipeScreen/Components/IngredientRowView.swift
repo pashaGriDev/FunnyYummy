@@ -11,11 +11,15 @@ struct IngredientRowView: View {
     
     let ingredient: Ingredient
     
+    var urlStringImage: String {
+        "https://spoonacular.com/cdn/ingredients_500x500/\(ingredient.image)"
+    }
+    
     @State private var isSelected = false
     
     var body: some View {
         HStack(spacing: 20) {
-            ImageLoaderView(url: "ingredient.ingredientImage")
+            ImageLoaderView(url: urlStringImage)
                 .frame(width: 52, height: 52)
                 .clipped()
                 .cornerRadius(10)

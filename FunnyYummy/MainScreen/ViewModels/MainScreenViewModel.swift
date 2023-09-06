@@ -37,7 +37,8 @@ class MainScreenViewModel: ObservableObject {
             trending = try await networkService.getShortData(sort: .popularity, offset: offset)
         } catch {
             trending = mokRecipes
-            print(error)
+//            print(error)
+            print("Ошибка связанная с запросом дданных!!! Происходит подмена данных")
         }
     }
     
@@ -46,7 +47,8 @@ class MainScreenViewModel: ObservableObject {
             categoryRecipe = try await networkService.getShortData(sort: .popularity, type: dishType)
         } catch {
             categoryRecipe = mokRecipes
-            print(error)
+//            print(error)
+            print("Ошибка связанная с запросом дданных!!! Происходит подмена данных")
         }
     }
     
@@ -55,7 +57,8 @@ class MainScreenViewModel: ObservableObject {
             recentRecipe = try await networkService.getShortData(sort: .random)
         } catch {
             recentRecipe = mokRecipes
-            print(error)
+//            print(error)
+            print("Ошибка связанная с запросом дданных!!! Происходит подмена данных")
         }
     }
     
@@ -64,7 +67,8 @@ class MainScreenViewModel: ObservableObject {
             cousineRecipe = try await networkService.getShortData(sort: .popularity, cousine: .chinese)
         } catch {
             cousineRecipe = mokRecipes
-            print(error)
+//            print(error)
+            print("Ошибка связанная с запросом дданных!!! Происходит подмена данных")
         }
     }
     

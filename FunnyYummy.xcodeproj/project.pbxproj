@@ -394,9 +394,9 @@
 		FDBCA8162AA25EC600481DDE /* RecipeScreen */ = {
 			isa = PBXGroup;
 			children = (
-				FDBCA8182AA25EC600481DDE /* Components */,
 				FDBCA8172AA25EC600481DDE /* RecipeScreenView.swift */,
 				FD03F12B2AA6568E0018CC16 /* RecipeScreenViewModel.swift */,
+				FDBCA8182AA25EC600481DDE /* Components */,
 			);
 			name = RecipeScreen;
 			path = FunnyYummy/RecipeScreen;
