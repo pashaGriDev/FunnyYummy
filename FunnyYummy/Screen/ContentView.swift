@@ -22,8 +22,7 @@ struct ContentView: View {
                     case .favorites:
                         FavoriteScreenView()
                     case .addRecipe:
-                    //TODO: - ВСТАВИТЬ ЭКРАН С СОЗДАНИЕМ РЕЦЕПТА
-                        Color.red
+                        CustomRecipeView()
                     case .notifications:
                         Text("NOTIFICATION PAGE")
                     case .profile:

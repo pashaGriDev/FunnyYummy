@@ -60,8 +60,8 @@ struct ProfileView: View {
                             .padding()
                         
                         Picker("Звание", selection: $selectedRankIndex) {
-                            ForEach(0 ..< ranks.count, id: \.self) {
-                                Text(ranks[$0])
+                            ForEach(ranks, id: \.self) {
+                                Text($0)
                             }
                         }
                         .pickerStyle(WheelPickerStyle())
