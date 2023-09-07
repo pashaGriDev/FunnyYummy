@@ -16,6 +16,7 @@ struct MainScreenView: View {
             VStack(alignment: .leading, spacing: 10) {
                 Text("Get amazing recipes for cooking")
                     .font(.title.bold())
+                    .padding()
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 20) {
@@ -26,6 +27,7 @@ struct MainScreenView: View {
                                     await vm.findRecipe()
                                 }
                             }
+                            .padding(.horizontal)
                         if vm.searchText.isEmpty {
                             // MARK: - Trending now
                             VStack {
@@ -34,6 +36,7 @@ struct MainScreenView: View {
                                     title: "Trending now 🔥",
                                     sort: .popularity, type: nil, cuisine: nil
                                 )
+                                .padding(.horizontal)
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     LazyHStack(spacing: 20) {
                                         if vm.trending.isEmpty {
@@ -47,6 +50,7 @@ struct MainScreenView: View {
                                             }
                                         }
                                     }
+                                    .padding(.horizontal)
                                 }
                             }
                             // MARK: - Popular category
@@ -56,6 +60,7 @@ struct MainScreenView: View {
                                     hasNavigationLink: false,
                                     sort: .popularity, type: vm.dishType, cuisine: nil
                                 )
+                                .padding(.horizontal)
                                 CategorySegmentedView(vm: vm)
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     LazyHStack(spacing: 20) {
@@ -68,6 +73,7 @@ struct MainScreenView: View {
                                             ForEach($vm.categoryRecipe, content: PopularCategoryItem.init)
                                         }
                                     }
+                                    .padding(.horizontal)
                                 }
                             }
                             // MARK: - Recent recipe
@@ -77,6 +83,7 @@ struct MainScreenView: View {
                                     title: "Recent recipe",
                                     sort: .random, type: nil, cuisine: nil
                                 )
+                                .padding(.horizontal)
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     LazyHStack(spacing: 20) {
                                         if vm.recentRecipe.isEmpty {
@@ -88,6 +95,7 @@ struct MainScreenView: View {
                                             ForEach($vm.recentRecipe, content: RecentRecipeItem.init)
                                         }
                                     }
+                                    .padding(.horizontal)
                                 }
                             }
                             // TODO: - Any Cousin
@@ -97,6 +105,7 @@ struct MainScreenView: View {
                                     title: "\(vm.cousine.rawValue.capitalized) Cousin", hasNavigationLink: true,
                                     sort: .popularity, type: nil, cuisine: .chinese
                                 )
+                                .padding(.horizontal)
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     LazyHStack(spacing: 20) {
                                         if vm.cousineRecipe.isEmpty {
@@ -108,6 +117,7 @@ struct MainScreenView: View {
                                             ForEach($vm.cousineRecipe, content: PopularCousinItem.init)
                                         }
                                     }
+                                    .padding(.horizontal)
                                 }
                             }
                         } else {
@@ -115,11 +125,9 @@ struct MainScreenView: View {
                                 .navigationBarHidden(true)
                         }
                     }
-                    Spacer(minLength: 50)
+                    .padding(.bottom, 100)
                 }
-                
             }
-            .padding([.horizontal, .top])
         }
     }
 }

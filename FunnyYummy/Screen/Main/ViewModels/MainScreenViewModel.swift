@@ -10,9 +10,9 @@ import Foundation
 @MainActor
 class MainScreenViewModel: ObservableObject {
     
-    let networkService = NetworkManager()
+    private let networkService: NetworkManager
     
-    @Published var dishType: DishTypes = .appetizer
+    @Published var dishType: DishTypes = .mainCourse
     let cousine: Сuisine = Сuisine.allCases.randomElement() ?? .chinese
     @Published var emptyRecipe = Recipe(creditsText: "", id: 0, aggregateLikes: 0, title: "", sourceUrl: "", image: "", imageType: "", readyInMinutes: 0, dishTypes: [], extendedIngredients: [], analyzedInstructions: [])
     @Published var trending = [Recipe]()
@@ -23,7 +23,9 @@ class MainScreenViewModel: ObservableObject {
     @Published var searchText = ""
     @Published var offset: Int = 0
     
-    init() {
+    init(networkService: NetworkManager = .init()) {
+        self.networkService = networkService
+        
         Task {
             await fetchTrendingRecipe()
             await fetchDishTypeRecipe()

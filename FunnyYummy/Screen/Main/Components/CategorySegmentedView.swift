@@ -33,6 +33,7 @@ struct CategorySegmentedView: View {
                         }
                 }
             }
+            .padding(.horizontal)
         }
     }
 }

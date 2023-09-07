@@ -10,23 +10,31 @@ import SwiftUI
 struct ContentView: View {
     
     @StateObject var viewRouter: ViewRouter
+    @State var createRecipe: Bool = false
     
     var body: some View {
         GeometryReader { proxy in
-            VStack {
-                Spacer()
-                switch viewRouter.currentPage {
-                case .main:
-                    MainScreenView()
-                case .favorites:
-                    FavoriteScreenView()
-                case .notifications:
-                    Text("NOTIFICATION PAGE")
-                case .profile:
-                    ProfileView()
+            ZStack {
+                VStack {
+                    switch viewRouter.currentPage {
+                    case .main:
+                        MainScreenView()
+                    case .favorites:
+                        FavoriteScreenView()
+                    case .addRecipe:
+                    //TODO: - ВСТАВИТЬ ЭКРАН С СОЗДАНИЕМ РЕЦЕПТА
+                        Color.red
+                    case .notifications:
+                        Text("NOTIFICATION PAGE")
+                    case .profile:
+                        ProfileView()
+                    }
+                    Spacer()
                 }
-                Spacer()
-                TabBar(viewRouter: viewRouter, proxy: proxy)
+                VStack {
+                    Spacer()
+                    TabBar(viewRouter: viewRouter, proxy: proxy)
+                }
             }
             .environmentObject(DataProvider())
             .edgesIgnoringSafeArea(.bottom)

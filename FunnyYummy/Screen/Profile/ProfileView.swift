@@ -9,18 +9,29 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @EnvironmentObject var dataProvider: DataProvider
-    @State private var isEditing = false
+    @State private var isEditProfile: Bool = false
     
+    @State private var name: String = ""
+    @State private var rank: String = ""
+    
+    @State private var editedName: String = ""
+    @State private var selectedRankIndex = 0
+    
+    let ranks = ["Любитель", "Повар", "Шеф-повар", "Критик"]
+
     var body: some View {
-        NavigationView {
+        ZStack {
+            
             VStack {
+                Text("My profile")
+                    .font(.title.bold())
                 //MARK: - Profile Header
-                VStack {
-                    ProfileHeaderView()
-                        .padding([.top, .horizontal])
-                    //MARK: - Resipes Bookmark
-                    ScrollView(showsIndicators: false) {
+                ScrollView(showsIndicators: false) {
+                    VStack {
+                        ProfileHeaderView(name: $name, rank: $rank, isEditProfile: $isEditProfile)
+                            .padding([.top, .horizontal])
+                        
+                        //MARK: - Recipes Title
                         HeaderTitleView(
                             title: "My Recipes",
                             hasNavigationLink: false,
@@ -28,29 +39,50 @@ struct ProfileView: View {
                         )
                         .padding(.horizontal)
                         
-                        VStack(spacing: 16) {
-                            ForEach($dataProvider.recipes) {
-                                RecipesCardView(recipe: $0, isEditing: $isEditing)
+                        //MARK: - Resipes Bookmark
+                        LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 5) {
+                            ForEach(1..<4) { _ in
+                                RecipesCardView()
                             }
                         }
+                        .padding(.horizontal)
                     }
+                    .padding(.top, 10)
                 }
-                .padding(.top, 10)
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Text("My Profile")
-                        .font(.title.bold())
-                }
+
+            if isEditProfile {
+                Color.black.opacity(0.5).ignoresSafeArea()
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        isEditing.toggle()
-                    } label: {
-                        Image(systemName: "ellipsis")
-                            .foregroundColor(Color.Button.black)
+                VStack {
+                    TextField("Имя", text: $editedName)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding()
+                    
+                    Picker("Звание", selection: $selectedRankIndex) {
+                        ForEach(0 ..< ranks.count) {
+                            Text(ranks[$0])
+                        }
                     }
+                    .pickerStyle(WheelPickerStyle())
+                    .padding()
+                    
+                    Button(action: {
+                        isEditProfile = false
+                        name = editedName
+                        rank = ranks[selectedRankIndex]
+                    }) {
+                        Text("Сохранить")
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                    }
+                    .padding()
                 }
+                .background(Color.white)
+                .cornerRadius(15)
+                .padding()
             }
         }
     }
