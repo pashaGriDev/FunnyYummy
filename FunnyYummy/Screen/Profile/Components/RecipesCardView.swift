@@ -9,48 +9,68 @@ import SwiftUI
 
 struct RecipesCardView: View {
     
-    let url = "https://spoonacular.com/recipeImages/716429-312x231.jpg"
+    @EnvironmentObject var dataProvider: DataProvider
+    @Binding var recipe: CustomRecipeModel
+    @Binding var isEditing: Bool
+
+    var image: UIImage {
+        return UIImage(data: recipe.image) ?? UIImage(systemName: "xmark")!
+    }
     
     var body: some View {
-        VStack {
-            AsyncImage(url: URL(string: url)) { image in
-                image
+        NavigationLink(destination: CustomRecipeView(recipe: recipe)){
+            VStack {
+                Image(uiImage: image)
                     .resizable()
-                    .scaledToFit()
-            } placeholder: {
-                ProgressView()
-            }
-            .overlay(
-                HStack {
-                    HStack(spacing: 0) {
-                        Image(systemName: "star.fill")
-                        Text("4.5")
+                    .scaledToFill()
+                    .frame(width: 350, height: 200)
+                    .background(Color.gray.opacity(0.3))
+                    .clipShape(RoundedRectangle(cornerRadius: 24))
+                    .overlay(
+                        VStack(alignment: .leading, spacing: 10) {
+                            
+                            Spacer()
+                            
+                            Text(recipe.recipeName)
+                                .fontWeight(.bold)
+                                .multilineTextAlignment(.leading)
+                            
+                            HStack {
+                                Label(recipe.serves.formatted(), systemImage: "person.2.circle.fill")
+                                Label("\(recipe.readyInMinutes)min", systemImage: "clock.fill")
+                            }
+                            .font(.subheadline.bold())
+                            .opacity(0.7)
+                        }
                             .foregroundColor(Color.Text.white)
-                    }
-                    .padding(2)
-                    .background(Color.gray.opacity(0.5).blur(radius: 0.5))
-                    .cornerRadius(10)
-                    Spacer()
-                    BookmarkView(id: 100)
-                }
-                    .padding(4)
-                , alignment: .top)
-            .clipShape(RoundedRectangle(cornerRadius: 15))
-            Text("How to shawarma at home")
-                .font(.headline)
-                .multilineTextAlignment(.leading)
+                            .padding([.vertical, .leading]),
+                        alignment: .topLeading
+                    )
+                    .overlay(
+                        Image(systemName: isEditing ? "trash.circle" : "")
+                            .resizable()
+                            .foregroundColor(.red)
+                            .frame(width: 30, height: 30)
+                            .padding([.top, .trailing])
+                            .onTapGesture {
+                                withAnimation(.linear(duration: 0.2)) {
+                                    dataProvider.recipes.removeAll(where: { $0.id == recipe.id })
+                                }
+                                try? dataProvider.saveData(for: dataProvider.recipes, withKey: "treni3")
+                            },
+                        alignment: .topTrailing
+                    )
+            }
         }
-        .padding(8)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 15))
-        .frame(width: 170, height: 200)
-        .shadow(color: .black.opacity(0.15), radius: 5)
+        .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading).combined(with: .opacity).combined(with: .scale(scale: 0))))
     }
 }
 
 struct RecipesCardView_Previews: PreviewProvider {
+    static let image = UIImage(systemName: "xmark")!.pngData()!
     static var previews: some View {
-        RecipesCardView()
+        RecipesCardView(recipe: .constant(CustomRecipeModel(id: 0, recipeName: "Shawarma at Home", image: image, serves: 2, readyInMinutes: 5, ingredients: [])), isEditing: .constant(true))
+            .environmentObject(DataProvider())
     }
 }
 

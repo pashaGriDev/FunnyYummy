@@ -9,11 +9,14 @@ import Foundation
 
 class DataProvider: ObservableObject {
     
-    @Published var ids: [Int] = []
+    @Published var ids = [Int]()
+    @Published var recipes = [CustomRecipeModel]()
+    static let instance = DataProvider()
     
     init() {
         do {
-           ids = try loadData(forKey: "ID")
+            ids = try loadData(forKey: "ID")
+            recipes = try loadData(forKey: "treni3")
         } catch {
             print(error.localizedDescription)
         }
@@ -21,6 +24,7 @@ class DataProvider: ObservableObject {
     
     func loadData<T: Decodable>(forKey key: String) throws -> T {
         guard let data = UserDefaults.standard.data(forKey: key) else {
+            print("ProblemHere: \(key)")
             throw DataError.notFound(key)
         }
         return try JSONDecoder().decode(T.self, from: data)
@@ -31,6 +35,7 @@ class DataProvider: ObservableObject {
             throw DataError.notEncode(withKey)
         }
         UserDefaults.standard.setValue(data, forKey: withKey)
+        print("Saved recipes: \(recipes.count)")
     }
     
     
