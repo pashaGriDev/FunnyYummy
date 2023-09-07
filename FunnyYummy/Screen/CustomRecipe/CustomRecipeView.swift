@@ -68,6 +68,8 @@ struct CustomRecipeView: View {
                 }
             }
         }
+        .navigationHeader(title: "")
+        .navigationBarBackButtonHidden(true)
         .onAppear {
             if let recipe {
                 vm.showCustomRecipe(recipe)
