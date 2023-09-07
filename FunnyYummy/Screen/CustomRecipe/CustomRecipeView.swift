@@ -11,6 +11,9 @@ struct CustomRecipeView: View {
     
     @StateObject private var vm = CustomRecipeViewModel()
     @EnvironmentObject var dataProvider: DataProvider
+    @Environment(\.dismiss) var dismiss
+    var recipe: CustomRecipeModel? = nil
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Create recipe")
@@ -46,10 +49,28 @@ struct CustomRecipeView: View {
                         }
                         .padding(.top, vm.ingredients.isEmpty ? 0 : 30)
                     
-                    SaveButtonView {
-                        vm.creatRecipe()
+                    SaveButtonView(condition: false) {
+                        recipe == nil
+                        ? vm.creatRecipe()
+                        : vm.updateRecipe(recipe?.id ?? 0)
+                        do {
+                            dataProvider.recipes = try dataProvider.loadData(forKey: "treni3")
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                        if recipe != nil {
+                            dismiss()
+                        }
                     }
+                    .background(vm.checkData() ? Color.Button.red : Color.Button.red.opacity(0.5))
+                    .cornerRadius(15)
+                    .disabled(!vm.checkData())
                 }
+            }
+        }
+        .onAppear {
+            if let recipe {
+                vm.showCustomRecipe(recipe)
             }
         }
         .padding([.top, .horizontal])

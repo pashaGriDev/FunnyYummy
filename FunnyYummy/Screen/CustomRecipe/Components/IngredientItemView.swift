@@ -9,7 +9,7 @@ import SwiftUI
 
 struct IngredientItemView: View {
     
-    @Binding var ingredient: Ingredient
+    @Binding var ingredient: CustomIngredients
     @State private var amount = ""
     @State private var unit = ""
     let content: (Int) -> ()
@@ -26,10 +26,10 @@ struct IngredientItemView: View {
                     )
                 
                 TextField("Amount", text: Binding(
-                    get: { amount },
+                    get: { ingredient.amount == 0 ? "" : amount },
                     set: { newValue in
                         amount = newValue
-                        ingredient.amount = Double(newValue)
+                        ingredient.amount = Double(newValue) ?? 0
                     }))
                     .padding(.leading, 6)
                     .frame(width: geo.size.width * 0.22, height: 44)
@@ -39,7 +39,7 @@ struct IngredientItemView: View {
                     )
                 
                 TextField("Unit", text: Binding(
-                    get: { unit },
+                    get: { ingredient.unit.isEmpty ? "" : unit },
                     set: { newValue in
                         unit = newValue
                         ingredient.unit = newValue
@@ -65,11 +65,15 @@ struct IngredientItemView: View {
                     }
             }
         }
+        .onAppear {
+            amount = String(ingredient.amount)
+            unit = ingredient.unit
+        }
     }
 }
 
 struct IngredientItemView_Previews: PreviewProvider {
     static var previews: some View {
-        IngredientItemView(ingredient: .constant(Ingredient(id: 0, image: "", name: "", amount: nil, unit: nil)), content: {int in })
+        IngredientItemView(ingredient: .constant(CustomIngredients(id: 0, name: "", amount: 0, unit: "")), content: {int in })
     }
 }

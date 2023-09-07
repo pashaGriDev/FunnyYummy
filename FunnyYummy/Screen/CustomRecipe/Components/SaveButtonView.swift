@@ -9,25 +9,24 @@ import SwiftUI
 
 struct SaveButtonView: View {
     
+    let condition: Bool
     let content: () -> ()
     
     var body: some View {
         Button {
             content()
         } label: {
-            Text("Create recipe")
+            Text(condition ? "Update Recipe"  : "Create recipe")
                 .font(.title2.bold())
                 .foregroundColor(Color.Text.white)
                 .padding()
                 .frame(maxWidth: .infinity)
-                .background(Color.Button.red)
-                .cornerRadius(15)
         }
     }
 }
 
 struct SaveButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        SaveButtonView(content: {})
+        SaveButtonView(condition: false,  content: {})
     }
 }

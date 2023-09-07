@@ -21,8 +21,8 @@ struct FunnyYummyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            CustomRecipeView()
+            ProfileView()
+                .environmentObject(dataProvider)
         }
-        
     }
 }

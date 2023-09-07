@@ -10,13 +10,13 @@ import Foundation
 class DataProvider: ObservableObject {
     
     @Published var ids = [Int]()
-    @Published var recipes = [Recipe]()
-    
+    @Published var recipes = [CustomRecipeModel]()
+    static let instance = DataProvider()
     
     init() {
         do {
             ids = try loadData(forKey: "ID")
-            recipes = try loadData(forKey: "treni1")
+            recipes = try loadData(forKey: "treni3")
         } catch {
             print(error.localizedDescription)
         }

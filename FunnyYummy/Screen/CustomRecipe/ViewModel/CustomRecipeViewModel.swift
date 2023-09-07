@@ -9,8 +9,8 @@ import SwiftUI
 
 final class CustomRecipeViewModel: ObservableObject {
     
-    let dataProvider = DataProvider()
-    @Published var ingredients = [Ingredient]()
+    let dataProvider = DataProvider.instance
+    @Published var ingredients = [CustomIngredients]()
     @Published var selectedDishImage: UIImage? = nil
     @Published var recipeName = ""
     @Published var serves = 2
@@ -19,11 +19,10 @@ final class CustomRecipeViewModel: ObservableObject {
     
     init() {
         addIngredients()
-        addIngredients()
     }
     
     func addIngredients() {
-        let ingredient = Ingredient(id: ingredients.count, image: "", name: "", amount: nil, unit: nil)
+        let ingredient = CustomIngredients(id: ingredients.count, name: "", amount: 0, unit: "")
         ingredients.append(ingredient)
     }
     
@@ -33,20 +32,40 @@ final class CustomRecipeViewModel: ObservableObject {
     
     func creatRecipe() {
         let id = dataProvider.recipes.count
-        let recipe = Recipe(creditsText: nil, id: id, aggregateLikes: nil, title: recipeName, sourceUrl: nil, image: nil, imageType: nil, readyInMinutes: readyInMinutes, dishTypes: nil, extendedIngredients: ingredients, analyzedInstructions: nil)
+        guard let data = selectedDishImage?.pngData() else { return }
+        let recipe = CustomRecipeModel(id: id, recipeName: recipeName, image: data, serves: serves, readyInMinutes: readyInMinutes, ingredients: ingredients)
         dataProvider.recipes.append(recipe)
-        try? dataProvider.saveData(for: dataProvider.recipes, withKey: "treni1")
+        try? dataProvider.saveData(for: dataProvider.recipes, withKey: "treni3")
         resetCreatRecipe()
     }
     
+    func updateRecipe(_ id: Int) {
+        guard let data = selectedDishImage?.pngData() else { return }
+        if let index = dataProvider.recipes.firstIndex(where: { $0.id == id }) {
+            dataProvider.recipes[index] = CustomRecipeModel(id: id, recipeName: recipeName, image: data, serves: serves, readyInMinutes: readyInMinutes, ingredients: ingredients)
+            try? dataProvider.saveData(for: dataProvider.recipes, withKey: "treni3")
+        }
+    }
+
     func resetCreatRecipe() {
         ingredients = []
-        addIngredients()
         addIngredients()
         selectedDishImage = nil
         recipeName = ""
         serves = 2
         readyInMinutes = 15
+    }
+    
+    func showCustomRecipe(_ recipe: CustomRecipeModel) {
+        ingredients = recipe.ingredients
+        selectedDishImage = UIImage(data: recipe.image)
+        recipeName = recipe.recipeName
+        serves = recipe.serves
+        readyInMinutes = recipe.readyInMinutes
+    }
+    
+    func checkData() -> Bool {
+        !ingredients.isEmpty && !recipeName.isEmpty && selectedDishImage != nil
     }
 }
 
