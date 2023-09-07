@@ -21,8 +21,14 @@ struct FunnyYummyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ProfileView()
-                .environmentObject(dataProvider)
+            if isOnboarding {
+                ContentView(viewRouter: viewRouter)
+                    .environmentObject(dataProvider)
+                    .preferredColorScheme(.light)
+            } else {
+                PageControlView(isOnboarding: $isOnboarding)
+            }
         }
+        
     }
 }
