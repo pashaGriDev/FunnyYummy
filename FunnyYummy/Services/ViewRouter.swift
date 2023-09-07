@@ -16,6 +16,7 @@ class ViewRouter: ObservableObject {
 enum Page {
     case main
     case favorites
+    case addRecipe
     case notifications
     case profile
 }
