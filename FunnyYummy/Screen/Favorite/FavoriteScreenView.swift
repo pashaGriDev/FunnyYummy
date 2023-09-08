@@ -24,6 +24,11 @@ struct FavoriteScreenView: View {
                 }
             }
             .padding(.top)
+            .onChange(of: dataProvider.ids) { _ in
+                withAnimation {
+                    vm.updateList(dataProvider.ids)
+                }
+            }
             .task {
                 await vm.fetchFavoriteRecipe(id: dataProvider.ids)
             }
