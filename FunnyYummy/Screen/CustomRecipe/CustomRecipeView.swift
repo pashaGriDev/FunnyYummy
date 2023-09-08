@@ -12,6 +12,8 @@ struct CustomRecipeView: View {
     @StateObject private var vm = CustomRecipeViewModel()
     @EnvironmentObject var dataProvider: DataProvider
     @Environment(\.dismiss) var dismiss
+    @State private var isShowingKeyboard = false
+    @FocusState var keyboard: Bool
     var recipe: CustomRecipeModel? = nil
     
     var body: some View {
@@ -66,7 +68,11 @@ struct CustomRecipeView: View {
                     .cornerRadius(15)
                     .disabled(!vm.checkData())
                 }
+                .focused($keyboard)
+                .padding(.bottom, 120)
+                
             }
+            .padding(.bottom, keyboard ? 260 : 0)
         }
         .navigationHeader(title: "")
         .navigationBarBackButtonHidden(true)
