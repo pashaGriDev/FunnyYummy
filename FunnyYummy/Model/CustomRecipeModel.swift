@@ -17,7 +17,7 @@ struct CustomRecipeModel: Codable, Identifiable {
     let ingredients: [CustomIngredients]
     
 }
-struct CustomIngredients: Codable, Identifiable {
+struct CustomIngredients: Codable, Identifiable, Hashable {
     let id: Int
     var name: String
     var amount: Double
