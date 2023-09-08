@@ -121,8 +121,13 @@ struct MainScreenView: View {
                                 }
                             }
                         } else {
-                            CategoryView(recipeList: vm.searchRecipe, title: "")
-                                .navigationBarHidden(true)
+                            ScrollView(showsIndicators: false) {
+                                VStack {
+                                    ForEach(vm.searchRecipe) { recipe in
+                                        TrendingItemView(recipe: recipe, screen: .favorite)
+                                    }
+                                }
+                            }
                         }
                     }
                     .padding(.bottom, 100)
