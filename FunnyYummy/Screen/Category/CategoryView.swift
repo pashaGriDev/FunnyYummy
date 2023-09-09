@@ -29,7 +29,7 @@ struct CategoryView: View {
         ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 16) {
                 ForEach(vm.recipes.indices, id: \.self) { index in
-                    CategoryViewCell(recipe: vm.recipes[index])
+                    TrendingItemView(recipe: vm.recipes[index], screen: .favorite)
                         .onAppear {
                             if index == vm.recipes.count - 3 {
                                 vm.offset += 10
@@ -61,6 +61,7 @@ struct CategoryView_Previews: PreviewProvider {
                 recipeList: mokRecipes,
                 title: "Trending"
             )
+            .environmentObject(DataProvider())
         }
     }
 }
