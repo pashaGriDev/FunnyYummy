@@ -69,7 +69,15 @@ struct RecipesCardView: View {
 struct RecipesCardView_Previews: PreviewProvider {
     static let image = UIImage(systemName: "xmark")!.pngData()!
     static var previews: some View {
-        RecipesCardView(recipe: .constant(CustomRecipeModel(id: 0, recipeName: "Shawarma at Home", image: image, serves: 2, readyInMinutes: 5, ingredients: [])), isEditing: .constant(true))
+        RecipesCardView(
+            recipe: .constant(CustomRecipeModel(
+                id: 0,
+                recipeName: "Shawarma at Home",
+                image: image,
+                serves: 2,
+                readyInMinutes: 5,
+                ingredients: [])),
+            isEditing: .constant(true))
             .environmentObject(DataProvider())
     }
 }

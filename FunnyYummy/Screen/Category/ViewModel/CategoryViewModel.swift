@@ -30,7 +30,7 @@ class CategoryViewModel: ObservableObject {
     func loadingData() {
         Task {
             do {
-                let recipes: [Recipe] = try await networkService.getShortData(sort: sort, cousine: cuisine, type: type, offset: offset)
+                let recipes: [Recipe] = try await networkService.getFullData(sort: sort, cousine: cuisine, type: type, offset: offset)
                 
                 self.recipes.insert(contentsOf: recipes, at: lastIndex)
             } catch {
