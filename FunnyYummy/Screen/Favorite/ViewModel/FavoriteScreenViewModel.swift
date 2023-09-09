@@ -25,4 +25,8 @@ final class FavoriteScreenViewModel: ObservableObject {
             print(error.localizedDescription)
         }
     }
+    
+    func updateList(_ ids: [Int]) {
+        favoriteRecipes.removeAll(where: { !ids.contains($0.id) })
+    }
 }
