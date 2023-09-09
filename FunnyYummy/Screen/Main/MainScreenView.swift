@@ -24,7 +24,6 @@ struct MainScreenView: View {
                         SearchBarView(searchText: $vm.searchText)
                             .onSubmit {
                                 vm.findRecipe()
-                                vm.searchText = ""
                             }
                             .padding(.horizontal)
                         if vm.searchText.isEmpty {

@@ -81,8 +81,12 @@ class MainScreenViewModel: ObservableObject {
                 try await Task.sleep(nanoseconds: 300_000_000)
                 let recipes = try await networkService.getFullData(by: searchText.lowercased(), amount: 15, offset: offset)
                 
-                searchRecipe.insert(contentsOf: recipes, at: searchRecipe.count - 1)
-
+                if searchRecipe.isEmpty {
+                    searchRecipe = recipes
+                } else {
+                    searchRecipe.insert(contentsOf: recipes, at: searchRecipe.count - 1)
+                }
+                
             } catch {
                 searchRecipe = mokRecipes
                 print("Ошибка связанная с запросом дданных!!! Происходит подмена данных")
