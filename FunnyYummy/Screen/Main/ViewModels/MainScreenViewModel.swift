@@ -21,7 +21,8 @@ class MainScreenViewModel: ObservableObject {
     @Published var searchRecipe = [Recipe]()
     @Published var cousineRecipe = [Recipe]()
     @Published var searchText = ""
-//    @Published var offset: Int = 0
+    
+    var offset = 0
     
     init(networkService: NetworkManager = .init()) {
         self.networkService = networkService
@@ -74,15 +75,20 @@ class MainScreenViewModel: ObservableObject {
         }
     }
     
-    func findRecipe() async {
-        do {
-            try await Task.sleep(nanoseconds: 300_000_000)
-            searchRecipe = try await networkService.getFullData(by: searchText.lowercased(), amount: 10)
-            print(searchText)
-        } catch {
-            print(error)
+    func findRecipe() {
+        Task {
+            do {
+                try await Task.sleep(nanoseconds: 300_000_000)
+                let recipes = try await networkService.getFullData(by: searchText.lowercased(), amount: 15, offset: offset)
+                
+                searchRecipe.insert(contentsOf: recipes, at: searchRecipe.count - 1)
+
+            } catch {
+                searchRecipe = mokRecipes
+                print("Ошибка связанная с запросом дданных!!! Происходит подмена данных")
+                print(error)
+            }
         }
-        
     }
 }
 

@@ -22,10 +22,9 @@ struct MainScreenView: View {
                     VStack(spacing: 20) {
                         // MARK: - SearchBar
                         SearchBarView(searchText: $vm.searchText)
-                            .onChange(of: vm.searchText) { _ in
-                                Task {
-                                    await vm.findRecipe()
-                                }
+                            .onSubmit {
+                                vm.findRecipe()
+                                vm.searchText = ""
                             }
                             .padding(.horizontal)
                         if vm.searchText.isEmpty {
@@ -122,9 +121,15 @@ struct MainScreenView: View {
                             }
                         } else {
                             ScrollView(showsIndicators: false) {
-                                VStack {
-                                    ForEach(vm.searchRecipe) { recipe in
-                                        TrendingItemView(recipe: recipe, screen: .favorite)
+                                LazyVStack {
+                                    ForEach(vm.searchRecipe.indices, id: \.self) { index in
+                                        TrendingItemView(recipe: vm.searchRecipe[index], screen: .favorite)
+                                            .onAppear {
+                                                if index == vm.searchRecipe.count - 3 {
+                                                    vm.offset += 10
+                                                    vm.findRecipe()
+                                                }
+                                            }
                                     }
                                 }
                             }

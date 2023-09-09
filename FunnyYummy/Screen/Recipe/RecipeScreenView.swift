@@ -51,7 +51,7 @@ struct RecipeScreenView: View {
                             ForEach(vm.steps) { step in
                                 HStack (alignment: .firstTextBaseline){
                                     Text("\(step.number).")
-                                    Text(step.step)
+                                    Text(step.step ?? "")
                                     
                                 }
                                 .font(.system(size: 18))

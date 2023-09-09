@@ -17,8 +17,7 @@ struct CategoryView: View {
     let type: DishTypes?
     let cuisine: Сuisine?
     
-    init(recipeList: [Recipe], title: String,
-         sort: SortType? = nil, type: DishTypes? = nil, cuisine: Сuisine? = nil) {
+    init(recipeList: [Recipe], title: String, sort: SortType? = nil, type: DishTypes? = nil, cuisine: Сuisine? = nil) {
         self.recipeList = recipeList
         self.title = title
         self.sort = sort
@@ -42,7 +41,9 @@ struct CategoryView: View {
             .padding(.top, 20)
         }
         .onAppear {
-            vm.sort = sort ; vm.type = type; vm.cuisine = cuisine
+            vm.sort = sort
+            vm.type = type
+            vm.cuisine = cuisine
             
             if vm.recipes.isEmpty {
                 vm.recipes = recipeList
