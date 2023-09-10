@@ -21,7 +21,8 @@ class MainScreenViewModel: ObservableObject {
     @Published var searchRecipe = [Recipe]()
     @Published var cousineRecipe = [Recipe]()
     @Published var searchText = ""
-    @Published var offset: Int = 0
+    
+    var offset = 0
     
     init(networkService: NetworkManager = .init()) {
         self.networkService = networkService
@@ -36,7 +37,7 @@ class MainScreenViewModel: ObservableObject {
     
     func fetchTrendingRecipe(number: Int = 10) async {
         do {
-            trending = try await networkService.getShortData(sort: .popularity, offset: offset)
+            trending = try await networkService.getFullData(sort: .popularity)
         } catch {
             trending = mokRecipes
 //            print(error)
@@ -46,7 +47,7 @@ class MainScreenViewModel: ObservableObject {
     
     func fetchDishTypeRecipe() async {
         do {
-            categoryRecipe = try await networkService.getShortData(sort: .popularity, type: dishType)
+            categoryRecipe = try await networkService.getFullData(sort: .popularity, type: dishType)
         } catch {
             categoryRecipe = mokRecipes
 //            print(error)
@@ -56,7 +57,7 @@ class MainScreenViewModel: ObservableObject {
     
     func fetchRecentRecipe() async {
         do {
-            recentRecipe = try await networkService.getShortData(sort: .random)
+            recentRecipe = try await networkService.getFullData(sort: .random)
         } catch {
             recentRecipe = mokRecipes
 //            print(error)
@@ -66,7 +67,7 @@ class MainScreenViewModel: ObservableObject {
     
     func fetchCousinRecipe() async {
         do {
-            cousineRecipe = try await networkService.getShortData(sort: .popularity, cousine: .chinese)
+            cousineRecipe = try await networkService.getFullData(sort: .popularity, cousine: .chinese)
         } catch {
             cousineRecipe = mokRecipes
 //            print(error)
@@ -74,15 +75,24 @@ class MainScreenViewModel: ObservableObject {
         }
     }
     
-    func findRecipe() async {
-        do {
-            try await Task.sleep(nanoseconds: 300_000_000)
-            searchRecipe = try await networkService.searchShortData(by: searchText.lowercased(), amount: 50)
-            print(searchText)
-        } catch {
-            print(error)
+    func findRecipe() {
+        Task {
+            do {
+                try await Task.sleep(nanoseconds: 300_000_000)
+                let recipes = try await networkService.getFullData(by: searchText.lowercased(), amount: 15, offset: offset)
+                
+                if searchRecipe.isEmpty {
+                    searchRecipe = recipes
+                } else {
+                    searchRecipe.insert(contentsOf: recipes, at: searchRecipe.count - 1)
+                }
+                
+            } catch {
+                searchRecipe = mokRecipes
+                print("Ошибка связанная с запросом дданных!!! Происходит подмена данных")
+                print(error)
+            }
         }
-        
     }
 }
 

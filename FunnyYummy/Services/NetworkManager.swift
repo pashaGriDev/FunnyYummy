@@ -48,64 +48,35 @@ struct NetworkManager {
 extension NetworkManager {
     /// получить данные по id одному или несколько
     func getFullData(by id: [Int]) async throws -> [Recipe] {
-        
+
         let idsString = id.map { String($0) + "," }.reduce("", +) // в конце запятая, но вроде не влияет
         let baseUrl = SpoonacularURL.byIDs.rawValue
         let url = "\(baseUrl)\(idsString)\(apiKey)"
 //        print("URL ID: \(url)")
-        
+
         return try await fetchData(url: url, model: [Recipe].self)
     }
 }
 
 extension NetworkManager {
     /// дает полный набор данных, но быстрей убивается ключ
-    func searchData(by text: String?,
+    func getFullData(by text: String = "",
                     sort: SortType? = nil,
                     cousine: Сuisine? = nil ,
                     type: DishTypes? = nil,
-                    amount: Int = 10) async throws -> [Recipe] {
+                    amount: Int = 10,
+                     offset: Int = 0) async throws -> [Recipe] {
         
         let baseUrl = SpoonacularURL.full.rawValue
         let amount = "&number=\(amount)"
-        let query = "&query=\(text ?? "")"
+        let query = "&query=\(text)"
         let cousine = "&cuisine=\(cousine?.rawValue ?? "")"
         let sort = "&sort=\(sort?.rawValue ?? "")"
         let type = "&type=\(type?.rawValue ?? "")"
-        
-        let url = "\(baseUrl)\(apiKey)\(cousine)\(sort)\(type)\(query)\(amount)"
-        return try await fetchData(url: url, model: RecipeModel.self).results
-    }
-    
-    /// поиск по тексту + нужное количество ответов. По умолчанию 10
-    func searchShortData(by text: String?, amount: Int = 10) async throws -> [Recipe] {
-        
-        let baseUrl = SpoonacularURL.short.rawValue
-        let amount = "&number=\(amount)"
-        let query = "&query=\(text ?? "")"
-        
-        let url = "\(baseUrl)\(apiKey)\(query)\(amount)"
-        return try await fetchData(url: url, model: RecipeModel.self).results
-    }
-}
-
-extension NetworkManager {
-    
-    func getShortData(sort: SortType? = nil,
-                      cousine: Сuisine? = nil ,
-                      type: DishTypes? = nil,
-                      amount: Int = 10,
-                      offset: Int = 0) async throws -> [Recipe] {
-        
-        let baseUrl = SpoonacularURL.short.rawValue
-        let cousine = "&cuisine=\(cousine?.rawValue ?? "")"
-        let sort = "&sort=\(sort?.rawValue ?? "")"
-        let type = "&type=\(type?.rawValue ?? "")"
-        let amount = "&number=\(amount)"
         let offset = "&offset=\(offset)"
         
-        let url = "\(baseUrl)\(apiKey)\(cousine)\(sort)\(type)\(amount)\(offset)"
-        print("\(cousine):\(sort):\(type):\(amount):\(offset)")
+        let url = "\(baseUrl)\(apiKey)\(cousine)\(sort)\(type)\(query)\(amount)\(offset)"
+        
         return try await fetchData(url: url, model: RecipeModel.self).results
     }
 }

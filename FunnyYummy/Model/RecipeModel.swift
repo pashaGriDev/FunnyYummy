@@ -59,7 +59,7 @@ struct Recipe: Codable, Identifiable {
 
 struct Instruction: Codable {
     let name: String?
-    let steps: [Step]
+    let steps: [Step]?
 }
 // шаги приготовления
 struct Step: Codable, Identifiable {
@@ -68,7 +68,7 @@ struct Step: Codable, Identifiable {
     }
     
     let number: Int // номер шага
-    let step: String // описание приготовления
+    let step: String? // описание приготовления
     let ingredients: [Ingredient]? // продукты для данного шага
 }
 
@@ -76,17 +76,20 @@ struct Step: Codable, Identifiable {
 
 struct Ingredient: Codable, Identifiable {
     let id: Int
-    let image: String
-    var name: String
+    let image: String?
+    var name: String?
     var amount: Double?
     var unit: String?
     
     var urlImageStr: String {
-        "https://spoonacular.com/cdn/ingredients_500x500/\(image)"
+        "https://spoonacular.com/cdn/ingredients_500x500/\(image ?? "")"
     }
     
     var correctName: String {
-        name.prefix(1).capitalized + name.dropFirst()
+        if let name {
+         return   name.prefix(1).capitalized + name.dropFirst()
+        }
+        return ""
     }
     
     var shortUnit: String {
@@ -95,6 +98,6 @@ struct Ingredient: Codable, Identifiable {
     }
     
     var ingredientImage: String {
-        "https://spoonacular.com/cdn/ingredients_250x250/\(image)"
+        "https://spoonacular.com/cdn/ingredients_250x250/\(image ?? "")"
     }
 }

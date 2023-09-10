@@ -17,8 +17,7 @@ struct CategoryView: View {
     let type: DishTypes?
     let cuisine: Сuisine?
     
-    init(recipeList: [Recipe], title: String,
-         sort: SortType? = nil, type: DishTypes? = nil, cuisine: Сuisine? = nil) {
+    init(recipeList: [Recipe], title: String, sort: SortType? = nil, type: DishTypes? = nil, cuisine: Сuisine? = nil) {
         self.recipeList = recipeList
         self.title = title
         self.sort = sort
@@ -30,7 +29,7 @@ struct CategoryView: View {
         ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 16) {
                 ForEach(vm.recipes.indices, id: \.self) { index in
-                    CategoryViewCell(recipe: vm.recipes[index])
+                    TrendingItemView(recipe: vm.recipes[index], screen: .favorite)
                         .onAppear {
                             if index == vm.recipes.count - 3 {
                                 vm.offset += 10
@@ -42,7 +41,9 @@ struct CategoryView: View {
             .padding(.top, 20)
         }
         .onAppear {
-            vm.sort = sort ; vm.type = type; vm.cuisine = cuisine
+            vm.sort = sort
+            vm.type = type
+            vm.cuisine = cuisine
             
             if vm.recipes.isEmpty {
                 vm.recipes = recipeList
@@ -60,6 +61,7 @@ struct CategoryView_Previews: PreviewProvider {
                 recipeList: mokRecipes,
                 title: "Trending"
             )
+            .environmentObject(DataProvider())
         }
     }
 }

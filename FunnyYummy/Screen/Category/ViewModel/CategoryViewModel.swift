@@ -22,6 +22,11 @@ class CategoryViewModel: ObservableObject {
     var sort: SortType? = nil
     var type: DishTypes? = nil
     var cuisine: Сuisine? = nil
+    var searchText: String = ""
+    
+    var isSearch: Bool {
+        !searchText.isEmpty
+    }
     
     var lastIndex: Int {
         recipes.count - 1
@@ -30,9 +35,23 @@ class CategoryViewModel: ObservableObject {
     func loadingData() {
         Task {
             do {
-                let recipes: [Recipe] = try await networkService.getShortData(sort: sort, cousine: cuisine, type: type, offset: offset)
+                let recipes: [Recipe] = try await networkService.getFullData(
+                    by: searchText,
+                    sort: sort,
+                    cousine: cuisine,
+                    type: type,
+                    offset: offset)
                 
                 self.recipes.insert(contentsOf: recipes, at: lastIndex)
+                
+            } catch RecipeError.invalidURL {
+                print("invalidURL")
+            } catch RecipeError.invalidResponse {
+                print("invalidResponse")
+            } catch RecipeError.failedRequest {
+                print("failedRequest")
+            } catch RecipeError.failedDecoded {
+                print("failedDecoded")
             } catch {
                 print(error.localizedDescription)
             }
