@@ -18,7 +18,7 @@
 
 ## Скриншоты
 
-<img src="/Assets/img_5.png" width="150">&nbsp;<img src="/Assets/img_1.png" width="150">&nbsp;<img src="/Assets/img_4.png" width="150">&nbsp;<img src="/Assets/img_3.png" width="150">&nbsp;<img src="/Assets/img_2.png" width="150">
+<img src="/Assets/img_5.png" width="150">&nbsp;<img src="/Assets/img_1.png" width="150">&nbsp;<img src="/Assets/img_4.png" width="150">&nbsp;<img src="/Assets/img_3.png" width="150">&nbsp;<img src="/Assets/img_6.png" width="150">
 
 ## Команда
 
